@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DB {
 
-    public static final String URL="jdbc:kkkkkkk://192.168.4.34:3306/secondteam?characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
+    public static final String URL="jdbc:mysql://192.168.4.34:3306/secondteam?characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
     public static final String USER="root";
     public static final String PAW="root";
     public static final String DRIVER= "com.mysql.cj.jdbc.Driver";
