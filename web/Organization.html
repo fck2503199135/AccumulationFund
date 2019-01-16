@@ -40,7 +40,33 @@
                 $("#rightContent").toggleClass("pd0px");
             })
 
+            //ajax
+            $.ajax({
+                type:"POST",
+                url:"DeptServlet",
+                data:"type=getAll",
+                dataType:"json",//声明返回数据格式是json
+                success:function(data){
+                    // alert(data)
+                    //    alert(data.length)
+                    alert(data)
+                    $("#select").append("<option value='0'>请选择商品类别</option>");
 
+                    $("#select2").append("<option value='0'>请选择商品类别</option>");
+
+
+                    $("#select3").append("<option value='0'>请选择商品类别</option>");
+                    for (var i=0;i<data.length;i++){
+                        $("#select").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
+                        $("#select2").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
+                        $("#select3").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
+                    }
+
+
+
+                },
+                dateType:"json"
+            });
             //tree------------------------
 
 
