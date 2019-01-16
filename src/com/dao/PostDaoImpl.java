@@ -1,4 +1,86 @@
 package com.dao;
 
+import com.bean.Dept;
+import com.bean.Post;
+import com.utils.DB;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 public class PostDaoImpl implements PostDao {
+
+    QueryRunner qr=new QueryRunner();
+
+    @Override
+    public void addPost(Post post) {
+
+        Connection con = DB.getcon();
+        try {
+            qr.execute(con,"insert into Post values(0,?)",post.getPname());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DB.close();
+        }
+
+    }
+
+    @Override
+    public List<Post> getAllPost() {
+
+        Connection con = DB.getcon();
+        try {
+            return   qr.query(con, "select * from Post", new BeanListHandler<>(Post.class));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Post getPostByPid(int pid) {
+
+        Connection con = DB.getcon();
+
+        try {
+            return   qr.query(con, "select * from Post where pid=?", new BeanHandler<>(Post.class),pid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DB.close();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void delPost(int pid) {
+        Connection con = DB.getcon();
+        try{
+            qr.execute(con,"delete from Post where pid=?",pid);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DB.close();
+        }
+    }
+
+    @Override
+    public void updatePost(Post post) {
+        Connection con = DB.getcon();
+
+        try {
+            qr.execute(con,"update Post set pname=? where pid=?",post.getPname(),post.getPid());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DB.close();
+        }
+
+    }
 }
