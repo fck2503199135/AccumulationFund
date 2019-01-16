@@ -15,4 +15,18 @@ public interface DeptDao {
      * 查询全部
      */
     public List<Dept> getAllDept();
+    /**
+     * 根据did查找dept
+     */
+    public Dept getDeptByDid(int did);
+
+    /**
+     * 删除
+     */
+    public void delDept(int did);
+    /**
+     * 修改
+     */
+    public void updateDept(Dept dept);
+
 }
