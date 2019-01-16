@@ -46,6 +46,37 @@
                 $("#rightContent").toggleClass("pd0px");
             })
 
+
+            $("#updateBtn").click(function () {
+
+                var form = new FormData($("#updateform")[0]);
+                // alert(serialize)
+                var name=$("#updatename").val();
+                var did=$("#updatedid").val();
+
+                alert("修改提交did为"+did)
+
+                $.ajax({
+                    type: "POST",
+                    url: "PostServlet?type=update&name="+name+"&did="+did,
+                    // data: serialize,
+                    data: form,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",//声明返回数据格式是json
+                    success: function (data) {
+                        // initPage(data);
+
+                        $("#tab").bootstrapTable("refresh");
+
+                        $("#updateDept").modal("hide");
+                    },
+                    dateType: "json"
+
+                });
+
+            })
+
             //点击添加提交保存按钮---------------------------++++++
             $("#addbtn").click(function () {
                 var name=$("#addname").val();
@@ -54,7 +85,7 @@
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "postServlet?type=add&name="+name,
+                    url: "PostServlet?type=add&name="+name,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -72,11 +103,10 @@
 
             })
 
-
             // ----------------------------
             //初始化tab
             $('#tab').bootstrapTable({
-                url: 'postServlet?type=getAll',         //请求后台的URL（*）
+                url: 'PostServlet?type=getAll',         //请求后台的URL（*）
                 method: 'Get',                      //请求方式（*）
                 // toolbar: '#toolbar',                //工具按钮用哪个容器
                 // striped: true,                      //是否显示行间隔色
@@ -101,15 +131,15 @@
                 // cardView: false,                    //是否显示详细视图
                 // detailView: false,                   //是否显示父子表
                 columns: [{
-                    field: 'did',
+                    field: 'pid',
                     title: '编号',
                     align: 'center',
                 }, {
-                    field: 'dname',
+                    field: 'pname',
                     title: '岗位名称',
                     align: 'center',
                 }, {
-                    field: 'did',
+                    field: 'pid',
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
@@ -126,17 +156,15 @@
         function edit(did) {
             $.ajax({
                 type: "POST",
-                url: "postServlet",
+                url: "PostServlet",
                 data: "type=edit&did=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
                     // alert(good);
                     alert(good)
 
-                    $("#updatedid").val(good.did);
-                    $("#updatename").val(good.dname);
-
-
+                    $("#updatedid").val(good.pid);
+                    $("#updatename").val(good.pname);
                     $("#updatepost").modal("show");
                 },
                 dateType: "json"
@@ -149,7 +177,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "postServlet",
+                url: "PostServlet",
                 data: "type=del&did=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (data) {
@@ -214,7 +242,7 @@
 
         <div class="data-div col-sm-12">
 
-            <table id="tab" align="center" border="1" style="margin-top: 15px; "
+            <table id="tab" align="center" border="1"
                    class="table table-condensed table-hover  table-condensed  table-responsive table-bordered">
                 <tr class="success text-center">
                     <!--<td class="col-sm-1">编号</td>-->
@@ -293,31 +321,13 @@
                                                    placeholder="">
                                         </div>
                                     </div>
-                                    <!--<div class="form-group ">-->
-                                    <!--<label  class="col-xs-3 control-label">岗位描述：</label>-->
-                                    <!--<div class="col-xs-8 ">-->
-                                    <!--<input type="text" class="form-control input-sm duiqi" id="dd"-->
-                                    <!--placeholder="">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                    <!--<label for="sLink" class="col-xs-3 control-label">纬度：</label>-->
-                                    <!--<div class="col-xs-8 ">-->
-                                    <!--<input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                    <!--<label for="sOrd" class="col-xs-3 control-label">简称：</label>-->
-                                    <!--<div class="col-xs-8">-->
-                                    <!--<input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
-                                </form>
+
+
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                            <button type="button" class="btn btn-xs btn-green">保 存</button>
+                            <button type="button" id="updateBtn" class="btn btn-xs btn-green" >保 存</button>
                         </div>
                     </form>
 
