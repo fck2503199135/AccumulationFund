@@ -18,9 +18,28 @@ public class DeptServlet extends HttpServlet {
      DeptService ds=new DeptServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("---------------------------------servlet里");
-        List<Dept> allDept = ds.getAllDept();
-        response.getWriter().write(JSON.toJSONString(allDept));
+
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
+        System.out.println("-----servlet里");
+        String type = request.getParameter("type");
+
+        if (type.equals("getAll")) {
+            List<Dept> allDept = ds.getAllDept();
+            response.getWriter().write(JSON.toJSONString(allDept));
+
+        }else if (type.equals("add")){
+            addDept(request,response);
+        }
+
+    }
+
+    private void addDept(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+        System.out.println("add方法里===================");
+
+        String name = request.getParameter("name");
+
+
 
 
     }
