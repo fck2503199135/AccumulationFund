@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dept</title>
+    <script src="web/js/jquery.min.js"></script>
+    <script src="web/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+            $(".meun-item").click(function () {
+                $(".meun-item").removeClass("meun-item-active");
+                $(this).addClass("meun-item-active");
+                var itmeObj = $(".meun-item").find("img");
+                itmeObj.each(function () {
+                    var items = $(this).attr("src");
+                    items = items.replace("_grey.png", ".png");
+                    items = items.replace(".png", "_grey.png")
+                    $(this).attr("src", items);
+                });
+                var attrObj = $(this).find("img").attr("src");
+                ;
+                attrObj = attrObj.replace("_grey.png", ".png");
+                $(this).find("img").attr("src", attrObj);
+            });
+            $("#topAD").click(function () {
+                $("#topA").toggleClass(" glyphicon-triangle-right");
+                $("#topA").toggleClass(" glyphicon-triangle-bottom");
+            });
+            $("#topBD").click(function () {
+                $("#topB").toggleClass(" glyphicon-triangle-right");
+                $("#topB").toggleClass(" glyphicon-triangle-bottom");
+            });
+            $("#topCD").click(function () {
+                $("#topC").toggleClass(" glyphicon-triangle-right");
+                $("#topC").toggleClass(" glyphicon-triangle-bottom");
+            });
+            $(".toggle-btn").click(function () {
+                $("#leftMeun").toggleClass("show");
+                $("#rightContent").toggleClass("pd0px");
+            })
+
+
+            //tree------------------------
+
+
+            $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', '折叠分支');
+
+            $('.tree li.parent_li > span').on('click', function (e) {
+
+                var children = $(this).parent('li.parent_li').find(' > ul > li');
+
+                if (children.is(":visible")) {
+
+                    children.hide('fast');
+
+                    $(this).attr('title', '展开分支').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+
+                } else {
+
+                    children.show('fast');
+
+                    $(this).attr('title', '折叠分支').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+
+                }
+
+                e.stopPropagation();
+
+            });
+
+            $('ul li ul:not(:first) li').hide()
+
+            // ----------------------------
+            //初始化tab
+            alert(1111)
+            $('#tab').bootstrapTable({
+                url: 'DeptServlet?type=getAll',         //请求后台的URL（*）
+                method: 'Get',                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 5,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'gid',
+                    title: '编号',
+                    align: 'center',
+                }, {
+                    field: 'name',
+                    title: '名称',
+                    align: 'center',
+                }, {
+                    field: 'img',
+                    title: '图片',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+
+                        console.log(value + "," + row.name + "," + index);
+
+                        return '<img src=' + value + ' height="46" >'
+                    }
+                }, {
+                    field: 'price',
+                    title: '价格',
+                    align: 'center',
+                }, {
+                    field: 'dname',
+                    title: '商品类型',
+                    align: 'center',
+                }, {
+                    field: 'gid',
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        // console.log(value + "," + row.name + "," + index);
+
+                        return '<button class="btn btn-primary btn-xs" onclick="edit(' + value + ')">修改</button>  <button onclick="del(' + value + ')"  class="btn btn-danger btn-xs">删除</button>'
+                    }
+                }]
+            });
+
+
+        })
+
+        function queryParams(param ) {
+
+            var param={
+                name:$("#name3").val(),
+                did:$("#select").val()
+            }
+            return param
+        }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="web/js/html5shiv.min.js"></script>
+
+    <script src="web/js/tree.js"></script>
+
+    <![endif]-->
+
+
+    <script src="web/js/respond.min.js"></script>
+
+    <link href="web/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="web/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="web/css/slide.css"/>
+    <link rel="stylesheet" type="text/css" href="web/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="web/css/flat-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="web/css/jquery.nouislider.css">
+
+    <link rel="stylesheet" type="text/css" href="web/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <!--部门管理模块-->
+    <div role="tabpanel" class="tab-pane" id="scho">
+
+        <div class="check-div form-inline">
+            <div class="col-xs-3">
+                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addDept">添加部门</button>
+            </div>
+            <div class="col-lg-4 col-xs-5">
+                <input type="text" class=" form-control input-sm " placeholder="输入文字搜索">
+                <button class="btn btn-white btn-xs ">查 询</button>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <ul class="pagination">
+                <li>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                    页
+                </li>
+                <li class="gray">
+                    共20页
+                </li>
+                <li>
+                    <i class="glyphicon glyphicon-menu-left">
+                    </i>
+                </li>
+                <li>
+                    <i class="glyphicon glyphicon-menu-right">
+                    </i>
+                </li>
+            </ul>
+        </footer>
+        <div class="data-div col-sm-12">
+            <table id="tab" align="center" border="1" style="margin-top: 15px; "
+                   class="table table-condensed table-hover  table-condensed  table-responsive table-bordered">
+                <tr class="success text-center">
+
+                    <!--<td class="col-sm-1">编号</td>-->
+                    <!--<td class="col-sm-2">名称</td>-->
+                    <!--<td class="col-sm-2">图片</td>-->
+                    <!--<td class="col-sm-1">价格</td>-->
+                    <!--<td class="col-sm-2">操作</td>-->
+                </tr>
+
+            </table>
+        </div>
+        <!--弹出添加部门窗口-->
+        <div class="modal fade" id="addDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">添加部门</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="form-group ">
+                                    <label for="sName" class="col-xs-3 control-label">部门名称：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="email" class="form-control input-sm duiqi" id="dname"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group ">-->
+                                <!--<label for="sName" class="col-xs-3 control-label">经度：</label>-->
+                                <!--<div class="col-xs-8 ">-->
+                                <!--<input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                <!--<label for="sLink" class="col-xs-3 control-label">纬度：</label>-->
+                                <!--<div class="col-xs-8 ">-->
+                                <!--<input type="" class="form-control input-sm duiqi" placeholder="">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <div class="form-group">
+                                    <label for="sOrd" class="col-xs-3 control-label">部门</label>
+                                    <div class="col-xs-8">
+                                        <input type="" class="form-control input-sm duiqi" id="" placeholder="">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                        <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--弹出修改用户窗口-->
+        <div class="modal fade" id="reviseDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">修改部门</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="form-group ">
+                                    <label for="sName" class="col-xs-3 control-label">部门名称：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="email" class="form-control input-sm duiqi" id="dName"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="sName" class="col-xs-3 control-label">部门描述：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="email" class="form-control input-sm duiqi" id="dd"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<label for="sLink" class="col-xs-3 control-label">纬度：</label>-->
+                                <!--<div class="col-xs-8 ">-->
+                                <!--<input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                <!--<label for="sOrd" class="col-xs-3 control-label">简称：</label>-->
+                                <!--<div class="col-xs-8">-->
+                                <!--<input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                        <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--弹出删除用户警告窗口-->
+        <div class="modal fade" id="deleteDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            确定要删除该部门？删除后不可恢复！
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                        <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+    </div>
+</div>
+
+
+</body>
+</html>
