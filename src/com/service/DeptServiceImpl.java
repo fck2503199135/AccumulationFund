@@ -13,4 +13,9 @@ public class DeptServiceImpl implements DeptService {
     public List<Dept> getAllDept() {
         return dd.getAllDept();
     }
+
+    @Override
+    public void addDept(Dept dept) {
+        dd.addDept(dept);
+    }
 }
