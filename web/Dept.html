@@ -72,7 +72,7 @@
 
             // ----------------------------
             //初始化tab
-            alert(1111)
+
             $('#tab').bootstrapTable({
                 url: 'DeptServlet?type=getAll',         //请求后台的URL（*）
                 method: 'Get',                      //请求方式（*）
@@ -99,33 +99,15 @@
                 // cardView: false,                    //是否显示详细视图
                 // detailView: false,                   //是否显示父子表
                 columns: [{
-                    field: 'gid',
+                    field: 'did',
                     title: '编号',
                     align: 'center',
                 }, {
-                    field: 'name',
+                    field: 'dname',
                     title: '名称',
                     align: 'center',
                 }, {
-                    field: 'img',
-                    title: '图片',
-                    align: 'center',
-                    formatter: function (value, row, index) {
-
-                        console.log(value + "," + row.name + "," + index);
-
-                        return '<img src=' + value + ' height="46" >'
-                    }
-                }, {
-                    field: 'price',
-                    title: '价格',
-                    align: 'center',
-                }, {
-                    field: 'dname',
-                    title: '商品类型',
-                    align: 'center',
-                }, {
-                    field: 'gid',
+                    field: 'did',
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
@@ -184,46 +166,18 @@
 
         </div>
 
-        <footer class="footer">
-            <ul class="pagination">
-                <li>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                    页
-                </li>
-                <li class="gray">
-                    共20页
-                </li>
-                <li>
-                    <i class="glyphicon glyphicon-menu-left">
-                    </i>
-                </li>
-                <li>
-                    <i class="glyphicon glyphicon-menu-right">
-                    </i>
-                </li>
-            </ul>
-        </footer>
+
         <div class="data-div col-sm-12">
+
             <table id="tab" align="center" border="1" style="margin-top: 15px; "
                    class="table table-condensed table-hover  table-condensed  table-responsive table-bordered">
                 <tr class="success text-center">
 
-                    <!--<td class="col-sm-1">编号</td>-->
-                    <!--<td class="col-sm-2">名称</td>-->
+                    <td class="col-sm-1">编号</td>
+                    <td class="col-sm-2">部门名称</td>
                     <!--<td class="col-sm-2">图片</td>-->
                     <!--<td class="col-sm-1">价格</td>-->
-                    <!--<td class="col-sm-2">操作</td>-->
+                    <td class="col-sm-2">操作</td>
                 </tr>
 
             </table>
