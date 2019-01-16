@@ -30,7 +30,50 @@ public class DeptServlet extends HttpServlet {
 
         }else if (type.equals("add")){
             addDept(request,response);
+        }else if (type.equals("edit")){
+            edit(request,response);
+        }else if (type.equals("del")){
+            del(request,response);
+        }else if (type.equals("update")){
+            update(request,response);
         }
+
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("update方法里=====");
+        String name = request.getParameter("name");
+        System.out.println(name);
+//        String did = request.getParameter("did");
+        int did = Integer.parseInt(request.getParameter("did"));
+        System.out.println("did为"+did);
+
+        Dept dept=new Dept(did,name);
+        ds.updateDept(dept);
+        System.out.println("修改以后");
+        response.getWriter().write(JSON.toJSONString(1));
+
+    }
+
+    private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("del方法里===================");
+
+        int did = Integer.parseInt(request.getParameter("did"));
+
+        System.out.println("did为"+did);
+          ds.delDept(did);
+        System.out.println("删除成功后");
+
+        response.getWriter().write(JSON.toJSONString(1));
+
+    }
+
+    private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int  did = Integer.parseInt(request.getParameter("did"));
+
+        Dept deptByDid = ds.getDeptByDid(did);
+
+        response.getWriter().write(JSON.toJSONString(deptByDid));
 
     }
 
@@ -38,9 +81,10 @@ public class DeptServlet extends HttpServlet {
         System.out.println("add方法里===================");
 
         String name = request.getParameter("name");
-
-
-
+        System.out.println("name"+name);
+        Dept dept = new Dept(0, name);
+        ds.addDept(dept);
+        response.getWriter().write(JSON.toJSONString(1));
 
     }
 
