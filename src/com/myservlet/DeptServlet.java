@@ -18,7 +18,7 @@ public class DeptServlet extends HttpServlet {
      DeptService ds=new DeptServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("---------------------------------servlet里");
         List<Dept> allDept = ds.getAllDept();
         response.getWriter().write(JSON.toJSONString(allDept));
 
