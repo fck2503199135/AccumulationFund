@@ -9,7 +9,7 @@ public interface DeptDao {
     /**
      * 添加
      */
-    public void addDept();
+    public void addDept(Dept dept);
 
     /**
      * 查询全部
