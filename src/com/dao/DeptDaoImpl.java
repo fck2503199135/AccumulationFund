@@ -12,8 +12,16 @@ import java.util.List;
 public class DeptDaoImpl implements DeptDao {
     QueryRunner qr=new QueryRunner();
     @Override
-    public void addDept() {
+    public void addDept(Dept dept) {
         Connection con = DB.getcon();
+        try {
+            qr.execute(con,"insert into Dept values(0,?)",dept.getDname());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DB.close();
+        }
+
     }
 
     @Override
