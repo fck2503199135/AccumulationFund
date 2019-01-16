@@ -1,16 +1,24 @@
 package com.bean;
 
-public class post {
+public class Post {
 
-    private int pid;
+    private  int pid;
     private  String pname;
 
-    public post() {
+    public Post() {
     }
 
-    public post(int pid, String pname) {
+    public Post(int pid, String pname) {
         this.pid = pid;
         this.pname = pname;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "pid=" + pid +
+                ", pname='" + pname + '\'' +
+                '}';
     }
 
     public int getPid() {
@@ -27,13 +35,5 @@ public class post {
 
     public void setPname(String pname) {
         this.pname = pname;
-    }
-
-    @Override
-    public String toString() {
-        return "post{" +
-                "pid=" + pid +
-                ", pname='" + pname + '\'' +
-                '}';
     }
 }
