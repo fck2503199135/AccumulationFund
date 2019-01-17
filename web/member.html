@@ -46,7 +46,6 @@
                 $("#rightContent").toggleClass("pd0px");
             })
 
-
             //点击模态框提交按钮   修改提交
             $("#updateBtn").click(function () {
                 //获取表单数据
@@ -60,7 +59,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "DeptServlet?type=update&name="+name+"&did="+did,
+                    url: "MemberServlet?type=update&name="+name+"&did="+did,
                     // data: serialize,
                     data: form,
                     contentType: false,
@@ -71,7 +70,7 @@
 
                         $("#tab").bootstrapTable("refresh");
 
-                        $("#updateDept").modal("hide");
+                        $("#updateMember").modal("hide");
                     },
                     dateType: "json"
 
@@ -89,7 +88,7 @@
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "DeptServlet?type=add&name="+name,
+                    url: "MemberServlet?type=add&name="+name,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -99,7 +98,7 @@
                         // initPage(data);
                         $("#tab").bootstrapTable("refresh");
 
-                        $("#addDept").modal("hide");
+                        $("#addMember").modal("hide");
                     },
                     dateType: "json"
 
@@ -110,7 +109,7 @@
             // ----------------------------
             //初始化tab
             $('#tab').bootstrapTable({
-                url: 'DeptServlet?type=getAll',         //请求后台的URL（*）
+                url: 'MemberServlet?type=getAll',         //请求后台的URL（*）
                 method: 'Get',                      //请求方式（*）
                 // toolbar: '#toolbar',                //工具按钮用哪个容器
                 // striped: true,                      //是否显示行间隔色
@@ -135,21 +134,25 @@
                 // cardView: false,                    //是否显示详细视图
                 // detailView: false,                   //是否显示父子表
                 columns: [{
-                    field: 'did',
+                    field: 'mid',
                     title: '编号',
                     align: 'center',
                 }, {
-                    field: 'dname',
+                    field: 'mname',
                     title: '岗位成员名称',
                     align: 'center',
                 }, {
-                    field: 'did',
+                    field: 'pname',
+                    title: '所在岗位名称',
+                    align: 'center',
+                }, {
+                    field: 'mid',
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
                         // console.log(value + "," + row.name + "," + index);
 
-                        return '<button class="btn btn-primary btn-xs" onclick="edit(' + value + ')" data-toggle="modal" data-target="#updateDept">修改</button>  <button onclick="del(' + value + ')"  class="btn btn-danger btn-xs">删除</button>'
+                        return '<button class="btn btn-primary btn-xs" onclick="edit(' + value + ')" data-toggle="modal" data-target="#updateMember">修改</button>  <button onclick="del(' + value + ')"  class="btn btn-danger btn-xs">删除</button>'
                     }
                 }]
             });
@@ -160,7 +163,7 @@
         function edit(did) {
             $.ajax({
                 type: "POST",
-                url: "DeptServlet",
+                url: "MemberServlet",
                 data: "type=edit&did=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
@@ -170,7 +173,7 @@
                     $("#updatedid").val(good.did);
                     $("#updatename").val(good.dname);
 
-                    $("#updateDept").modal("show");
+                    $("#updateMember").modal("show");
                 },
                 dateType: "json"
             });
@@ -182,7 +185,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "DeptServlet",
+                url: "MemberServlet",
                 data: "type=del&did=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (data) {
@@ -232,7 +235,7 @@
 
         <div class="check-div form-inline">
             <div class="col-xs-3">
-                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addDept">添加岗位成员</button>
+                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addMember">添加岗位成员</button>
             </div>
             <div class="col-xs-5">
                 <h2 align="center">岗位成员表</h2>
@@ -259,7 +262,7 @@
             </table>
         </div>
         <!--弹出添加岗位成员窗口-->
-        <div class="modal fade" id="addDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade" id="addMember" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -274,9 +277,16 @@
                             <div class="container-fluid">
                                 <form class="form-horizontal">
                                     <div class="form-group ">
-                                        <label for="" class="col-xs-4 control-label">岗位成员名称：</label>
+                                        <label for="" class="col-xs-4 control-label">成员名称：</label>
                                         <div class="col-xs-8 ">
                                             <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
+                                                   placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="" class="col-xs-4 control-label">成员岗位：</label>
+                                        <div class="col-xs-8 ">
+                                            <input type="text" class="form-control input-sm duiqi" name="dname" id="postname"
                                                    placeholder="">
                                         </div>
                                     </div>
@@ -304,7 +314,7 @@
         <!-- /.modal -->
 
         <!--弹出修改用户窗口-->
-        <div class="modal fade" id="updateDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade" id="updateMember" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -343,7 +353,7 @@
         <!-- /.modal -->
 
         <!--弹出删除用户警告窗口-->
-        <div class="modal fade" id="deleteDept" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade" id="deleteMember" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
