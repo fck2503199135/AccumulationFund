@@ -14,5 +14,6 @@ public interface CreditService {
     int del (int cid);
     Credit getImg(int cid);
     Credit getbyId (int cid);
+    List<Credit> getCreditByIdName(String stime,String etime,String cname,String reason,String style);
 
 }
