@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/CreditServlet")
@@ -21,29 +23,104 @@ public class CreditServlet extends HttpServlet {
         doGet(request,response);
     }
     CreditService cs = new CreditServicelmpl();
+    int i;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String type = request.getParameter("type");
+        System.out.println(type);
         if (type.equals("add")){
             add(request,response);
         }else if (type.equals("getAll")){
             getAll(request,response);
+        }else if (type.equals("goupdate")){
+            goupdate(request,response);
+        }else if (type.equals("updatedeld")){
+            updatedeld(request,response);
+        }else if (type.equals("allGo")){
+            allGo(request,response);
+        }else if (type.equals("allDel")){
+            allDel(request,response);
+        }else if (type.equals("del")){
+            del(request,response);
+        }else if (type.equals("getImg")){
+            getImg(request,response);
+        }else if (type.equals("getbyId")){
+            getbyId(request,response);
         }
-
 
     }
 
+    protected void getbyId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        Credit credit = cs.getbyId(cid);
+        response.getWriter().write(JSON.toJSONString(credit));
+    }
+
+
+
+    protected void getImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        Credit img = cs.getImg(cid);
+        response.getWriter().write(JSON.toJSONString(img));
+
+    }
+
+
+    protected void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        cs.del(cid);
+        response.getWriter().write(JSON.toJSONString(1));
+    }
+
+
+    protected void allGo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        List<Credit> credits = cs.allGo();
+        response.getWriter().write(JSON.toJSONString(credits));
+    }
+
+
+    protected void allDel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        List<Credit> credits = cs.allDel();
+        response.getWriter().write(JSON.toJSONString(credits));
+    }
+
+    protected void updatedeld(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        response.getWriter().write(JSON.toJSONString(1));
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        String deld = request.getParameter("deld");
+        cs.updatedeld(new Credit(cid,deld,null));
+    }
+
+
+    protected void goupdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        response.getWriter().write(JSON.toJSONString(1));
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        String goby = request.getParameter("goby");
+        cs.goupdate(new Credit(cid,null,goby));
+
+
+    }
 
     protected void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
         List<Credit> credits = cs.getAllCredit();
-        System.out.println(credits);
         response.getWriter().write(JSON.toJSONString(credits));
 
     }
     protected void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String cname = request.getParameter("cname");
         // 创建图片的存储路径
+
+
+        i++;
         request.getServletContext().getContextPath();
         String realPath = request.getServletContext().getRealPath("/") + "images";
         //判断路径是否存在  （没有就创建）
@@ -68,10 +145,15 @@ public class CreditServlet extends HttpServlet {
             sud.save(realPath);
             String fileName = sud.getFiles().getFile(0).getFileName();
 
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+            String cdate = simpleDateFormat.format(date);
+            String cname = sud.getRequest().getParameter("cname");
+            System.out.println(cname);
             String cnum = sud.getRequest().getParameter("cnum");
-            String reason = sud.getRequest().getParameter("reason");
-            String style = sud.getRequest().getParameter("style");
-            cs.addCredit(new Credit(cname,cnum,reason,style,"images/" + fileName));
+            String reason = sud.getRequest().getParameter("option");
+            String style = sud.getRequest().getParameter("options");
+            cs.addCredit(new Credit(cdate,"GCA100000"+i,cname,cnum,reason,style,"images/" + fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
