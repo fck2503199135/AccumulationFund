@@ -117,7 +117,6 @@ public class CreditDaolmpl implements CreditDao {
         }finally {
             DB.close();
         }
-
         return null;
     }
 
@@ -133,4 +132,19 @@ public class CreditDaolmpl implements CreditDao {
         }
         return null;
     }
+
+    @Override
+    public List<Credit> getCreditByIdName(String stime,String etime,String cname,String reason,String style) {
+        Connection con = DB.getcon();
+
+        try {
+           return qr.query(con,"select * from credit where cdate > ?  and cdate < ? and cname like ? and reason like ? and style like ?",new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%","%"+reason+"%","%"+style+"%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close();
+        }
+        return null;
+    }
+
 }
