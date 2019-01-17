@@ -67,95 +67,94 @@
     text-align: right;
 
 
+}
+/*.admin-top{*/
+    /*width: auto;*/
+    /*margin: 0 15px;*/
+    /*position: relative;*/
+    /*display: block;*/
+/*}*/
 
 
-}
-.admin-top{
-    width: auto;
-    margin: 0 15px;
-    position: relative;
-    display: block;
-}
+/*.admin-login-box{*/
+    /*width: 185px;*/
+    /*height: 70px;*/
+    /*position: relative;*/
+/*}*/
 
+/*.admin-side-toggle, .admin-side-full{*/
+    /*position: absolute;*/
+    /*cursor: pointer;*/
+    /*z-index: 19940201;*/
+    /*left: 200px;*/
+    /*color: white;*/
+    /*text-align: center;*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*background-color: #808080;*/
+    /*line-height: 30px;*/
+    /*top: 25%*/
 
-.admin-login-box{
-    width: 185px;
-    height: 70px;
-    position: relative;
-}
+/*}*/
 
-.admin-side-toggle, .admin-side-full{
-    position: absolute;
-    cursor: pointer;
-    z-index: 19940201;
-    left: 200px;
-    color: white;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    background-color: #1AA094;
-    line-height: 30px;
-    top: 25%
+/*.header .layui-nav {*/
+    /*position: absolute;*/
+    /*right: 30px;*/
+/*}*/
 
-}
+/*.layui-nav .layui-nav-item{*/
+    /*position: relative;*/
+    /*display: inline-block;*/
+/*}*/
 
-.header .layui-nav {
-    position: absolute;
-    right: 30px;
-}
+/*.admin-login-box {*/
+    /*width: 185px;*/
+    /*height: 70px;*/
+    /*position: relative;*/
+/*}*/
 
-.layui-nav .layui-nav-item{
-    position: relative;
-    display: inline-block;
-}
+/*.logo {*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 18px;*/
+/*}*/
+/*.admin-side-toggle, .admin-side-full {*/
+    /*position: absolute;*/
+    /*cursor: pointer;*/
+    /*z-index: 19940201;*/
+    /*left: 200px;*/
+    /*color: white;*/
+    /*text-align: center;*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*background-color: #808080;*/
+    /*line-height: 30px;*/
+    /*top: 25%;*/
+/*}*/
 
-.admin-login-box {
-    width: 185px;
-    height: 70px;
-    position: relative;
-}
+/*.header .layui-nav {*/
+    /*position: absolute;*/
+    /*right: 30px;*/
+    /*top: 0;*/
+    /*padding: 0;*/
+    /*background: none;*/
+/*}*/
 
-.logo {
-    position: absolute;
-    left: 0;
-    top: 18px;
-}
-.admin-side-toggle, .admin-side-full {
-    position: absolute;
-    cursor: pointer;
-    z-index: 19940201;
-    left: 200px;
-    color: white;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    background-color: #1AA094;
-    line-height: 30px;
-    top: 25%;
-}
+/*.admin-header-item-mobile {*/
+    /*position: absolute;*/
+    /*right: 0px;*/
+    /*height: 70px;*/
+    /*line-height: 70px;*/
+    /*padding: 0 20px;*/
+    /*text-align: center;*/
+    /*top: 0;*/
+    /*display: none;*/
+/*}*/
 
-.header .layui-nav {
-    position: absolute;
-    right: 30px;
-    top: 0;
-    padding: 0;
-    background: none;
-}
-.admin-header-item-mobile {
-    position: absolute;
-    right: 0px;
-    height: 70px;
-    line-height: 70px;
-    padding: 0 20px;
-    text-align: center;
-    top: 0;
-    display: none;
-}
-
-.header .layui-nav {
-    position: absolute;
-    right: 30px;
-    top: 0;
-    padding: 0;
-    background: none;
-}
+/*.header .layui-nav {*/
+    /*position: absolute;*/
+    /*right: 30px;*/
+    /*top: 0;*/
+    /*padding: 0;*/
+    /*background: none;*/
+/*}*/
