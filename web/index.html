@@ -13,7 +13,10 @@
     <script src="web/js/bootstrap.min.js"></script>
     <script>
         $(function () {
+            $("#management").click(function () {
 
+                 $(".manage").slideToggle(1000);
+            })
 
             $(".meun-item").click(function () {
                 $(".meun-item").removeClass("meun-item-active");
@@ -76,18 +79,20 @@
         <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img
                 src="images/icon_source.png">资源管理
         </div>
-        <p style="margin-left: 20px">
-        <a class="meun-item" href="Organization.html" aria-controls="char" target="right">
+        <p style="margin-left: 20px" >
+        <a class="meun-item" href="Organization.html" aria-controls="char" target="right" id="management">
             <img src="images/icon_chara_grey.png">组织机构管理</a></p>
-        <p style="margin-left: 20px">
+
+        <p style="margin-left: 30px;display: none" class="manage">
         <a class="meun-item" href="Dept.html" aria-controls="char" target="right">
             <img src="images/icon_chara_grey.png">部门管理</a></p>
-        <p style="margin-left: 20px">
+        <p style="margin-left: 30px;display: none" class="manage">
         <a class="meun-item" href="post.html" aria-controls="char" target="right">
             <img src="images/icon_chara_grey.png">岗位管理</a> </p>
-        <p style="margin-left: 20px">
+        <p style="margin-left: 30px;display: none" class="manage">
         <a class="meun-item" href="member.html" aria-controls="char" target="right">
             <img src="images/icon_chara_grey.png">成员管理</a> </p>
+
         <p style="margin-left: 20px">
         <a class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img
                 src="images/icon_user_grey.png">用户管理
