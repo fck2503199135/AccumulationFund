@@ -8,7 +8,7 @@ public class Post {
 
     private  int did;
 
-    private  int dname;
+    private  String dname;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public class Post {
                 '}';
     }
 
-    public Post(int pid, String pname, int did, int dname) {
+    public Post(int pid, String pname, int did, String dname) {
         this.pid = pid;
         this.pname = pname;
         this.did = did;
@@ -35,11 +35,11 @@ public class Post {
         this.did = did;
     }
 
-    public int getDname() {
+    public String getDname() {
         return dname;
     }
 
-    public void setDname(int dname) {
+    public void setDname(String dname) {
         this.dname = dname;
     }
 
