@@ -6,6 +6,11 @@ public class Post {
 
     private  String pname;
 
+    private  int did;
+
+    private  int dname;
+
+
     public Post() {
     }
 
