@@ -112,12 +112,12 @@
             //点击添加提交保存按钮---------------------------++++++
             $("#addbtn").click(function () {
                 var name=$("#addname").val();
-                alert(name)
+                var did=$("#updatedid").val();
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "PostServlet?type=add&name="+name,
+                    url: "PostServlet?type=add&name="+name+"&did="+did,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -189,19 +189,20 @@
         })
 
         //修改弹出模态框方法--------------------------------------------------
-        function edit(did) {
+        function edit(pid) {
             $.ajax({
                 type: "POST",
                 url: "PostServlet",
-                data: "type=edit&did=" + did,
+                data: "type=edit&pid=" + pid,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
-                    // alert(good);
 
-                    $("#updatedid").val(good.pid);
-
-                    $("#updatename").val(good.pname);
+                    $("#updatepid").val(good.pid);
+                    $("#updatedid"),val(good.did);
+                    $("#updatename").val(good.name);
+                    alert(111)
                     alert("返回数值为"+good)
+
                     $("#updatepost").modal("show");
 
                 },
@@ -320,23 +321,25 @@
                         <div class="modal-body">
                             <div class="container-fluid">
 
-                                <div class="form-group ">
+                                <div class="form-group col-xs-12">
                                     <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
                                     <div class="col-xs-8 ">
-                                        <!--<input type="hidden" id="updatedid">-->
+                                        <input type="hidden" id="updategid" name="pid">
                                         <input type="text" class="form-control input-sm duiqi" id="updatename"
                                                placeholder="">
                                     </div>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group col-xs-12">
                                     <label for="updatename" class="col-xs-4 control-label">所属部门：</label>
-                                    <select class="form-control" id="updatedid">
+                                    <div class="col-xs-7">
+                                    <select class="col-xs-7 form-control " id="updatedid">
                                         <!--<option>1</option>-->
                                         <!--<option>2</option>-->
                                         <!--<option>3</option>-->
                                         <!--<option>4</option>-->
                                         <!--<option>5</option>-->
                                     </select>
+                                    </div>
                                 </div>
 
                             </div>
@@ -366,17 +369,17 @@
 
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <form class="form-horizontal">
-                                    <div class="form-group ">
-                                        <label for="" class="col-xs-4 control-label">岗位名称：</label>
+
+                                    <div class="form-group col-xs-12 " >
+                                        <label class="col-xs-4 control-label">岗位名称：</label>
                                         <div class="col-xs-8 ">
                                             <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
                                                    placeholder="">
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                    <label  class="col-xs-4 control-label">所属部门</label>
+                                    <div class="form-group col-xs-12">
+                                    <label  class="col-xs-4 control-label">所属部门:</label>
                                     <div class="col-xs-7">
                                         <select class="form-control" id="select2">
                                             <!--<option>1</option>-->
@@ -387,7 +390,7 @@
                                         </select>
                                     </div>
 
-                                </form>
+
                             </div>
                         </div>
                         <div class="modal-footer">
