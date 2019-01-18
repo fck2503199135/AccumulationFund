@@ -61,12 +61,13 @@
 
                     $("#select2").append("<option value='0'>请选择部门</option>");
 
-
+                    $("#updatedid").append("<option value='0'>请选择部门</option>")
                     $("#select3").append("<option value='0'>请选择部门</option>");
                     for (var i=0;i<data.length;i++){
                         $("#select").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
                         $("#select2").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
                         $("#select3").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
+                        $("#updatedid").append("<option value="+data[i].did+">"+data[i].dname+"</option>");
 
                     }
 
@@ -170,6 +171,10 @@
                     title: '岗位名称',
                     align: 'center',
                 }, {
+                    field: 'dname',
+                    title: '所属部门',
+                    align: 'center',
+                }, {
                     field: 'pid',
                     title: '操作',
                     align: 'center',
@@ -196,9 +201,9 @@
                     $("#updatedid").val(good.pid);
 
                     $("#updatename").val(good.pname);
+                    alert("返回数值为"+good)
+                    $("#updatepost").modal("show");
 
-                    $("#updatePost").modal("show");
-                    alert(good)
                 },
                 dateType: "json"
             });
@@ -300,6 +305,53 @@
 
             </table>
         </div>
+        <!--弹出修改用户窗口-->
+        <div class="modal fade" id="updatepost" role="dialog" aria-labelledby="gridSystemModalLabel">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">修改岗位</h4>
+                    </div>
+
+                    <form action="" id="updateform">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+
+                                <div class="form-group ">
+                                    <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
+                                    <div class="col-xs-8 ">
+                                        <!--<input type="hidden" id="updatedid">-->
+                                        <input type="text" class="form-control input-sm duiqi" id="updatename"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="updatename" class="col-xs-4 control-label">所属部门：</label>
+                                    <select class="form-control" id="updatedid">
+                                        <!--<option>1</option>-->
+                                        <!--<option>2</option>-->
+                                        <!--<option>3</option>-->
+                                        <!--<option>4</option>-->
+                                        <!--<option>5</option>-->
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                            <button type="button" id="updateBtn" class="btn btn-xs btn-green" >保 存</button>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
         <!--弹出添加岗位窗口-->
         <div class="modal fade" id="addpost" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -350,53 +402,57 @@
         </div>
         <!-- /.modal -->
 
-        <!--弹出修改用户窗口-->
-        <div class="modal fade" id="updatePost" role="dialog" aria-labelledby="gridSystemModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">修改岗位</h4>
-                    </div>
-
-                    <form action="" id="updateform">
-                        <div class="modal-body">
-                            <div class="container-fluid">
-
-                                    <div class="form-group ">
-                                        <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
-                                        <div class="col-xs-8 ">
-                                            <!--<input type="hidden" id="updatedid">-->
-                                            <input type="text" class="form-control input-sm duiqi" id="updatename"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="updatename" class="col-xs-4 control-label">所属部门：</label>
-                                        <select class="form-control" id="updatedid">
-                                            <!--<option>1</option>-->
-                                            <!--<option>2</option>-->
-                                            <!--<option>3</option>-->
-                                            <!--<option>4</option>-->
-                                            <!--<option>5</option>-->
-                                        </select>
-                                    </div>
 
 
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                            <button type="button" id="updateBtn" class="btn btn-xs btn-green" >保 存</button>
-                        </div>
-                         </form>
 
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
+
+
+        <!--<div class="modal fade" id="update" role="dialog" aria-labelledby="gridSystemModalLabel">-->
+            <!--<div class="modal-dialog" role="document">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+                                <!--aria-hidden="true">&times;</span></button>-->
+                        <!--<h4 class="modal-title">修改岗位</h4>-->
+                    <!--</div>-->
+
+                    <!--<form action="" id="updateform">-->
+                        <!--<div class="modal-body">-->
+                            <!--<div class="container-fluid">-->
+
+                                    <!--<div class="form-group ">-->
+                                        <!--<label for="updatename" class="col-xs-4 control-label">岗位名称：</label>-->
+                                        <!--<div class="col-xs-8 ">-->
+                                            <!--&lt;!&ndash;<input type="hidden" id="updatedid">&ndash;&gt;-->
+                                            <!--<input type="text" class="form-control input-sm duiqi" id="updatename"-->
+                                                   <!--placeholder="">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group ">-->
+                                        <!--<label for="updatename" class="col-xs-4 control-label">所属部门：</label>-->
+                                        <!--<select class="form-control" id="updatedid">-->
+                                            <!--&lt;!&ndash;<option>1</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option>2</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option>3</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option>4</option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<option>5</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="modal-footer">-->
+                            <!--<button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>-->
+                            <!--<button type="button" id="updateBtn" class="btn btn-xs btn-green" >保 存</button>-->
+                        <!--</div>-->
+                         <!--</form>-->
+
+                <!--</div>-->
+                <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+        <!--</div>-->
         <!-- /.modal -->
 
         <!--弹出删除用户警告窗口-->
