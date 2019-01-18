@@ -28,6 +28,8 @@ public class PostServlet extends HttpServlet {
 
         if (type.equals("getAll")) {
             List<Post> allPost = ps.getAllPost();
+
+            System.out.println(allPost);
             response.getWriter().write(JSON.toJSONString(allPost));
 
         }else if (type.equals("add")){
@@ -49,19 +51,16 @@ public class PostServlet extends HttpServlet {
         System.out.println("update方法里=====");
 
         String name = request.getParameter("name");
-
         System.out.println(name);
 
-//        String did = request.getParameter("did");
-
+        int pid = Integer.parseInt(request.getParameter("pid"));
         int did = Integer.parseInt(request.getParameter("did"));
 
-        System.out.println("did为"+did);
-
-        Dept dept=new Dept(did,name);
 
 
-        Post post = new Post(did, name);
+//        Dept dept=new Dept(did,name);
+
+        Post post = new Post(did,name,did);
         ps.updatePost(post);
 
         System.out.println("修改以后");
@@ -73,11 +72,12 @@ public class PostServlet extends HttpServlet {
 
     private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int  did = Integer.parseInt(request.getParameter("did"));
+        int  pid = Integer.parseInt(request.getParameter("pid"));
 
-        Post postByPid = ps.getPostByPid(did);
-
+        Post postByPid = ps.getPostByPid(pid);
+        System.out.println(postByPid);
         response.getWriter().write(JSON.toJSONString(postByPid));
+
 
     }
     private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,9 +99,11 @@ public class PostServlet extends HttpServlet {
         System.out.println("add方法里===================");
 
         String name = request.getParameter("name");
-        System.out.println("name"+name);
+        int did = Integer.parseInt(request.getParameter("did"));
 
-        Post post =new Post(0,name);
+
+
+        Post post =new Post(0,name,did);
         ps.addPost(post);
 //        ds.addDept(dept);
         response.getWriter().write(JSON.toJSONString(1));
