@@ -21,7 +21,7 @@ public class DeptDaoImpl implements DeptDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -35,7 +35,7 @@ public class DeptDaoImpl implements DeptDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
         return null;
@@ -49,7 +49,7 @@ public class DeptDaoImpl implements DeptDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -62,7 +62,7 @@ public class DeptDaoImpl implements DeptDao {
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            DB.close();
+                            DB.close(con);
                         }
 
     }
@@ -75,6 +75,8 @@ public class DeptDaoImpl implements DeptDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DB.close(con);
         }
 
 
