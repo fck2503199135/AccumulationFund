@@ -1,5 +1,7 @@
 package com.bean;
 
+import java.util.Date;
+
 public class Member {
 
     private  int mid;       //成员id
@@ -7,8 +9,18 @@ public class Member {
     private  String power;//权限
 
     private  int pid;//所属岗位id
+
                           //岗位名称
     private  String pname;
+
+    private  int checked;//是否选中
+
+    public Member(int mid, String mname, int pid, String regtime) {
+        this.mid = mid;
+        this.mname = mname;
+        this.pid = pid;
+        this.regtime = regtime;
+    }
 
     @Override
     public String toString() {
@@ -22,10 +34,6 @@ public class Member {
                 '}';
     }
 
-    //注册时间
-    private  String regtime;
-
-
     public Member(int mid, String mname, String power, int pid, String regtime) {
         this.mid = mid;
         this.mname = mname;
@@ -33,6 +41,17 @@ public class Member {
         this.pid = pid;
         this.regtime = regtime;
     }
+
+    public int getChecked() {
+        return checked;
+    }
+
+    public void setChecked(int checked) {
+        this.checked = checked;
+    }
+
+    //注册时间
+    private  String regtime;
 
     public String getRegtime() {
         return regtime;
@@ -42,15 +61,13 @@ public class Member {
         this.regtime = regtime;
     }
 
-    public Member() {
-    }
 
-    public Member(int mid, String mname, String power, int pid) {
-        this.mid = mid;
-        this.mname = mname;
-        this.power = power;
-        this.pid = pid;
-    }
+
+
+
+
+
+
 
 
     public String getPname() {
