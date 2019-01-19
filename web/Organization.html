@@ -52,7 +52,6 @@
                         //    alert(data.length)
                         alert(data)
 
-
                         // $("#select").append("<option value='0'>请选择商品类别</option>");
                         //
                         // $("#select2").append("<option value='0'>请选择商品类别</option>");
@@ -175,6 +174,9 @@
             // });
 
 
+            $("div").bind("contextmenu", function(){
+                return false;
+            })
         })
 
         function queryParams(param ) {
@@ -185,6 +187,9 @@
             }
             return param
         }
+
+
+
     </script>
     <!--[if lt IE 9]>
     <script src="web/js/html5shiv.min.js"></script>
@@ -192,9 +197,7 @@
     <script src="web/js/tree.js"></script>
 
     <![endif]-->
-
     <script src="web/js/respond.min.js"></script>
-
     <link href="web/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="web/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="web/css/slide.css"/>
@@ -208,7 +211,7 @@
 
 <div class="container">
     <!-- 组织机构模块-->
-    <div role="tabpanel" class="tab-pane" id="char">
+    <div role="tabpanel" class="tab-pane" id="tree">
         <!--树杈分支---------------------------------------------->
         <div class="tree well col-sm-6">
 
@@ -236,10 +239,10 @@
 
                         <!--</li>-->
 
-                        <li>
+                        <li >
 
                             <span><i class="icon-minus-sign"></i> 杭州住房公积金管理中心</span>
-                            <a href="Dept.html" target="righttab" role="tab" data-toggle="tab">编辑</a>
+                            <a href="Dept.html" >编辑</a>
 
                             <ul id="Dept">
 
@@ -482,7 +485,7 @@
                                                 <li>
 
                                                     <span><i class="icon-leaf"></i>成员</span>
-                                                    <a href="">Goes somewhere</a>
+                                                    <a href="">编辑</a>
 
                                                 </li>
 

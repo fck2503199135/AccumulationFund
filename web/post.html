@@ -47,18 +47,56 @@
             })
 
 
-            $("#updateBtn").click(function () {
+            //查询按钮
+            $("#searchBtn").click(function () {
 
+                $("#tab").bootstrapTable("refresh");
+
+
+
+            })
+
+            //所在部门下拉
+            $.ajax({
+                type: "POST",
+                url: "DeptServlet",
+                data: "type=getAll",
+                dataType: "json",//声明返回数据格式是json
+                success: function (data) {
+                    // alert(data)
+                    //    alert(data.length)
+                    $("#select").append("<option value='0'>请选择部门</option>");
+
+                    $("#select2").append("<option value='0'>请选择部门</option>");
+
+                    $("#updatedid").append("<option value='0'>请选择部门</option>")
+
+                    $("#select3").append("<option value='0'>请选择部门</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $("#select").append("<option value=" + data[i].did + ">" + data[i].dname + "</option>");
+                        $("#select2").append("<option value=" + data[i].did + ">" + data[i].dname + "</option>");
+                        $("#select3").append("<option value=" + data[i].did + ">" + data[i].dname + "</option>");
+                        $("#updatedid").append("<option value=" + data[i].did + ">" + data[i].dname + "</option>");
+
+                    }
+
+
+                },
+                dateType: "json"
+            });
+
+            //修改保存按钮
+            $("#updateBtn").click(function () {
                 var form = new FormData($("#updateform")[0]);
                 // alert(serialize)
-                var name=$("#updatename").val();
-                var did=$("#updatedid").val();
+                var name = $("#updatename").val();
+                var did = $("#updatedid").val();
 
-                alert("修改提交did为"+did)
+                alert("修改提交did为" + did)
 
                 $.ajax({
                     type: "POST",
-                    url: "PostServlet?type=update&name="+name+"&did="+did,
+                    url: "PostServlet?type=update&name=" + name + "&did=" + did,
                     // data: serialize,
                     data: form,
                     contentType: false,
@@ -79,13 +117,13 @@
 
             //点击添加提交保存按钮---------------------------++++++
             $("#addbtn").click(function () {
-                var name=$("#addname").val();
-                alert(name)
+                var name = $("#addname").val();
+                var did = $("#updatedid").val();
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "PostServlet?type=add&name="+name,
+                    url: "PostServlet?type=add&name=" + name + "&did=" + did,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -139,6 +177,10 @@
                     title: '岗位名称',
                     align: 'center',
                 }, {
+                    field: 'dname',
+                    title: '所属部门',
+                    align: 'center',
+                }, {
                     field: 'pid',
                     title: '操作',
                     align: 'center',
@@ -153,19 +195,23 @@
         })
 
         //修改弹出模态框方法--------------------------------------------------
-        function edit(did) {
+        function edit(pid) {
             $.ajax({
                 type: "POST",
                 url: "PostServlet",
-                data: "type=edit&did=" + did,
+                data: "type=edit&pid=" + pid,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
-                    // alert(good);
-                    alert(good)
+                    alert(good.did)
 
-                    $("#updatedid").val(good.pid);
+                    $("#updatepid").val(good.pid);
                     $("#updatename").val(good.pname);
+
+                    $("#updatedid").val(good.did);
+                    // alert(111)
+                    // alert("返回数值为"+good)
                     $("#updatepost").modal("show");
+
                 },
                 dateType: "json"
             });
@@ -174,7 +220,7 @@
 
         //删除方法
         function del(did) {
-
+            $("#deletepost").modal("show");
             $.ajax({
                 type: "POST",
                 url: "PostServlet",
@@ -190,12 +236,12 @@
 
         }
 
+        function queryParams(param) {
 
-        function queryParams(param ) {
 
-            var param={
-                name:$("#name3").val(),
-                // did:$("#select").val()
+            var param = {
+                name: $("#searchname").val(),
+                did:$("#select").val()
             }
             return param
         }
@@ -204,9 +250,7 @@
     <script src="web/js/html5shiv.min.js"></script>
 
 
-
     <![endif]-->
-
 
     <script src="web/js/respond.min.js"></script>
 
@@ -226,16 +270,31 @@
     <div role="tabpanel" class="tab-pane" id="scho">
 
         <div class="check-div form-inline">
-            <div class="col-xs-3">
+            <!--<div class="col-xs-3">-->
+            <!--<button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addpost">添加岗位</button>-->
+            <!--</div>-->
+            <div class="col-xs-12">
+                <h3 align="center">岗位表</h3>
+            </div>
+
+            <div class="col-xs-2 ">
                 <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addpost">添加岗位</button>
             </div>
-            <div class="col-xs-5">
-                <h2 align="center">岗位表</h2>
-            </div>
-            <!--<div class="col-lg-4 col-xs-5">-->
-            <!--<input type="text" id="search" class=" form-control input-sm " placeholder="输入文字搜索">-->
-            <!--<button class="btn btn-white btn-xs ">查 询</button>-->
-            <!--</div>-->
+
+            <form action="" id="serch">
+                <div class="col-sm-2 col-xs-2 col-xs-offset-3">
+                    <input type="text" id="searchname" class=" form-control input-sm " placeholder="输入文字搜索">
+                </div>
+                <div class="col-xs-2 ">
+
+                    <select class="form-control" id="select">
+
+                    </select>
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-primary btn-xs " type="button" id="searchBtn">查 询</button>
+                </div>
+            </form>
 
         </div>
 
@@ -254,53 +313,9 @@
 
             </table>
         </div>
-        <!--弹出添加岗位窗口-->
-        <div class="modal fade" id="addpost" role="dialog" aria-labelledby="gridSystemModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">添加岗位</h4>
-                    </div>
-
-                    <form id="addform">
-
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <form class="form-horizontal">
-                                    <div class="form-group ">
-                                        <label for="" class="col-xs-4 control-label">岗位名称：</label>
-                                        <div class="col-xs-8 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-
-                                    <!--<div class="form-group">-->
-                                    <!--<label  class="col-xs-4 control-label">岗位描述</label>-->
-                                    <!--<div class="col-xs-7">-->
-                                    <!--<input type="text" class="form-control input-sm duiqi" name="describe" id="" placeholder="">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
-
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                            <button type="button" id="addbtn" class="btn btn-xs btn-green">保 存</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
         <!--弹出修改用户窗口-->
         <div class="modal fade" id="updatepost" role="dialog" aria-labelledby="gridSystemModalLabel">
+
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -312,22 +327,32 @@
                     <form action="" id="updateform">
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <form class="form-horizontal">
-                                    <div class="form-group ">
-                                        <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
-                                        <div class="col-xs-8 ">
-                                            <input type="hidden" id="updatedid">
-                                            <input type="text" class="form-control input-sm duiqi" id="updatename"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
 
+                                <div class="form-group col-xs-12">
+                                    <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="hidden" id="updategid" name="pid">
+                                        <input type="text" class="form-control input-sm duiqi" id="updatename">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-4 control-label">所属部门：</label>
+                                    <div class="col-xs-7">
+                                        <select class="col-xs-7 form-control " id="updatedid">
+                                            <!--<option>1</option>-->
+                                            <!--<option>2</option>-->
+                                            <!--<option>3</option>-->
+                                            <!--<option>4</option>-->
+                                            <!--<option>5</option>-->
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                            <button type="button" id="updateBtn" class="btn btn-xs btn-green" >保 存</button>
+                            <button type="button" id="updateBtn" class="btn btn-xs btn-green">保 存</button>
                         </div>
                     </form>
 
@@ -336,7 +361,57 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <!--弹出添加岗位窗口-->
+        <div class="modal fade" id="addpost" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">添加岗位</h4>
+                    </div>
+
+                    <form id="addform">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+
+                                <div class="form-group col-xs-12 ">
+                                    <label class="col-xs-4 control-label">岗位名称：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
+                                               placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-4 control-label">所属部门:</label>
+                                    <div class="col-xs-7">
+                                        <select class="form-control" id="select2">
+                                            <!--<option>1</option>-->
+                                            <!--<option>2</option>-->
+                                            <!--<option>3</option>-->
+                                            <!--<option>4</option>-->
+                                            <!--<option>5</option>-->
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" id="addbtn" class="btn btn-xs btn-green">保 存</button>
+                            </div>
+                    </form>
+
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
         <!-- /.modal -->
+
 
         <!--弹出删除用户警告窗口-->
         <div class="modal fade" id="deletepost" role="dialog" aria-labelledby="gridSystemModalLabel">

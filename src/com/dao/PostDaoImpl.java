@@ -20,7 +20,7 @@ public class PostDaoImpl implements PostDao {
 
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"insert into Post values(0,?)",post.getPname());
+            qr.execute(con,"insert into Post values(0,?,?)",post.getPname(),post.getDid());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -34,10 +34,11 @@ public class PostDaoImpl implements PostDao {
 
         Connection con = DB.getcon();
         try {
-            return   qr.query(con, "select * from Post", new BeanListHandler<>(Post.class));
-
+            return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did",new BeanListHandler<>(Post.class));
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DB.close();
         }
         return null;
     }
@@ -75,7 +76,7 @@ public class PostDaoImpl implements PostDao {
         Connection con = DB.getcon();
 
         try {
-            qr.execute(con,"update Post set pname=? where pid=?",post.getPname(),post.getPid());
+            qr.execute(con,"update Post set pname=?,did=? where pid=?",post.getPname(),post.getDid(),post.getPid());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
