@@ -27,10 +27,11 @@ public class PostServlet extends HttpServlet {
         System.out.println("type为"+type);
 
         if (type.equals("getAll")) {
-            List<Post> allPost = ps.getAllPost();
-
-            System.out.println(allPost);
-            response.getWriter().write(JSON.toJSONString(allPost));
+            
+            getAll(request,response);
+//            List<Post> allPost = ps.getAllPost();
+//            System.out.println(allPost);
+//            response.getWriter().write(JSON.toJSONString(allPost));
 
         }else if (type.equals("add")){
             addPost(request,response);
@@ -46,10 +47,31 @@ public class PostServlet extends HttpServlet {
 
     }
 
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        System.out.println(name);
+        String didstr = request.getParameter("did");
+
+        int did=0;
+        if(didstr.trim().length()!=0) {
+            did=Integer.parseInt(didstr);
+        }
+
+        System.out.println(name+did);
+        List<Post> postByNameAndDid = ps.getPostByNameAndDid(name, did);
+        System.out.println(postByNameAndDid);
+        response.getWriter().write(JSON.toJSONString(postByNameAndDid));
+//        List<Post> allPost = ps.getAllPost();
+//        System.out.println(allPost);
+//        response.getWriter().write(JSON.toJSONString(allPost));
+
+    }
+
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("update方法里=====");
 
+
+        System.out.println("update方法里=====");
         String name = request.getParameter("name");
         System.out.println(name);
 
