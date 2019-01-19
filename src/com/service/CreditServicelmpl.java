@@ -58,4 +58,11 @@ public class CreditServicelmpl implements CreditService {
     public List<Credit> getCreditByIdName(String stime,String etime,String cname,String reason,String style) {
         return cd.getCreditByIdName(stime,etime,cname,reason,style);
     }
+
+
+    @Override
+    public List<Credit> getDateName(String se, String ee, String cnam) {
+        return cd.getDateName(se,ee,cnam);
+    }
+
 }

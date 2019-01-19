@@ -1,7 +1,5 @@
 package com.bean;
 
-import java.util.Date;
-
 public class Credit {
     private int cid;
     private String cdate;
@@ -13,6 +11,12 @@ public class Credit {
     private String img;
     private String deld;
     private String goby;
+    private String wname;
+    private String wnum;
+    private String mymit;
+    private String thmit;
+    private String count;
+
 
     public Credit() {
 
@@ -24,14 +28,60 @@ public class Credit {
         this.goby = goby;
     }
 
-    public Credit(String cdate, String index, String cname, String cnum, String reason, String style, String img) {
+
+    public Credit(String cdate, String index,String mymit,String thmit, String cname, String cnum,String wname, String wnum, String reason, String style, String img) {
         this.cdate = cdate;
         this.index = index;
+        this.mymit = mymit;
+        this.thmit = thmit;
         this.cname = cname;
         this.cnum = cnum;
+        this.wname = wname;
+        this.wnum = wnum;
         this.reason = reason;
         this.style = style;
         this.img = img;
+    }
+
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getMymit() {
+        return mymit;
+    }
+
+    public void setMymit(String mymit) {
+        this.mymit = mymit;
+    }
+
+    public String getThmit() {
+        return thmit;
+    }
+
+    public void setThmit(String thmit) {
+        this.thmit = thmit;
+    }
+
+    public String getWname() {
+        return wname;
+    }
+
+    public void setWname(String wname) {
+        this.wname = wname;
+    }
+
+    public String getWnum() {
+        return wnum;
+    }
+
+    public void setWnum(String wnum) {
+        this.wnum = wnum;
     }
 
     public String getDeld() {
@@ -114,6 +164,7 @@ public class Credit {
         this.style = style;
     }
 
+
     @Override
     public String toString() {
         return "Credit{" +
@@ -125,6 +176,13 @@ public class Credit {
                 ", reason='" + reason + '\'' +
                 ", style='" + style + '\'' +
                 ", img='" + img + '\'' +
+                ", deld='" + deld + '\'' +
+                ", goby='" + goby + '\'' +
+                ", wname='" + wname + '\'' +
+                ", wnum='" + wnum + '\'' +
+                ", mymit='" + mymit + '\'' +
+                ", thmit='" + thmit + '\'' +
+                ", count='" + count + '\'' +
                 '}';
     }
 }

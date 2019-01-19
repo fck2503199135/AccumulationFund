@@ -17,7 +17,7 @@ public class CreditDaolmpl implements CreditDao {
     public void addCredit(Credit credit) {
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getCname(),credit.getCnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
+            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getMymit(),credit.getThmit(),credit.getCname(),credit.getCnum(),credit.getWname(),credit.getWnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -139,6 +139,24 @@ public class CreditDaolmpl implements CreditDao {
 
         try {
            return qr.query(con,"select * from credit where cdate > ?  and cdate < ? and cname like ? and reason like ? and style like ?",new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%","%"+reason+"%","%"+style+"%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close();
+        }
+        return null;
+    }
+
+
+    @Override
+    public List<Credit> getDateName(String se, String ee, String cnam) {
+        System.out.println(se+"=====++");
+        System.out.println(ee+"=====++");
+        System.out.println(cnam+"=====++");
+
+        Connection con = DB.getcon();
+        try {
+            return qr.query(con, "SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style", new BeanListHandler<>(Credit.class),se,ee,"%"+cnam+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

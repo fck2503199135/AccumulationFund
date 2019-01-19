@@ -15,5 +15,7 @@ public interface CreditService {
     Credit getImg(int cid);
     Credit getbyId (int cid);
     List<Credit> getCreditByIdName(String stime,String etime,String cname,String reason,String style);
+    List<Credit> getDateName(String se,String ee,String cnam);
+
 
 }
