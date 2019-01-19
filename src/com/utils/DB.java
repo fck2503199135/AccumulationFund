@@ -37,8 +37,6 @@ public class DB {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-
         }
 
     }
