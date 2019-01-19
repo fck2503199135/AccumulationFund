@@ -5,6 +5,8 @@ import com.bean.Credit;
 import com.jspsmart.upload.SmartUpload;
 import com.service.CreditService;
 import com.service.CreditServicelmpl;
+import com.utils.NowTime;
+import sun.security.provider.certpath.CertId;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,10 +57,36 @@ public class CreditServlet extends HttpServlet {
                 getbyId(request, response);
             } else if (type.equals("getCreditByIdName")) {
                 getCreditByIdName(request, response);
+            } else if (type.equals("getDateName")) {
+                getDateName(request, response);
             }
 
         }
 
+
+    }
+
+    String cnam;
+    String se;
+    String ee;
+
+    protected void getDateName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        se = request.getParameter("stime");
+        ee = request.getParameter("etime");
+        cnam = request.getParameter("cname");
+
+        if (cnam==null){
+            cnam = "";
+        }
+        if (se == null) {
+            se = "1500-1-1";
+        }
+        if (ee == null) {
+            ee = "2500-1-1";
+        }
+        List<Credit> dateName = cs.getDateName(se, ee, cnam);
+
+        response.getWriter().write(JSON.toJSONString(dateName));
 
     }
 
@@ -151,10 +179,12 @@ public class CreditServlet extends HttpServlet {
 
     String reason;
     String style;
+    String mymit;
+    String thmit;
 
     protected void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 创建图片的存储路径
-        int i = 1;
+
         request.getServletContext().getContextPath();
         String realPath = request.getServletContext().getRealPath("/") + "images";
         //判断路径是否存在  （没有就创建）
@@ -175,14 +205,29 @@ public class CreditServlet extends HttpServlet {
         response.setContentType("text/html;charset=GBK");
 
         try {
+            Date date = new Date();
             sud.upload();
             sud.save(realPath);
             String fileName = sud.getFiles().getFile(0).getFileName();
-            Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String cdate = simpleDateFormat.format(date);
+            long index = date.getTime();
             String cname = request.getParameter("cname");
             String cnum = sud.getRequest().getParameter("cnum");
+            String my = sud.getRequest().getParameter("mymit");
+            String th = sud.getRequest().getParameter("thmit");
+            if (my.equals("0")){
+                mymit = "本人";
+            }
+            if (th.equals("1")){
+                thmit = "配偶";
+            }
+
+            String wname = request.getParameter("wname");
+            String wnum = sud.getRequest().getParameter("wnum");
+            System.out.println(wname+"*************");
+
+
             String option = sud.getRequest().getParameter("option1");
             String options = sud.getRequest().getParameter("option2");
 
@@ -198,7 +243,7 @@ public class CreditServlet extends HttpServlet {
             } else if (options.equals("5")) {
                 style = "身份信息核查";
             }
-            cs.addCredit(new Credit(cdate, "GCA100000" + i, cname, cnum, reason, style, "images/" + fileName));
+            cs.addCredit(new Credit(cdate,"GTA"+index,mymit,thmit,cname,cnum,wname,wnum,reason, style, "images/" + fileName));
 
         } catch (Exception e) {
             e.printStackTrace();
