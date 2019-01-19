@@ -21,7 +21,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -35,7 +35,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
 
         return null;
@@ -49,7 +49,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -62,7 +62,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -76,7 +76,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -89,7 +89,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -102,7 +102,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return 0;
     }
@@ -115,7 +115,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -128,7 +128,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -142,7 +142,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -160,7 +160,7 @@ public class CreditDaolmpl implements CreditDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
