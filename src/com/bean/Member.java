@@ -10,6 +10,37 @@ public class Member {
                           //岗位名称
     private  String pname;
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "mid=" + mid +
+                ", mname='" + mname + '\'' +
+                ", power='" + power + '\'' +
+                ", pid=" + pid +
+                ", pname='" + pname + '\'' +
+                ", regtime='" + regtime + '\'' +
+                '}';
+    }
+
+    //注册时间
+    private  String regtime;
+
+
+    public Member(int mid, String mname, String power, int pid, String regtime) {
+        this.mid = mid;
+        this.mname = mname;
+        this.power = power;
+        this.pid = pid;
+        this.regtime = regtime;
+    }
+
+    public String getRegtime() {
+        return regtime;
+    }
+
+    public void setRegtime(String regtime) {
+        this.regtime = regtime;
+    }
 
     public Member() {
     }
@@ -21,17 +52,6 @@ public class Member {
         this.pid = pid;
     }
 
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "mid=" + mid +
-                ", mname='" + mname + '\'' +
-                ", power='" + power + '\'' +
-                ", pid=" + pid +
-                ", pname='" + pname + '\'' +
-                '}';
-    }
 
     public String getPname() {
         return pname;
