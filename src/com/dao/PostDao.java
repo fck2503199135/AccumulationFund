@@ -28,4 +28,7 @@ public interface PostDao {
      * 修改更新
      */
     public void updatePost(Post post);
+
+
+    public  List<Post> getPostByNameAndDid(String name,int did);
 }

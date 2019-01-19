@@ -24,7 +24,7 @@ public class PostDaoImpl implements PostDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
@@ -38,7 +38,7 @@ public class PostDaoImpl implements PostDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -53,7 +53,7 @@ public class PostDaoImpl implements PostDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
         return null;
@@ -67,7 +67,7 @@ public class PostDaoImpl implements PostDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
     }
 
@@ -80,8 +80,32 @@ public class PostDaoImpl implements PostDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
+    }
+
+    @Override
+    public List<Post> getPostByNameAndDid(String name, int did) {
+        Connection con = DB.getcon();
+
+        try {
+            if(did==0){
+
+                return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did and pname like ?", new BeanListHandler<>(Post.class),"%"+name+"%");
+
+
+            }else {
+
+                return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did and dept.did=? and pname like ?", new BeanListHandler<>(Post.class),did,"%"+name+"%");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DB.close(con);
+        }
+
+
+        return null;
     }
 }
