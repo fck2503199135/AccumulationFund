@@ -15,7 +15,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getPostByNameAndDid(String name, int did) {
+        System.out.println(pd.getPostByNameAndDid(name,did));
+        return pd.getPostByNameAndDid(name,did);
+    }
+
+    @Override
     public List<Post> getAllPost() {
+        System.out.println(pd.getAllPost());
         return pd.getAllPost();
     }
 

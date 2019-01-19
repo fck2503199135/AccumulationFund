@@ -30,4 +30,9 @@ public interface PostService {
      * 修改更新
      */
     public void updatePost(Post post);
+
+    /**
+     * 查询
+     */
+    public  List<Post> getPostByNameAndDid(String name,int did);
 }
