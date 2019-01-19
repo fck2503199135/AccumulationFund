@@ -6,13 +6,12 @@ public class Dept {
 
           private String dname;
 
+          private String daddress;
 
-    public Dept() {
-    }
-
-    public Dept(int did, String dname) {
+    public Dept(int did, String dname, String daddress) {
         this.did = did;
         this.dname = dname;
+        this.daddress = daddress;
     }
 
     @Override
@@ -20,7 +19,24 @@ public class Dept {
         return "Dept{" +
                 "did=" + did +
                 ", dname='" + dname + '\'' +
+                ", daddress='" + daddress + '\'' +
                 '}';
+    }
+
+    public String getDaddress() {
+        return daddress;
+    }
+
+    public void setDaddress(String daddress) {
+        this.daddress = daddress;
+    }
+
+    public Dept() {
+    }
+
+    public Dept(int did, String dname) {
+        this.did = did;
+        this.dname = dname;
     }
 
     public int getDid() {
