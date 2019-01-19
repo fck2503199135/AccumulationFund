@@ -31,10 +31,10 @@ public class DB {
         return null;
     }
 
-    public static void close(){
+    public static void close(Connection con){
 
         try {
-            getcon().close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
