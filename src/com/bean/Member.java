@@ -3,6 +3,8 @@ package com.bean;
 import java.util.Date;
 
 public class Member {
+    public Member() {
+    }
 
     private  int mid;       //成员id
     private  String mname; //成员名称
