@@ -4,6 +4,7 @@ public class Credit {
     private int cid;
     private String cdate;
     private String index;
+    private String uname;
     private String cname;
     private String cnum;
     private String reason;
@@ -29,7 +30,7 @@ public class Credit {
     }
 
 
-    public Credit(String cdate, String index,String mymit,String thmit, String cname, String cnum,String wname, String wnum, String reason, String style, String img) {
+    public Credit(String cdate, String index,String uname,String mymit,String thmit, String cname, String cnum,String wname, String wnum, String reason, String style, String img) {
         this.cdate = cdate;
         this.index = index;
         this.mymit = mymit;
@@ -43,6 +44,13 @@ public class Credit {
         this.img = img;
     }
 
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
 
     public String getCount() {
         return count;

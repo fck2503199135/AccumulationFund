@@ -59,6 +59,12 @@ public class CreditServlet extends HttpServlet {
                 getCreditByIdName(request, response);
             } else if (type.equals("getDateName")) {
                 getDateName(request, response);
+            } else if (type.equals("getAllcount")) {
+                getAllcount(request, response);
+            } else if (type.equals("getWork")) {
+                getWork(request, response);
+            } else if (type.equals("getAllwork")) {
+                getAllwork(request, response);
             }
 
         }
@@ -66,26 +72,71 @@ public class CreditServlet extends HttpServlet {
 
     }
 
-    String cnam;
-    String se;
-    String ee;
 
-    protected void getDateName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        se = request.getParameter("stime");
-        ee = request.getParameter("etime");
-        cnam = request.getParameter("cname");
+    protected void getAllwork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (cnam==null){
-            cnam = "";
-        }
-        if (se == null) {
-            se = "1500-1-1";
-        }
-        if (ee == null) {
-            ee = "2500-1-1";
-        }
-        List<Credit> dateName = cs.getDateName(se, ee, cnam);
+        String uname = request.getParameter("uname");
+        List<Credit> allwork = cs.getAllwork(uname);
+        response.getWriter().write(JSON.toJSONString(allwork));
 
+
+    }
+
+
+    protected void getWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String strtime = request.getParameter("strtime");
+        String endtime = request.getParameter("endtime");
+        cname = request.getParameter("cname");
+
+        if (cname == null) {
+            cname = "";
+        }
+        if (strtime == null) {
+            stime = "1500-1-1";
+        }
+        if (endtime == null) {
+            etime = "2500-1-1";
+        }
+
+
+        List<Credit> works = cs.getWork(stime, etime, cname);
+        response.getWriter().write(JSON.toJSONString(works));
+
+    }
+
+
+    protected void getAllcount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String reason = request.getParameter("reason");
+
+        String style = request.getParameter("style");
+
+        List<Credit> counts = cs.getAllcount(reason, style);
+        response.getWriter().write(JSON.toJSONString(counts));
+
+
+    }
+
+
+    String cname;
+
+    protected void getDateName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String strtime = request.getParameter("strtime");
+        String endtime = request.getParameter("endtime");
+        cname = request.getParameter("cname");
+
+        if (cname == null) {
+            cname = "";
+        }
+        if (strtime == null) {
+            stime = "1500-1-1";
+        }
+        if (endtime == null) {
+            etime = "2500-1-1";
+        }
+
+        List<Credit> dateName = cs.getDateName(stime, etime, cname);
         response.getWriter().write(JSON.toJSONString(dateName));
 
     }
@@ -216,16 +267,16 @@ public class CreditServlet extends HttpServlet {
             String cnum = sud.getRequest().getParameter("cnum");
             String my = sud.getRequest().getParameter("mymit");
             String th = sud.getRequest().getParameter("thmit");
-            if (my.equals("0")){
+            if (my.equals("0")) {
                 mymit = "本人";
             }
-            if (th.equals("1")){
+            if (th.equals("1")) {
                 thmit = "配偶";
             }
 
             String wname = request.getParameter("wname");
             String wnum = sud.getRequest().getParameter("wnum");
-            System.out.println(wname+"*************");
+            System.out.println(wname + "*************");
 
 
             String option = sud.getRequest().getParameter("option1");
@@ -243,7 +294,7 @@ public class CreditServlet extends HttpServlet {
             } else if (options.equals("5")) {
                 style = "身份信息核查";
             }
-            cs.addCredit(new Credit(cdate,"GTA"+index,mymit,thmit,cname,cnum,wname,wnum,reason, style, "images/" + fileName));
+            cs.addCredit(new Credit(cdate, "GTA" + index, "admin", mymit, thmit, cname, cnum, wname, wnum, reason, style, "images/" + fileName));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@ public class CreditDaolmpl implements CreditDao {
     public void addCredit(Credit credit) {
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getMymit(),credit.getThmit(),credit.getCname(),credit.getCnum(),credit.getWname(),credit.getWnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
+            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getUname(),credit.getMymit(),credit.getThmit(),credit.getCname(),credit.getCnum(),credit.getWname(),credit.getWnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -149,14 +149,11 @@ public class CreditDaolmpl implements CreditDao {
 
 
     @Override
-    public List<Credit> getDateName(String se, String ee, String cnam) {
-        System.out.println(se+"=====++");
-        System.out.println(ee+"=====++");
-        System.out.println(cnam+"=====++");
+    public List<Credit> getDateName(String stime,String etime,String cname) {
 
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style", new BeanListHandler<>(Credit.class),se,ee,"%"+cnam+"%");
+            return qr.query(con, "SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -165,4 +162,59 @@ public class CreditDaolmpl implements CreditDao {
         return null;
     }
 
+    @Override
+    public List<Credit> getWork(String stime,String etime,String cname) {
+
+        Connection con = DB.getcon();
+        try {
+            return qr.query(con, "SELECT uname,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY uname", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close(con);
+        }
+        return null;
+    }
+
+    //    @Override
+//    public List<Credit> getAllcount(String se, String ee, String cnam,String count,String tse, String tee, String tcnam,String tcount) {
+//
+//        Connection con = DB.getcon();
+//        try {
+//           return qr.query(con,"SELECT * FROM credit WHERE reason in (SELECT reason FROM (SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style ) AS ter WHERE ter.count = ?) and style in (SELECT style FROM (SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style ) AS ter WHERE ter.count = ?) ", new BeanListHandler<>(Credit.class),se,ee,"%"+cnam+"%",count,tse,tee,"%"+tcnam+"%",tcount);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }finally {
+//            DB.close(con);
+//        }
+//        return null;
+//    }
+
+
+    @Override
+    public List<Credit> getAllcount(String reason, String style) {
+        Connection con = DB.getcon();
+        try {
+            return qr.query(con, "SELECT *  FROM credit where reason = ? and style = ?", new BeanListHandler<>(Credit.class),reason,style);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close(con);
+        }
+        return null;
+    }
+
+
+    @Override
+    public List<Credit> getAllwork(String uname) {
+        Connection con = DB.getcon();
+        try {
+            return qr.query(con, "SELECT *  FROM credit where uname = ?", new BeanListHandler<>(Credit.class),uname);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close(con);
+        }
+        return null;
+    }
 }
