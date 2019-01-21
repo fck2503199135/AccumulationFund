@@ -81,8 +81,9 @@ public class DeptServlet extends HttpServlet {
         System.out.println("add方法里===================");
 
         String name = request.getParameter("name");
-        System.out.println("name"+name);
-        Dept dept = new Dept(0, name);
+        String address = request.getParameter("address");
+        System.out.println(address);
+        Dept dept = new Dept(0, name,address);
         ds.addDept(dept);
         response.getWriter().write(JSON.toJSONString(1));
 
