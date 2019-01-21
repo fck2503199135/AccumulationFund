@@ -45,7 +45,7 @@ public class DeptDaoImpl implements DeptDao {
     public void updateDept(Dept dept) {
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"update Dept set dname=? where did=?",dept.getDname(),dept.getDid());
+            qr.execute(con,"update Dept set dname=? daddress=? where did=?",dept.getDname(),dept.getDaddress(),dept.getDid());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -58,7 +58,7 @@ public class DeptDaoImpl implements DeptDao {
     public void addDept(Dept dept) {
                         Connection con = DB.getcon();
                         try {
-                            qr.execute(con,"insert into Dept values(0,?)",dept.getDname());
+                            qr.execute(con,"insert into Dept values(0,?,?)",dept.getDname(),dept.getDaddress());
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
