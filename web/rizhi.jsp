@@ -9,10 +9,11 @@
 <html>
   <head>
     <title>$Title$</title>
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
     <link rel="stylesheet" href="./bootstrap/js/bootstrap-table.min.css">
-    <script src="./bootstrap/js/jquery-2.1.4.js"></script>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+
+    <script src="./jq/jquery-3.2.0.min.js"></script>
     <script src="./bootstrap/js/bootstrap.js"></script>
     <script src="./bootstrap/js/bootstrap-table.min.js"></script>
     <script src="./bootstrap/js/bootstrap-table-zh-CN.min.js"></script>

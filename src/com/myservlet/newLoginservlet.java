@@ -24,8 +24,9 @@ import java.util.List;
 public class newLoginservlet extends HttpServlet {
     UserService us = new UserServiceImpl();
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
         String type=req.getParameter("type");
-        System.out.println(type);
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String nowTime = simpleDateFormat.format(date);
@@ -35,8 +36,8 @@ public class newLoginservlet extends HttpServlet {
         int  r2=nowTime.compareTo(t2);
         Calendar cal = Calendar.getInstance();
         int nowday = cal.get(Calendar.DAY_OF_WEEK);
-//        (nowday>1&&nowday<7)&&
-        if((r1>0&&r2<0)){
+//        (nowday>1&&nowday<7)&&(r1>0&&r2<0)
+        if(true){
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
@@ -50,6 +51,7 @@ public class newLoginservlet extends HttpServlet {
                 Object userStr = JSON.toJSON(users);
                 resp.getWriter().print(userStr);
             } else if(type.equals("getAllroles")){
+                System.out.println(type);
                 getAllroles(req,resp);
             }
             else if(type.equals("init")) {
@@ -109,8 +111,7 @@ public class newLoginservlet extends HttpServlet {
 
     protected void getAllroles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          System.out.println("---get---");
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
+
         RoleService rs= new RoleServiceImpl();
         PrintWriter out = resp.getWriter();
         List<role> roles=rs.getAllrole();

@@ -17,7 +17,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
