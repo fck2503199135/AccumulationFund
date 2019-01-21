@@ -70,19 +70,16 @@ public class PostServlet extends HttpServlet {
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-
         System.out.println("update方法里=====");
         String name = request.getParameter("name");
-        System.out.println(name);
-
         int pid = Integer.parseInt(request.getParameter("pid"));
+        System.out.println(pid);
         int did = Integer.parseInt(request.getParameter("did"));
-
-
+        System.out.println("pid"+pid+"did"+did);
 
 //        Dept dept=new Dept(did,name);
 
-        Post post = new Post(did,name,did);
+        Post post = new Post(pid,name,did);
         ps.updatePost(post);
 
         System.out.println("修改以后");
