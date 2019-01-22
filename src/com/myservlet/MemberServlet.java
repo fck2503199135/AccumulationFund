@@ -34,13 +34,20 @@ public class MemberServlet extends HttpServlet {
         else if (type.equals("add")){
             addMember(request,response);
         }
-//        else if (type.equals("edit")){
-//            edit(request,response);
-//        }else if (type.equals("del")){
+        else if (type.equals("edit")){
+            edit(request,response);
+        }
+//        else if (type.equals("del")){
 //            del(request,response);
 //        }else if (type.equals("update")){
 //            update(request,response);
 //        }
+
+    }
+
+    private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("edit方法里");
+
 
     }
 
