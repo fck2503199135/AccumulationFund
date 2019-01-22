@@ -276,7 +276,6 @@ public class CreditServlet extends HttpServlet {
 
             String wname = request.getParameter("wname");
             String wnum = sud.getRequest().getParameter("wnum");
-            System.out.println(wname + "*************");
 
 
             String option = sud.getRequest().getParameter("option1");

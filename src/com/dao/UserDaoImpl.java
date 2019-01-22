@@ -2,7 +2,6 @@ package com.dao;
 import com.bean.User;
 import java.sql.Connection;
 import java.util.List;
-
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import com.utils.DB;
@@ -19,7 +18,7 @@ public class UserDaoImpl implements UserDao {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                DB.close();
+                DB.close(con);
             }
             return null;
         }
@@ -32,7 +31,7 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
         return null;
     }
@@ -45,7 +44,7 @@ public class UserDaoImpl implements UserDao {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                DB.close();
+                DB.close(con);
             }
         }
 
@@ -58,7 +57,7 @@ public class UserDaoImpl implements UserDao {
              }catch (Exception e){
                  e.printStackTrace();
              }finally {
-                 DB.close();
+                 DB.close(con);
              }
     }
 
@@ -70,7 +69,7 @@ public class UserDaoImpl implements UserDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            DB.close();
+            DB.close(con);
         }
     }
 
@@ -82,7 +81,7 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DB.close();
+            DB.close(con);
         }
 
     }
