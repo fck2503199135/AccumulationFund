@@ -30,6 +30,7 @@ public class newLoginservlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
         String type=req.getParameter("type");
+        System.out.println(type);
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String nowTime = simpleDateFormat.format(date);
@@ -39,8 +40,8 @@ public class newLoginservlet extends HttpServlet {
         int  r2=nowTime.compareTo(t2);
         Calendar cal = Calendar.getInstance();
         int nowday = cal.get(Calendar.DAY_OF_WEEK);
-//        (nowday>1&&nowday<7)&&(r1>0&&r2<0)
-        if(true){
+//
+        if( (nowday>1&&nowday<7)&&(r1>0&&r2<0)){
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
