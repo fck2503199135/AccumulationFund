@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/js/bootstrap-table.min.css" rel="stylesheet">
+    <script src="jq/jquery-3.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-table.min.js"></script>
+    <script src="bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <!-- bootstrap表格导出初始化-->
+    <script type="text/javascript" src="bootstrap/export/table-export.js"></script>
+    <!-- bootstrap表格导出执行-->
+    <script type="text/javascript" src="bootstrap/export/tableExport.js"></script>
+    <script type="text/javascript" src="bootstrap/export/jquery.base64.js"></script>
+    <script type="text/javascript" src="bootstrap/export/main.js"></script>
+
+    <meta charset="UTF-8">
+
+    <style>
+
+    </style>
+
+    <script language="JavaScript">
+
+
+
+        $(function () {
+
+
+            $("#table").bootstrapTable({
+                url: "CreditServlet?type=getCreditByIdName",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 5,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                showExport:true,
+                exportDataType:"basic",
+                columns: [{
+                    field: 'cid',
+                    title: '编号',
+                    align: 'center',
+                }, {
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                }, {
+                    field: 'index',
+                    title: '审核号',
+                    align: 'center',
+                }, {
+                    field: 'byname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                }, {
+                    field: 'mymit',
+                    title: '类别',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '姓名',
+                    align: 'center',
+                },
+                    {
+                        field: 'cnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                        field: 'thmit',
+                        title: '类别',
+                        align: 'center',
+                    }, {
+                        field: 'wname',
+                        title: '姓名',
+                        align: 'center',
+                    },
+                    {
+                        field: 'wnum',
+                        title: '身份证',
+                        align: 'center',
+                    },
+                    {
+                        field: 'cid',
+                        title: '操作',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return '<button class="btn btn-info btn-xs" onclick=" sel(' + value + ')">查询</button><button class="btn btn-warning btn-xs" onclick=" look(' + value + ')">审核</button><button class="btn btn-primary btn-xs" onclick=" goupdate(' + value + ')" >通过</button><button onclick="delupdate(' + value + ')"  class="btn btn-danger btn-xs" >驳回</button>'
+                        }
+                    }
+                ]
+            })
+
+            // asyncPost({
+            //     url: "getExceptionDiagnoseCount.json",
+            //     data: {"startCheckTime":startCheckTime,"endCheckTime":endCheckTime,"options":checkBoxArr},
+            //     async: false,
+            //     dataType : 'json',
+            //     success: function(rst){
+            //         //为表格动态加载数据
+            //         $("#table").bootstrapTable('load',rst.data);
+            //     }
+            // });
+            //
+            //
+            // TableExport.init();
+
+            $("#table1").bootstrapTable({
+                url: "CreditServlet?type=allGo",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                // queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 3,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'cid',
+                    title: '编号',
+                    align: 'center',
+                }, {
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                }, {
+                    field: 'index',
+                    title: '审核号',
+                    align: 'center',
+                }, {
+                    field: 'byname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                }, {
+                    field: 'mymit',
+                    title: '类别',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '姓名',
+                    align: 'center',
+                },
+                    {
+                        field: 'cnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                        field: 'thmit',
+                        title: '类别',
+                        align: 'center',
+                    }, {
+                        field: 'wname',
+                        title: '姓名',
+                        align: 'center',
+                    },
+                    {
+                        field: 'wnum',
+                        title: '身份证',
+                        align: 'center',
+                    },
+                    {
+                        field: 'cid',
+                        title: '查看',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return '<button class="btn btn-primary btn-xs" onclick=" visee()">查看</button>'
+                        }
+                    }]
+            })
+        })
+
+        // var TableExport = function() {
+        //
+        //     "use strict";
+        //     // function to initiate HTML Table Export
+        //     var runTableExportTools = function() {
+        //         $(".export-excel").on("click", function(e) {
+        //             e.preventDefault();
+        //             var exportTable = $(this).data("table");
+        //             var ignoreColumn = $(this).data("ignorecolumn");
+        //             $(exportTable).tableExport({
+        //                 type : 'excel',
+        //                 escape : 'false',
+        //                 ignoreColumn : '[' + ignoreColumn + ']'
+        //             });
+        //         });
+        //     };
+        //     return {
+        //         // main function to initiate template pages
+        //         init : function() {
+        //             runTableExportTools();
+        //             //runDataTable_example2();
+        //         }
+        //     };
+        // }(jQuery);
+
+
+
+        function visee() {
+            alert("已经完成审核")
+        }
+
+
+        function queryParams(arams) {
+            return {
+                "stime": $("#stime").val(),
+                "etime": $("#etime").val(),
+                "cname": $("#cname").val(),
+                "reason": $("#reason").val(),
+                "style": $("#style").val()
+            }
+
+        }
+
+
+        function sel(cid) {
+            $.ajax({
+                type: "post",
+                url: "CreditServlet",
+                data: "type=getbyId&cid=" + cid,
+                dateType: "json",
+                success: function (credit) {
+                    $("#tr1  td:not(:first)").html("");
+                    $("#tr2  td:not(:first)").html("");
+                    $("#tr3  td:not(:first)").html("");
+                    $("#tr4  td:not(:first)").html("");
+                    $("#tr5  td:not(:first)").html("");
+                    $("#tr6  td:not(:first)").html("");
+                    $("#tr7  td:not(:first)").html("");
+                    $("#tr8  td:not(:first)").html("");
+                    var data = JSON.parse(credit);
+                    $("#tr1").append("<td>" + data.cdate + "</td>>")
+                    $("#tr2").append("<td>" + data.index + "</td>>")
+                    $("#tr3").append("<td>" + data.byname + "</td>>")
+                    $("#tr4").append("<td>" + data.reason + "</td>>")
+                    $("#tr5").append("<td>" + data.style + "</td>>")
+                    $("#tr6").append("<td>" + data.type + "</td>>")
+                    $("#tr7").append("<td>" + data.cname + "</td>>")
+                    $("#tr8").append("<td>" + data.cnum + "</td>>")
+                    $("#showtab").modal("show")
+
+
+                }
+            })
+
+        }
+
+
+        function look(cid) {
+            $.ajax({
+                type: "post",
+                url: "CreditServlet",
+                data: "type=getImg&cid=" + cid,
+                dateType: "json",
+                success: function (data) {
+                    var cre = JSON.parse(data);
+                    $("#img").attr("src", cre.img)
+                    $("#showimg").modal("show")
+
+                }
+            })
+
+        }
+
+
+        function delupdate(cid) {
+            var deld = 1;
+            $.ajax({
+                type: "post",
+                url: "CreditServlet",
+                data: "type=updatedeld&deld=" + deld + "&cid=" + cid,
+                dateType: "json",
+                success: function (data) {
+                    window.location.href = "credit.html";
+                }
+            })
+
+        }
+
+        function goupdate(cid) {
+            var goby = 0;
+            $.ajax({
+                type: "post",
+                url: "CreditServlet",
+                data: "type=goupdate&goby=" + goby + "&cid=" + cid,
+                dateType: "json",
+                success: function (data) {
+                    window.location.href = "credit.html";
+                }
+            })
+
+
+        }
+
+        function rego() {
+            $("#stime").val("")
+            $("#etime").val("")
+            $("#cname").val("")
+            $("#reason").val("")
+            $("#style").val("")
+        }
+
+
+        function getCreditByIdName() {
+
+            $("#table").bootstrapTable("refresh");
+        }
+
+
+
+    </script>
+
+
+    <title>审核列表</title>
+
+</head>
+<body>
+<h1 style="color: #c9302c" align="center">
+    杭州公积金审核列表
+</h1>
+
+<button type="button" id="download" style="margin-left:50px" id="btn_download" class="btn btn-primary" onClick ="$('#table').tableExport({ type: 'excel', escape: 'false' })">导出Excel</button>
+
+
+
+<div style="margin-top: 150px">
+
+    <form class="form-horizontal" role="form">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="stime" class="col-sm-4 control-label">开始时间</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" id="stime" name="stime" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="etime" class="col-sm-4 control-label">结束时间</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" id="etime" name="etime" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="reason" class="col-sm-4 control-label">查询原因</label>
+                <div class="col-sm-5">
+                    <select id="reason" name="reason" class="form-control">
+                        <option value="">请选择</option>
+                        <option value="公积金提取复核">公积金提取复核</option>
+                        <option value="贷款复核">贷款复核</option>
+                        <option value="贷后管理">贷后管理</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="style" class="col-sm-4 control-label">查询类型</label>
+                <div class="col-sm-5">
+                    <select id="style" name="style" class="form-control">
+                        <option value="">请选择</option>
+                        <option value="信用报告查询">信用报告查询</option>
+                        <option value="身份信息核查">身份信息核查</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="cname" class="col-sm-4 control-label">姓名</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="cname" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bname" class="col-sm-4 control-label">经办人</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="bname" placeholder="请输入">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" onclick="getCreditByIdName()" class="btn btn-info">查询</button>
+                <button type="button" onclick="rego()" class="btn btn-warning" name="type">重置</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div>
+
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#zero" data-toggle="tab">未审核</a>
+            </li>
+            <li>
+                <a href="#first" data-toggle="tab">已审核</a>
+            </li>
+
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active" id="zero">
+                <div>
+
+
+                    <table border="1" id="table" class="table table-striped table-bordered table-hover">
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="first">
+                <div>
+
+                    <table border="1" id="table1" class="table table-striped table-bordered table-hover">
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="showtab" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="tabModalLabel">查看详细信息</h4>
+                </div>
+                <div class="modal-body">
+
+                    <table border="1" class="table table-striped table-bordered table-hover">
+                        <tr id="tr1">
+                            <td style="width: 30%">提交时间</td>
+
+                        </tr>
+                        <tr id="tr2">
+                            <td>审核号</td>
+                        </tr>
+                        <tr id="tr3">
+                            <td>经办人</td>
+                        </tr>
+                        <tr id="tr4">
+                            <td>查询原因</td>
+                        </tr>
+                        <tr id="tr5">
+                            <td>查询类型</td>
+                        </tr>
+                        <tr id="tr6">
+                            <td>类别</td>
+                        </tr>
+                        <tr id="tr7">
+                            <td>姓名</td>
+                        </tr>
+                        <tr id="tr8">
+                            <td>身份证号</td>
+                        </tr>
+
+
+                    </table>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="showimg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="imgModalLabel">查看审核图片</h4>
+                </div>
+                <div class="modal-body">
+
+                    <img src="" id="img">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

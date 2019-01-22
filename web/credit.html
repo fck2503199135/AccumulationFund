@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/js/bootstrap-table.min.css" rel="stylesheet">
+    <script src="jq/jquery-3.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-table.min.js"></script>
+    <script src="bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <meta charset="UTF-8">
+
+    <script language="JavaScript">
+
+        $(function () {
+            $("#table").bootstrapTable({
+                url: "CreditServlet?type=allDel",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                // queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 3,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'cid',
+                    title: '编号',
+                    align: 'center',
+                }, {
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                }, {
+                    field: 'index',
+                    title: '审核号',
+                    align: 'center',
+                }, {
+                    field: 'byname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                },  {
+                    field: 'mymit',
+                    title: '类别',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '姓名',
+                    align: 'center',
+                },
+                    {
+                        field: 'cnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                        field: 'thmit',
+                        title: '类别',
+                        align: 'center',
+                    }, {
+                        field: 'wname',
+                        title: '姓名',
+                        align: 'center',
+                    },
+                    {
+                        field: 'wnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                    field: 'cid',
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return '<button class="btn btn-danger btn-xs" onclick=" del(' + value + ')">删除</button>'
+                    }
+                }
+                ]
+            })
+
+            $("#table1").bootstrapTable({
+                url: "CreditServlet?type=allGo",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                // queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 3,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'cid',
+                    title: '编号',
+                    align: 'center',
+                }, {
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                }, {
+                    field: 'index',
+                    title: '审核号',
+                    align: 'center',
+                }, {
+                    field: 'byname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                },  {
+                    field: 'mymit',
+                    title: '类别',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '姓名',
+                    align: 'center',
+                },
+                    {
+                        field: 'cnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                        field: 'thmit',
+                        title: '类别',
+                        align: 'center',
+                    }, {
+                        field: 'wname',
+                        title: '姓名',
+                        align: 'center',
+                    },
+                    {
+                        field: 'wnum',
+                        title: '身份证',
+                        align: 'center',
+                    }, {
+                    field: 'cid',
+                    title: '查看',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return '<button class="btn btn-primary btn-xs" onclick=" look(' + value + ')">查看</button>'
+                    }
+                }]
+            })
+        })
+
+
+        function del(cid) {
+            $.ajax({
+                type: "post",
+                url: "CreditServlet",
+                data: "type=del&cid=" + cid,
+                dateType: "json",
+                success: function (data) {
+                    // 刷新当前页面
+                    $("#table").bootstrapTable("refresh");
+                }
+            })
+        }
+
+
+        function add() {
+            var cname = $("#cname").val();
+            var wname = $("#wname").val();
+            var formData = new FormData($("#fr")[0]);
+            $.ajax({
+                type: "post",
+                url: "CreditServlet?type=add&cname=" + cname+"&wname="+wname,
+                data: formData,
+                contentType: false,
+                processData: false,
+                dateType: "json",
+                success: function (data) {
+                    alert("您已经成功提交审核！")
+                }
+            })
+        }
+
+        function look() {
+            alert("恭喜你通过了审核")
+        }
+
+
+        function wshow() {
+            if($("#sw1").is(":checked") == true){
+                $("#tb").append("<tr><td>配偶</td><td><input type='text' name='wname' id='wname'></td><td><input type='text' name='wnum'></td></tr>")
+            }else {
+                $("#tb  tr:not(:first)").html("");
+            }
+        }
+
+        function mshow() {
+            if($("#sw").is(":checked") == true){
+                $("#tb").append("<tr><td>本人</td><td><input type='text' value='"+$("#cname").val()+"'></td><td><input type='text' value='"+$("#cnum").val()+"'></td></tr>")
+            }else {
+                $("#tb  tr:not(:first)").html("");
+            }
+        }
+
+
+    </script>
+
+
+    <title>征信查询</title>
+
+
+</head>
+
+<body>
+
+<h1 style="color: #90111a" align="center">
+    杭州公积金管理系统
+</h1>
+<div style="margin-top: 100px">
+<div>
+    <form class="form-horizontal" role="form" id="fr" enctype="multipart/form-data">
+        <div class="col-sm-8">
+
+            <div class=" col-sm-6">
+                <div class="form-group">
+                    <label for="cname" class="col-sm-4 control-label">身份名称</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cname" name="cname" placeholder="请输入名字">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cnum" class="col-sm-4 control-label">身份证号</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cnum" name="cnum" placeholder="请输入身份证号">
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label class="col-sm-4 control-label">查询原因</label>
+
+                    <label class="radio-inline">
+                    <input type="radio" name="option1" id="optionsRadios1" value="1"> 公积金提取复核
+                </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="option1" id="optionsRadios2" value="2"> 贷款复核
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="option1" id="optionsRadios3" value="3"> 贷后管理
+                    </label>
+                </div>
+                <div class="form-group">
+
+                    <label class="col-sm-4 control-label">查询类型</label>
+
+                    <label class="radio-inline">
+                    <input type="radio" name="option2" id="optionsRadios4" value="4"> 信用报告查询
+                </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="option2" id="optionsRadios5" value="5"> 身份信息核查
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="image" class="col-sm-4 control-label">审核图片</label>
+                    <div class="col-sm-8">
+                        <input type="file" id="image" name="img">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox" onclick="mshow()"  id="sw" name="mymit" value="0">本人</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox" onclick="wshow()"  id="sw1" name="thmit" value="1">配偶</label>
+                    </div>
+                    <table border="1" class="table table-striped table-bordered table-hover" id="tb">
+                        <tr>
+                            <td>类别</td>
+                            <td>姓名</td>
+                            <td >身份证号</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="col-sm-12">
+        <p align="center">
+            <button onclick="add()" class="btn btn-primary btn-sm">提交审核</button>
+        </p>
+
+    </div>
+</div>
+
+<div class="form-group">
+
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#zero" data-toggle="tab">通过列表</a>
+        </li>
+        <li>
+            <a href="#first" data-toggle="tab">驳回列表</a>
+        </li>
+
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active" id="zero">
+            <div class="form-group">
+
+
+                <table border="1" id="table1" class="table table-striped table-bordered table-hover">
+
+                </table>
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="first">
+            <div class="form-group">
+
+                <table border="1" id="table" class="table table-striped table-bordered table-hover">
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</body>
+</html>
