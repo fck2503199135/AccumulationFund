@@ -13,37 +13,23 @@
     <script src="web/js/bootstrap.min.js"></script>
     <script>
         $(function () {
-
-
-            $("#userName").click(function () {
-
-                $("#logout").slideToggle()
-
-            })
-
             $("#management").click(function () {
-
-                $(".manage").slideToggle(600);
-            })
-
-
-            $("#cout").click(function () {
-
-                $(".rc").slideToggle(500);
-
-
-
-            })
-
+                $(".manage").slideToggle(1000);
+            });
 
             $("#show").click(function () {
 
-
                 $(".sow").slideToggle(500);
+            });
 
 
 
-            })
+
+
+
+
+
+
 
 
             $(".meun-item").click(function () {
@@ -53,11 +39,10 @@
                 itmeObj.each(function () {
                     var items = $(this).attr("src");
                     items = items.replace("_grey.png", ".png");
-                    items = items.replace(".png", "_grey.png")
+                    items = items.replace(".png", "_grey.png");
                     $(this).attr("src", items);
                 });
                 var attrObj = $(this).find("img").attr("src");
-                ;
                 attrObj = attrObj.replace("_grey.png", ".png");
                 $(this).find("img").attr("src", attrObj);
             });
@@ -78,6 +63,10 @@
                 $("#rightContent").toggleClass("pd0px");
             })
         })
+
+
+
+
 
 
     </script>
@@ -107,17 +96,23 @@
         <div class="meun-title">账号管理</div>
 
 
+
         <!-- 审核 -->
         <p style="margin-left: 20px">
             <a class="meun-item"  href="download.html" aria-controls="char" target="right" id="show">
                 <img src="images/icon_chara_grey.png">主页</a></p>
 
         <p style="margin-left: 30px;display: none" class="sow">
-            <a class="meun-item" href="credit.html" aria-controls="char" target="right">
+            <a class="meun-item" href="demo.html" aria-controls="char" target="right">
                 <img src="images/icon_chara_grey.png">征信查询</a></p>
         <p style="margin-left: 30px;display: none" class="sow">
-            <a class="meun-item" href="review.html" aria-controls="char" target="right">
+            <a class="meun-item" href="demo2.html" aria-controls="char" target="right">
                 <img src="images/icon_chara_grey.png">审核查询</a></p>
+
+
+
+
+
 
 
         <p style="margin-left: 20px">
@@ -132,30 +127,19 @@
                 <img src="images/icon_chara_grey.png">岗位管理</a></p>
         <p style="margin-left: 30px;display: none" class="manage">
             <a class="meun-item" href="member.html" aria-controls="char" target="right">
-                <img src="images/icon_chara_grey.png">岗位成员管理</a></p>
+                <img src="images/icon_chara_grey.png">成员管理</a></p>
 
         <p style="margin-left: 20px">
             <a class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img
                     src="images/icon_user_grey.png">角色管理
             </a></p>
         <p style="margin-left: 20px">
-            <a class="meun-item" href="" ><img
-            src="images/icon_change_grey.png">修改密码
-            </a>
-        </p>
-
-
-        <!-- 统计数据 -->
-        <p style="margin-left: 20px">
-            <a class="meun-item" href="#data" aria-controls="user" role="tab" data-toggle="tab" id="cout">
-                <img src="images/icon_user_grey.png">统计数据
-            </a>
-        </p>
-        <p style="margin-left: 30px;display: none" class="rc">
-            <a class="meun-item" href="count.html" aria-controls="char" target="right">
-                <img src="images/icon_chara_grey.png">统计查询报表</a></p>
-
-
+            <a class="meun-item" href="#data" aria-controls="user" role="tab" data-toggle="tab"><img
+                    src="images/icon_user_grey.png">统计数据
+            </a></p>
+        <!--<a class="meun-item" href="Dept.html" aria-controls="chan" role="tab" target="right"><img-->
+        <!--src="images/icon_change_grey.png">修改密码-->
+        <!--</a>-->
         <!--<div class="meun-title">地区管理</div>-->
         <!--<div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img-->
         <!--src="images/icon_house_grey.png">地区管理-->
@@ -177,19 +161,15 @@
         </a>
 
         <div class="tab-content tab-nav">
-            <div id="personInfor" class="dropdown-toggle">
-
-                <p id="userName">
-                    欢迎用户: AAA
-                    <img src="images/boy-3.png" alt="头像图片" height="46" class="img-circle">
-                    <span class="caret"></span>
+            <div id="personInfor">
+                <p id="userName">用户名: AAA
+                    <img src="images/boy-3.png
+" alt="头像图片" height="46" class="img-circle">
                 </p>
 
-                <p id="logout" style="display: none">
-                    <a href="login.jsp">退出登录</a> <br>
-                    <a href="#">注销</a> <br>
+                <p>
+                    <a href="">退出登录</a>
                 </p>
-
             </div>
         </div>
         <!-- Tab panes -->

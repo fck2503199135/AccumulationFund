@@ -4,8 +4,8 @@ public class role {
     private  int id;
     private  String rid;
     private  String name;
-    private  String Jname;
-    private  String JS;
+    private  String jName;
+    private  String jS;
 
     public role() {
     }
@@ -35,20 +35,20 @@ public class role {
         this.name = name;
     }
 
-    public String getJname() {
-        return Jname;
+    public String getJName() {
+        return jName;
     }
 
-    public void setJname(String jname) {
-        Jname = jname;
+    public void setJName(String jName) {
+        this.jName = jName;
     }
 
-    public String getJS() {
-        return JS;
+    public String getjS() {
+        return jS;
     }
 
-    public void setJS(String JS) {
-        this.JS = JS;
+    public void setJS(String jS) {
+        this.jS = jS;
     }
 
 
@@ -58,8 +58,8 @@ public class role {
                 "id=" + id +
                 ", rid='" + rid + '\'' +
                 ", name='" + name + '\'' +
-                ", Jname='" + Jname + '\'' +
-                ", JS='" + JS + '\'' +
+                ", jName='" + jName + '\'' +
+                ", jS='" + jS + '\'' +
                 '}';
     }
 }

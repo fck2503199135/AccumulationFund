@@ -1,12 +1,10 @@
 package com.myservlet;
-
 import com.alibaba.fastjson.JSON;
 import com.bean.Dept;
 import com.bean.Member;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 import com.utils.NowTime;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,13 +52,13 @@ public class MemberServlet extends HttpServlet {
         String power = request.getParameter("power");
         power=null;
 
-        System.out.println(name);
-              String regtime= NowTime.ATime();
-        System.out.println(regtime);
+//        System.out.println(name);
+//            String regtime= NowTime.ATime();
+//        System.out.println(regtime);
 
         int pid=1;
-        Member member=new Member(0,name,power,1,regtime);
-        ms.addMember(member);
+//        Member member=new Member(0,name,power,1,regtime);
+//        ms.addMember(member);
         response.getWriter().write(JSON.toJSONString(1));
 
     }
