@@ -29,10 +29,12 @@ public class PostServlet extends HttpServlet {
         if (type.equals("getAll")) {
             
             getAll(request,response);
-//            List<Post> allPost = ps.getAllPost();
-//            System.out.println(allPost);
-//            response.getWriter().write(JSON.toJSONString(allPost));
+//
 
+        }else if (type.equals("getAllPost")){
+            List<Post> allPost = ps.getAllPost();
+            System.out.println(allPost);
+            response.getWriter().write(JSON.toJSONString(allPost));
         }else if (type.equals("add")){
             addPost(request,response);
         }else if (type.equals("edit")){
@@ -61,9 +63,7 @@ public class PostServlet extends HttpServlet {
         List<Post> postByNameAndDid = ps.getPostByNameAndDid(name, did);
         System.out.println(postByNameAndDid);
         response.getWriter().write(JSON.toJSONString(postByNameAndDid));
-//        List<Post> allPost = ps.getAllPost();
-//        System.out.println(allPost);
-//        response.getWriter().write(JSON.toJSONString(allPost));
+
 
     }
 
@@ -71,11 +71,12 @@ public class PostServlet extends HttpServlet {
 
 
         System.out.println("update方法里=====");
-        String name = request.getParameter("name");
+
         int pid = Integer.parseInt(request.getParameter("pid"));
-        System.out.println(pid);
         int did = Integer.parseInt(request.getParameter("did"));
-        System.out.println("pid"+pid+"did"+did);
+        String name = request.getParameter("name");
+        System.out.println(name);
+
 
 //        Dept dept=new Dept(did,name);
 
@@ -119,8 +120,6 @@ public class PostServlet extends HttpServlet {
 
         String name = request.getParameter("name");
         int did = Integer.parseInt(request.getParameter("did"));
-
-
 
         Post post =new Post(0,name,did);
         ps.addPost(post);
