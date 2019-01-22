@@ -10,6 +10,7 @@ public class FileSize {
     }
 
 
+
     public static String GetFileSize(File file){
         String size = "";
         if(file.exists() && file.isFile()){

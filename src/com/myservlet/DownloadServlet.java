@@ -66,7 +66,6 @@ public class DownloadServlet extends HttpServlet {
             fe.add(f3);
             response.getWriter().write(JSON.toJSONString(fe));
 
-
         }
 
 
