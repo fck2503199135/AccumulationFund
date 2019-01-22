@@ -36,7 +36,7 @@ public class CreditServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         String type = request.getParameter("type");
-        System.out.println(type);
+
         if (type == null) {
             getAll(request, response);
         } else {
@@ -89,6 +89,8 @@ public class CreditServlet extends HttpServlet {
         String strtime = request.getParameter("strtime");
         String endtime = request.getParameter("endtime");
         cname = request.getParameter("cname");
+
+        System.out.println(cname + "===================");
 
         if (cname == null) {
             cname = "";
@@ -234,6 +236,7 @@ public class CreditServlet extends HttpServlet {
     String mymit;
     String thmit;
 
+
     protected void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 创建图片的存储路径
 
@@ -265,20 +268,17 @@ public class CreditServlet extends HttpServlet {
             String cdate = simpleDateFormat.format(date);
             long index = date.getTime();
             String cname = request.getParameter("cname");
+
             String cnum = sud.getRequest().getParameter("cnum");
-            String my = sud.getRequest().getParameter("mymit");
-            String th = sud.getRequest().getParameter("thmit");
-            if (my.equals("0")) {
-                mymit = "本人";
-            }
-            if (th.equals("1")) {
-                thmit = "配偶";
-            }
+
+            String mymit1 = sud.getRequest().getParameter("mymit");
+
+            String thmit1 = sud.getRequest().getParameter("thmit");
 
             String wname = request.getParameter("wname");
+
+
             String wnum = sud.getRequest().getParameter("wnum");
-
-
             String option = sud.getRequest().getParameter("option1");
             String options = sud.getRequest().getParameter("option2");
 
@@ -294,7 +294,19 @@ public class CreditServlet extends HttpServlet {
             } else if (options.equals("5")) {
                 style = "身份信息核查";
             }
-            cs.addCredit(new Credit(cdate, "GTA" + index, "admin", mymit, thmit, cname, cnum, wname, wnum, reason, style, "images/" + fileName));
+
+
+            if (mymit1 != null || thmit != null) {
+
+                    mymit = "本人";
+                    thmit = "配偶";
+
+                System.out.println(mymit+thmit);
+                cs.addCredit(new Credit(cdate, "GTA" + index, null, mymit, cname, cnum, thmit, wname, wnum, reason, style, "images/" + fileName));
+            } else {
+                cs.addCredit(new Credit(cdate, "GTA" + index, null, mymit, cname, cnum, thmit, wname, wnum, reason, style, "images/" + fileName));
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
