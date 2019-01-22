@@ -18,7 +18,7 @@ public class CreditDaolmpl implements CreditDao {
     public void addCredit(Credit credit) {
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getUname(),credit.getMymit(),credit.getThmit(),credit.getCname(),credit.getCnum(),credit.getWname(),credit.getWnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
+            qr.execute(con,"insert into credit values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",credit.getCdate(),credit.getIndex(),credit.getUname(),credit.getMymit(),credit.getCname(),credit.getCnum(),credit.getThmit(),credit.getWname(),credit.getWnum(),credit.getReason(),credit.getStyle(),credit.getImg(),credit.getDeld(),credit.getGoby());
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
