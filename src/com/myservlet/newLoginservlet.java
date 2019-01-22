@@ -1,13 +1,16 @@
 package com.myservlet;
 import com.alibaba.fastjson.JSON;
 import com.bean.MD5JM;
-import com.bean.NowTime;
+
 import com.bean.User;
 import com.bean.role;
 import com.service.RoleService;
 import com.service.RoleServiceImpl;
 import com.service.UserService;
 import com.service.UserServiceImpl;
+import com.utils.DB;
+import com.utils.NowTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,7 +64,8 @@ public class newLoginservlet extends HttpServlet {
                 if (u1!= null && u1.getUnumber()!= 0) {
                     u1.setUnumber(u1.getUnumber()+1);
                     us.updateStuNumber(u1);
-                    String n1=NowTime.getNowTiem();
+                    String n1 = NowTime.ATime();
+//                    String n1=NowTime.getNowTiem();
                     u1.setLogintime(n1);
                     us.updateStuSTime(u1);
                     req.getSession().setAttribute("u1",u1);
@@ -97,7 +101,8 @@ public class newLoginservlet extends HttpServlet {
     }
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          int uid=Integer.parseInt(req.getParameter("uid"));
-        String t2=NowTime.getNowTiem();
+        String t2 = NowTime.ATime();
+//        String t2=NowTime.getNowTiem();
        User u2=new User();
        u2.setUid(uid);
         u2.setLogouttime(t2);

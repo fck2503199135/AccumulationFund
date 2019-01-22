@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 2019/1/21
+  Time: 10:48
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="ch">
 
@@ -109,7 +117,7 @@
 
         <!-- 审核 -->
         <p style="margin-left: 20px">
-            <a class="meun-item"  href="download.html" aria-controls="char" target="right" id="show">
+            <a class="meun-item" aria-controls="char" target="right" id="show">
                 <img src="images/icon_chara_grey.png">主页</a></p>
 
         <p style="margin-left: 30px;display: none" class="sow">
@@ -136,11 +144,11 @@
 
         <p style="margin-left: 20px">
             <a class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img
-                    src="images/icon_user_grey.png">角色管理
+                    src="images/icon_user_grey.png">用户管理
             </a></p>
         <p style="margin-left: 20px">
             <a class="meun-item" href="" ><img
-            src="images/icon_change_grey.png">修改密码
+                    src="images/icon_change_grey.png">修改密码
             </a>
         </p>
 
@@ -195,7 +203,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
 
-            <iframe src="download.html" name="right" class="" style="width: 100%;height:1000px"></iframe>
+            <iframe src="a.html" name="right" class="" style="width: 100%;height:1000px"></iframe>
 
 
         </div>
