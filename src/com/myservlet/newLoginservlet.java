@@ -50,10 +50,12 @@ public class newLoginservlet extends HttpServlet {
             }else if(type.equals("updateone")){
                 updateone(req,resp);
             }else if(type.equals("seleteone")){
-                System.out.println("youjinquma");
                 seleteone(req,resp);
             }else if(type.equals("search")){
                 search(req,resp);
+            }else if(type.equals("deletone")){
+                System.out.println("---done---");
+                deletone(req,resp);
             }else if(type.equals("getAll"))
             {
                 UserService us=new UserServiceImpl();
@@ -76,10 +78,8 @@ public class newLoginservlet extends HttpServlet {
                     us.updateStuNumber(u1);
                     String n1 = NowTime.ATime();
 //                    String n1=NowTime.getNowTiem();
-                    u1.setLogintime(n1);
-                    us.updateStuSTime(u1);
-                    req.getSession().setAttribute("u1",u1);
 
+                    req.getSession().setAttribute("u1",u1);
                     req.getSession().setAttribute("name",name);
 
                     resp.getWriter().print("success");
@@ -119,10 +119,7 @@ public class newLoginservlet extends HttpServlet {
          int uid=Integer.parseInt(req.getParameter("uid"));
         String t2 = NowTime.ATime();
 //        String t2=NowTime.getNowTiem();
-       User u2=new User();
-       u2.setUid(uid);
-        u2.setLogouttime(t2);
-        us.updateStuETime(u2);
+
         req.getSession().invalidate();
         resp.getWriter().print("logout");
 
@@ -172,6 +169,15 @@ public class newLoginservlet extends HttpServlet {
         role r1=new role(id,rid,name,jName,jS);
         RoleService rs= new RoleServiceImpl();
         rs.update(r1);
+        resp.getWriter().print(1);
+    }
+    protected void deletone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---done---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        RoleService rs= new RoleServiceImpl();
+        rs.del(id);
         resp.getWriter().print(1);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
