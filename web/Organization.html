@@ -49,6 +49,58 @@
                     dataType:"json",//声明返回数据格式是json
                     success:function(data){
                         // alert(data)
+
+                        for (var i=0;i<data.length;i++){
+
+                            $("#Dept").append("<li>" +
+                                "                                    <span id=\"\"><i class=\"icon-leaf\"></i>"+data[i].dname+"</span>" +
+                                "                                    <a href='Dept.html' class='Post' >编辑</a>" +
+                                "                                </li>" +
+                                "")
+
+                        }
+
+                    },
+                    dateType:"json"
+                });
+
+            })
+            $(".Post").click(function () {
+                $.ajax({
+                    type:"POST",
+                    url:"PostServlet",
+                    data:"type=getAll",
+                    dataType:"json",//声明返回数据格式是json
+                    success:function(data){
+                        // alert(data)
+                        //    alert(data.length)
+                        // alert(data)
+                        // $("#select2").append("<option value='0'>请选择商品类别</option>");
+                        // $("#select3").append("<option value='0'>请选择商品类别</option>");
+                        for (var i=0;i<data.length;i++){
+
+                            $(".Post").append("<li>" +
+                                "                                    <span id=\"\"><i class=\"icon-leaf\"></i>"+data[i].dname+"</span>" +
+                                "                                    <a href='Post.html' class='member'>编辑</a>" +
+                                "                                </li>" +
+                                "")
+
+                        }
+
+
+                    },
+                    dateType:"json"
+                });
+
+            })
+            $(".Member").click(function () {
+                $.ajax({
+                    type:"POST",
+                    url:"MemberServlet",
+                    data:"type=getAll",
+                    dataType:"json",//声明返回数据格式是json
+                    success:function(data){
+                        // alert(data)
                         //    alert(data.length)
                         // alert(data)
                         // $("#select").append("<option value='0'>请选择商品类别</option>");
@@ -58,9 +110,9 @@
                         // $("#select3").append("<option value='0'>请选择商品类别</option>");
                         for (var i=0;i<data.length;i++){
 
-                            $("#Dept").append("<li>" +
+                            $(".Member").append("<li>" +
                                 "                                    <span id=\"\"><i class=\"icon-leaf\"></i>"+data[i].dname+"</span>" +
-                                "                                    <a href='Dept.html' aria-controls='post' role='tab' data-toggle='tab'>编辑</a>" +
+                                "                                    <a href='member.html' >编辑</a>" +
                                 "                                </li>" +
                                 "")
 
@@ -76,9 +128,7 @@
                 });
 
             })
-
             //tree------------------------
-
 
             $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', '折叠分支');
 
@@ -207,43 +257,28 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" >
     <!-- 组织机构模块-->
     <div role="tabpanel" class="tab-pane" id="tree">
         <!--树杈分支---------------------------------------------->
-        <div class="tree well col-sm-6">
+        <div class="tree well col-sm-6" style="margin-top: 20px;">
 
             <ul>
 
                 <li class="parent_li">
 
                     <span class="parent_li"><i class="icon-folder-open"></i> 住房公积金管理机构</span>
-                    <!--<a href="#scho" aria-controls="scho" role="tab" data-toggle="tab">查看</a>-->
+                    <!--<a href="#scho" >查看</a>-->
 
                     <ul>
-                        <!--<li>-->
-
-                        <!--<span><i class="icon-minus-sign"></i> 杭州住房公积金管理中心</span> <a href="#scho" aria-controls="scho" role="tab" data-toggle="tab">查看</a>-->
-
-                        <!--<ul>-->
-
-                        <!--<li>-->
-
-                        <!--<span><i class="icon-leaf"></i> 主城区提取</span> <a href="#post" aria-controls="post" role="tab" data-toggle="tab">Goes somewhere</a>-->
-
-                        <!--</li>-->
-
-                        <!--</ul>-->
-
-                        <!--</li>-->
 
                         <li >
 
                             <span><i class="icon-minus-sign"></i> 杭州住房公积金管理中心</span>
-                            <!--<a href="Dept.html" >编辑</a>-->
+                            <a href="Dept.html" id="Dept">编辑</a>
 
                             <ul >
-
+                                <!--<a href="Dept.html" id="Dept">编辑</a>-->
                                 <li>
 
                                     <span id=""><i class="icon-leaf"></i> 主城区提取</span>
@@ -259,14 +294,14 @@
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i> 成员</span>
+                                                    <span><i class="icon-leaf"></i> 成员A</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i>成员</span>
+                                                    <span><i class="icon-leaf"></i>成员B</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
@@ -283,14 +318,14 @@
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i> 成员</span>
+                                                    <span><i class="icon-leaf"></i> 成员C</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i>成员</span>
+                                                    <span><i class="icon-leaf"></i>成员D</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
@@ -298,11 +333,7 @@
                                             </ul>
                                         </li>
 
-                                        <!--<li>-->
 
-                                        <!--<span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>-->
-
-                                        <!--</li>-->
 
                                     </ul>
                                 </li>
@@ -323,7 +354,7 @@
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i> 成员</span>
+                                                    <span><i class="icon-leaf"></i> 成员E</span>
                                                     <a href="member.html">查看</a>
 
 
@@ -331,7 +362,7 @@
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i>成员</span>
+                                                    <span><i class="icon-leaf"></i>成员F</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
@@ -348,14 +379,14 @@
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i> 成员</span>
+                                                    <span><i class="icon-leaf"></i> 成员G</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
 
                                                 <li>
 
-                                                    <span><i class="icon-leaf"></i>成员</span>
+                                                    <span><i class="icon-leaf"></i>成员H</span>
                                                     <a href="member.html">查看</a>
 
                                                 </li>
@@ -363,11 +394,7 @@
                                             </ul>
                                         </li>
 
-                                        <!--<li>-->
 
-                                        <!--<span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>-->
-
-                                        <!--</li>-->
 
                                     </ul>
 
@@ -428,11 +455,6 @@
                                             </ul>
                                         </li>
 
-                                        <!--<li>-->
-
-                                        <!--<span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>-->
-
-                                        <!--</li>-->
 
                                     </ul>
                                 </li>
@@ -491,11 +513,7 @@
                                             </ul>
                                         </li>
 
-                                        <!--<li>-->
 
-                                        <!--<span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>-->
-
-                                        <!--</li>-->
 
                                     </ul>
                                 </li>
@@ -508,57 +526,10 @@
 
                 </li>
 
-                <!--<li>-->
-
-                <!--<span><i class="icon-folder"></i> 组织机构2</span> <a href="">Goes somewhere</a>-->
-
-                <!--<ul>-->
-
-                <!--<li>-->
-
-                <!--<span><i class="icon-minus-sign"></i> 下属部门</span> <a href="#scho">Goes somewhere</a>-->
-
-                <!--<ul>-->
-
-                <!--<li>-->
-
-                <!--<span><i class="icon-leaf"></i> 下属岗位</span> <a href="#post">Goes somewhere</a>-->
-
-                <!--</li>-->
-
-                <!--<li>-->
-
-                <!--<span><i class="icon-minus-sign"></i>下属岗位</span> <a href="">Goes somewhere</a>-->
-
-
-                <!--</li>-->
-
-                <!--<li>-->
-
-                <!--<span><i class="icon-leaf"></i>下属岗位</span> <a href="#post">Goes somewhere</a>-->
-
-                <!--</li>-->
-
-                <!--</ul>-->
-
-                <!--</li>-->
-
-                <!--</ul>-->
-
-                <!--</li>-->
 
             </ul>
 
         </div>
-
-        <div class="tree well col-sm-6">
-
-            <!--<iframe src="a.html" name="righttab" class="" style="width: 100%;height:1000px"></iframe>-->
-
-
-
-        </div>
-
 
 
     </div>

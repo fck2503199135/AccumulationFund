@@ -30,6 +30,7 @@ public class newLoginservlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
         String type=req.getParameter("type");
+        System.out.println(type);
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String nowTime = simpleDateFormat.format(date);
@@ -39,8 +40,8 @@ public class newLoginservlet extends HttpServlet {
         int  r2=nowTime.compareTo(t2);
         Calendar cal = Calendar.getInstance();
         int nowday = cal.get(Calendar.DAY_OF_WEEK);
-//        (nowday>1&&nowday<7)&&(r1>0&&r2<0)
-        if(true){
+//
+        if( (nowday>1&&nowday<7)&&(r1>0&&r2<0)){
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
@@ -71,6 +72,9 @@ public class newLoginservlet extends HttpServlet {
                     u1.setLogintime(n1);
                     us.updateStuSTime(u1);
                     req.getSession().setAttribute("u1",u1);
+
+                    req.getSession().setAttribute("name",name);
+
                     resp.getWriter().print("success");
                 }else if (u1!= null && u1.getUnumber()== 0){
 
@@ -99,6 +103,9 @@ public class newLoginservlet extends HttpServlet {
         u1.setUnumber(u1.getUnumber()+1);
         us.updateStuNumber(u1);
         resp.sendRedirect("Login.jsp");
+
+
+
 
     }
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

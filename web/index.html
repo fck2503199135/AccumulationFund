@@ -22,6 +22,12 @@
                 $(".sow").slideToggle(500);
             });
 
+            $("#cout").click(function () {
+
+                $(".rc").slideToggle(500);
+
+            })
+
 
 
             $(".meun-item").click(function () {
@@ -95,10 +101,10 @@
                 <img src="images/icon_chara_grey.png">主页</a></p>
 
         <p style="margin-left: 30px;display: none" class="sow">
-            <a class="meun-item" href="demo.html" aria-controls="char" target="right">
+            <a class="meun-item" href="credit.html" aria-controls="char" target="right">
                 <img src="images/icon_chara_grey.png">征信查询</a></p>
         <p style="margin-left: 30px;display: none" class="sow">
-            <a class="meun-item" href="demo2.html" aria-controls="char" target="right">
+            <a class="meun-item" href="review.html" aria-controls="char" target="right">
                 <img src="images/icon_chara_grey.png">审核查询</a></p>
 
 
@@ -125,10 +131,16 @@
             <a class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img
                     src="images/icon_user_grey.png">角色管理
             </a></p>
+
+
         <p style="margin-left: 20px">
-            <a class="meun-item" href="#data" aria-controls="user" role="tab" data-toggle="tab"><img
-                    src="images/icon_user_grey.png">统计数据
-            </a></p>
+            <a class="meun-item" aria-controls="user" role="tab" data-toggle="tab" id="cout">
+                <img src="images/icon_user_grey.png">统计数据
+            </a>
+        </p>
+        <p style="margin-left: 30px;display: none" class="rc">
+            <a class="meun-item" href="count.html" aria-controls="char" target="right">
+                <img src="images/icon_chara_grey.png">统计查询报表</a></p>
         <!--<a class="meun-item" href="Dept.html" aria-controls="chan" role="tab" target="right"><img-->
         <!--src="images/icon_change_grey.png">修改密码-->
         <!--</a>-->

@@ -31,7 +31,7 @@ public class Credit {
     }
 
 
-    public Credit(String cdate, String index,String uname,String mymit,String thmit, String cname, String cnum,String wname, String wnum, String reason, String style, String img) {
+    public Credit(String cdate, String index,String uname,String mymit, String cname, String cnum,String thmit,String wname, String wnum, String reason, String style, String img) {
         this.cdate = cdate;
         this.index = index;
         this.mymit = mymit;
@@ -173,13 +173,13 @@ public class Credit {
         this.style = style;
     }
 
-
     @Override
     public String toString() {
         return "Credit{" +
                 "cid=" + cid +
                 ", cdate='" + cdate + '\'' +
                 ", index='" + index + '\'' +
+                ", uname='" + uname + '\'' +
                 ", cname='" + cname + '\'' +
                 ", cnum='" + cnum + '\'' +
                 ", reason='" + reason + '\'' +

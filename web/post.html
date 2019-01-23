@@ -52,8 +52,6 @@
 
                 $("#tab").bootstrapTable("refresh");
 
-
-
             })
 
             //所在部门下拉
@@ -91,12 +89,11 @@
                 // alert(serialize)
                 var name = $("#updatename").val();
                 var did = $("#updatedid").val();
-
-                alert("修改提交did为" + did)
+                var pid=$("#updatepid").val();
 
                 $.ajax({
                     type: "POST",
-                    url: "PostServlet?type=update&name=" + name + "&did=" + did,
+                    url: "PostServlet?type=update&pid="+pid+"&name="+ name + "&did=" +did,
                     // data: serialize,
                     data: form,
                     contentType: false,
@@ -107,7 +104,7 @@
 
                         $("#tab").bootstrapTable("refresh");
 
-                        $("#updateDept").modal("hide");
+                        $("#updatepost").modal("hide");
                     },
                     dateType: "json"
 
@@ -118,7 +115,8 @@
             //点击添加提交保存按钮---------------------------++++++
             $("#addbtn").click(function () {
                 var name = $("#addname").val();
-                var did = $("#updatedid").val();
+                var did = $("#select2").val();
+                alert(did)
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
@@ -202,9 +200,9 @@
                 data: "type=edit&pid=" + pid,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
-                    alert(good.did)
 
                     $("#updatepid").val(good.pid);
+
                     $("#updatename").val(good.pname);
 
                     $("#updatedid").val(good.did);
@@ -220,19 +218,33 @@
 
         //删除方法
         function del(did) {
-            $("#deletepost").modal("show");
-            $.ajax({
-                type: "POST",
-                url: "PostServlet",
-                data: "type=del&did=" + did,
-                dataType: "json",//声明返回数据格式是json
-                success: function (data) {
-
-                    $("#tab").bootstrapTable("refresh");
-
-                },
-                dateType: "json"
-            });
+            // if(!confirm("确认要删除？")){
+            //     window.event.returnValue = false;
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "PostServlet",
+            //         data: "type=del&did=" + did,
+            //         dataType: "json",//声明返回数据格式是json
+            //         success: function (data) {
+            //
+            //             $("#tab").bootstrapTable("refresh");
+            //
+            //         },
+            //         dateType: "json"
+            //     });
+            // }
+            // $.ajax({
+            //     type: "POST",
+            //     url: "PostServlet",
+            //     data: "type=del&did=" + did,
+            //     dataType: "json",//声明返回数据格式是json
+            //     success: function (data) {
+            //
+            //         $("#tab").bootstrapTable("refresh");
+            //
+            //     },
+            //     dateType: "json"
+            // });
 
         }
 
@@ -265,7 +277,7 @@
 </head>
 <body>
 
-<div class="container">
+<div >
     <!--岗位管理模块-->
     <div role="tabpanel" class="tab-pane" id="scho">
 
@@ -331,7 +343,7 @@
                                 <div class="form-group col-xs-12">
                                     <label for="updatename" class="col-xs-4 control-label">岗位名称：</label>
                                     <div class="col-xs-8 ">
-                                        <input type="hidden" id="updategid" name="pid">
+                                        <input type="hidden" id="updatepid" name="pid" >
                                         <input type="text" class="form-control input-sm duiqi" id="updatename">
                                     </div>
                                 </div>

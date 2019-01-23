@@ -85,11 +85,12 @@
             $("#addbtn").click(function () {
                 var name=$("#addname").val();
                 alert(name)
+                var address=$("#addaddress").val();
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "DeptServlet?type=add&name="+name,
+                    url: "DeptServlet?type=add&name="+name+"&address="+address,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -142,7 +143,11 @@
                     field: 'dname',
                     title: '部门名称',
                     align: 'center',
-                }, {
+                },{
+                    field: 'daddress',
+                    title: '部门地址',
+                    align: 'center',
+                },{
                     field: 'did',
                     title: '操作',
                     align: 'center',
@@ -180,6 +185,9 @@
         //删除方法
         function del(did) {
 
+            // if(!confirm("确认要删除？")){
+            //     window.event.returnValue = false;
+            // }
             $.ajax({
                 type: "POST",
                 url: "DeptServlet",
@@ -192,6 +200,12 @@
                 },
                 dateType: "json"
             });
+            // if ($("#deleteDept").modal("show")) {
+            //
+            //
+            // }
+
+
 
         }
 
@@ -226,7 +240,7 @@
 </head>
 <body>
 
-<div class="container">
+<div >
     <!--部门管理模块-->
     <div role="tabpanel" class="tab-pane" >
 
@@ -235,7 +249,7 @@
                 <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addDept">添加部门</button>
             </div>
             <div class="col-xs-5">
-                <h2 align="center">部门表</h2>
+                <h3 align="center">部门表</h3>
             </div>
             <!--<div class="col-lg-4 col-xs-5">-->
                 <!--<input type="text" id="search" class=" form-control input-sm " placeholder="输入文字搜索">-->
@@ -273,10 +287,19 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <form class="form-horizontal">
-                                <div class="form-group ">
+                                <div class="form-group col-sm-12">
                                     <label for="" class="col-xs-4 control-label">部门名称：</label>
                                     <div class="col-xs-8 ">
                                         <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
+                                               placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label for="updatename" class="col-xs-4 control-label">部门地址：</label>
+                                    <div class="col-xs-8 ">
+
+                                        <input type="text" class="form-control input-sm duiqi" id="addaddress" name="address"
                                                placeholder="">
                                     </div>
                                 </div>
@@ -322,6 +345,14 @@
                                     <div class="col-xs-8 ">
                                         <input type="hidden" id="updatedid" value="">
                                         <input type="text" class="form-control input-sm duiqi" id="updatename"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="updatename" class="col-xs-4 control-label">部门地址：</label>
+                                    <div class="col-xs-8 ">
+
+                                        <input type="text" class="form-control input-sm duiqi" id="address" name="address"
                                                placeholder="">
                                     </div>
                                 </div>
