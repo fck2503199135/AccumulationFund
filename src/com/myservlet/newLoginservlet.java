@@ -72,6 +72,9 @@ public class newLoginservlet extends HttpServlet {
                     u1.setLogintime(n1);
                     us.updateStuSTime(u1);
                     req.getSession().setAttribute("u1",u1);
+
+                    req.getSession().setAttribute("name",name);
+
                     resp.getWriter().print("success");
                 }else if (u1!= null && u1.getUnumber()== 0){
 
@@ -100,6 +103,9 @@ public class newLoginservlet extends HttpServlet {
         u1.setUnumber(u1.getUnumber()+1);
         us.updateStuNumber(u1);
         resp.sendRedirect("Login.jsp");
+
+
+
 
     }
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
