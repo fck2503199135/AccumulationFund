@@ -40,16 +40,17 @@
                 data: {uid:uid,pwd:pwd},
                 success:function (msg) {
                     if (msg == "success") {
-                        window.location.href = "index.html"
+                        window.location.href = "index.jsp"
                     } else if (msg == "ed") {
                         window.location.href = "epwd.jsp"
                     } else if (msg == "logout") {
                         window.location.href = "newLogin.jsp"
                     } else if (msg == "fail") {
-                        alert("密码错误登陆失败")
+                        alert("密码错误登陆失败");
                     }
-                    else if(msg=="FFF")
-                        alert("非工作时间不能登陆")
+                    else if(msg=="FFF"){
+                        alert("非工作时间不能登陆");
+                    }
                 }
             });
         }
