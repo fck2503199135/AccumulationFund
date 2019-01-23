@@ -7,8 +7,25 @@ public class User {
     private String logintime;
     private String logouttime;
     private int unumber;
+    private  String  realname;
 
+    public User(int uid, String uname, String upwd, String logintime, String logouttime, int unumber, String realname) {
+        this.uid = uid;
+        this.uname = uname;
+        this.upwd = upwd;
+        this.logintime = logintime;
+        this.logouttime = logouttime;
+        this.unumber = unumber;
+        this.realname = realname;
+    }
 
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
     public User() {
     }
