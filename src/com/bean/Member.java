@@ -17,6 +17,21 @@ public class Member {
 
     private  int checked;//是否选中
 
+
+    private  String rid;
+
+
+
+
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
+
     public Member(int mid, String mname, int pid, String regtime) {
         this.mid = mid;
         this.mname = mname;
@@ -36,12 +51,13 @@ public class Member {
                 '}';
     }
 
-    public Member(int mid, String mname, String power, int pid, String regtime) {
+    public Member(int mid, String mname, String power, int pid, String regtime,String rid) {
         this.mid = mid;
         this.mname = mname;
         this.power = power;
         this.pid = pid;
         this.regtime = regtime;
+        this.rid=rid;
     }
 
     public int getChecked() {
