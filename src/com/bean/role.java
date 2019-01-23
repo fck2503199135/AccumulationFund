@@ -10,6 +10,13 @@ public class role {
     public role() {
     }
 
+    public role(int id, String rid, String name, String jName, String jS) {
+        this.id = id;
+        this.rid = rid;
+        this.name = name;
+        this.jName = jName;
+        this.jS = jS;
+    }
 
     public int getId() {
         return id;
