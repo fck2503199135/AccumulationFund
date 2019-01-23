@@ -45,8 +45,15 @@ public class newLoginservlet extends HttpServlet {
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
-            } else if(type.equals("logout")){
+            }else if(type.equals("logout")){
                 logout(req,resp);
+            }else if(type.equals("updateone")){
+                updateone(req,resp);
+            }else if(type.equals("seleteone")){
+                System.out.println("youjinquma");
+                seleteone(req,resp);
+            }else if(type.equals("search")){
+                search(req,resp);
             }else if(type.equals("getAll"))
             {
                 UserService us=new UserServiceImpl();
@@ -123,7 +130,6 @@ public class newLoginservlet extends HttpServlet {
 
     protected void getAllroles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          System.out.println("---get---");
-
         RoleService rs= new RoleServiceImpl();
         PrintWriter out = resp.getWriter();
         List<role> roles=rs.getAllrole();
@@ -132,7 +138,42 @@ public class newLoginservlet extends HttpServlet {
         resp.getWriter().print(rolestr);
 
     }
-
+    protected void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---search---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        String rid=req.getParameter("rid");
+        RoleService rs= new RoleServiceImpl();
+        PrintWriter out = resp.getWriter();
+        List<role> roles=rs.getone(rid);
+        Object rolestr = JSON.toJSON(roles);
+        resp.getWriter().print(rolestr);
+    }
+    protected void seleteone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---sone---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        RoleService rs= new RoleServiceImpl();
+        PrintWriter out = resp.getWriter();
+        role role=rs.getone(id);
+        Object rolestr = JSON.toJSON(role);
+        resp.getWriter().print(rolestr);
+    }
+    protected void updateone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---sone---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        String rid=req.getParameter("rid");
+        String name=req.getParameter("name");
+        String jName=req.getParameter("jName");
+        String jS=req.getParameter("jS");
+        role r1=new role(id,rid,name,jName,jS);
+        RoleService rs= new RoleServiceImpl();
+        rs.update(r1);
+        resp.getWriter().print(1);
+    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       doPost(request,response);
     }
