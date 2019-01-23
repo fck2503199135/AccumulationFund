@@ -103,7 +103,6 @@
 
 
         function deletone(id) {
-            alert(id);
             $.ajax({
                 type: "POST",
                 url: "newLoginservlet",
