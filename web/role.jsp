@@ -71,7 +71,7 @@
                 type: "POST",
                 url: "newLoginservlet?type=updateone",
                 data: {id: id, rid: rid, name: name, jName: jName, jS: jS},
-                dataType: "JSON",
+                // dataType: "JSON",
                 success: function (msg) {
                     $("#tab1").bootstrapTable("refresh");
                     $("#tab2").bootstrapTable("refresh");
@@ -180,7 +180,7 @@
                 tab2.className = 'table table-bordered';
                 $("#div2").append(tab2);
                 $("#tab2").bootstrapTable({
-                    url: "newLoginservlet?type=search&rid=" + rid,    //请求后台的URL（*）
+                    url: "newLoginservlet?type=search&rid="+ rid,    //请求后台的URL（*）
                     method: 'post',                                      //请求方式（*）
                     cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                     pagination: true,                   //是否显示分页（*）
