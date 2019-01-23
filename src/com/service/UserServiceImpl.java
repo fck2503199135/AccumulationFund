@@ -24,15 +24,7 @@ public class UserServiceImpl implements UserService{
            ud.updateStuPwd(user);
     }
 
-    @Override
-    public void updateStuSTime(User user) {
-        ud.updateStuSTime(user);
-    }
 
-    @Override
-    public void updateStuETime(User user) {
-            ud.updateStuETime(user);
-    }
 
 
     @Override

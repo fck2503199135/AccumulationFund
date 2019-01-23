@@ -106,9 +106,10 @@
             $.ajax({
                 type: "POST",
                 url: "newLoginservlet",
-                data: 'type=deleteone&id=' + id,
+                data: 'type=deletone&id='+id,
                 success: function (msg) {
                     $("#tab1").bootstrapTable("refresh");
+                    $("#tab2").bootstrapTable("refresh");
                 }
             });
         }
