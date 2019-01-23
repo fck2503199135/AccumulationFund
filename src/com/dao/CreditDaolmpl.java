@@ -73,7 +73,7 @@ public class CreditDaolmpl implements CreditDao {
     public List<Credit> allDel() {
         Connection con = DB.getcon();
         try {
-            return qr.query(con,"select * from credit where deld = 1",new BeanListHandler<>(Credit.class));
+            return qr.query(con,"select credit.*,uname from credit,user where credit.unid = user.uid and rid = 'R001'and deld = 1",new BeanListHandler<>(Credit.class));
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -86,7 +86,7 @@ public class CreditDaolmpl implements CreditDao {
     public List<Credit> allGo() {
         Connection con = DB.getcon();
         try {
-            return qr.query(con,"select * from credit where goby = 0",new BeanListHandler<>(Credit.class));
+            return qr.query(con,"select credit.*,uname from credit,user where credit.unid = user.uid and rid = 'R001' and goby = 0",new BeanListHandler<>(Credit.class));
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -139,7 +139,7 @@ public class CreditDaolmpl implements CreditDao {
         Connection con = DB.getcon();
 
         try {
-           return qr.query(con,"select * from credit where cdate > ?  and cdate < ? and cname like ? and reason like ? and style like ?",new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%","%"+reason+"%","%"+style+"%");
+           return qr.query(con,"select credit.* , uname from credit,user where credit.unid = user.uid and cdate > ?  and cdate < ? and cname like ? and reason like ? and style like ? and deld is null and goby is null",new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%","%"+reason+"%","%"+style+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -168,7 +168,7 @@ public class CreditDaolmpl implements CreditDao {
 
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT uname,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY uname", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
+            return qr.query(con, "SELECT uname,COUNT(*) AS count FROM user,(SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre where cre.unid = user.uid and rid = 'R001' GROUP BY uname", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -196,7 +196,7 @@ public class CreditDaolmpl implements CreditDao {
     public List<Credit> getAllcount(String reason, String style) {
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT *  FROM credit where reason = ? and style = ?", new BeanListHandler<>(Credit.class),reason,style);
+            return qr.query(con, "SELECT credit.*,uname FROM credit,user where credit.unid = user.uid and rid = 'R001' and reason = ? and style = ?", new BeanListHandler<>(Credit.class),reason,style);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -210,7 +210,7 @@ public class CreditDaolmpl implements CreditDao {
     public List<Credit> getAllwork(String uname) {
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT *  FROM credit where uname = ?", new BeanListHandler<>(Credit.class),uname);
+            return qr.query(con, "SELECT credit.*,uname FROM credit,user where credit.unid = user.uid and rid = 'R001' and uname = ?", new BeanListHandler<>(Credit.class),uname);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
