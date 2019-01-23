@@ -46,7 +46,6 @@
                 $("#rightContent").toggleClass("pd0px");
             })
 
-
             //所在部门下拉
             $.ajax({
                 type: "POST",
@@ -109,16 +108,22 @@
             })
 
 
-
+            // $("#addGoods").click(function () {
+            //     $("#myModal2").modal("show");
+            //
+            // })
             //点击添加提交保存按钮---------------------------++++++
             $("#addbtn").click(function () {
-                var name=$("#addname").val();
+
+                var name=$("#addmembername").val();
+                var pid=$("#select2").val();
+                alert(name)
 
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "MemberServlet?type=add&name="+name,
+                    url: "MemberServlet?type=add&name="+name+"pid"+pid,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -207,31 +212,28 @@
             $.ajax({
                 type: "POST",
                 url: "MemberServlet",
-                data: "type=edit&did=" + did,
+                data: "type=edit&mid=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (good) {
                     // alert(good.did);
                     alert(111)
-                    alert(good.pname)
-                    $("#updatedid").val(good.did);
-                    $("#updatename").val(good.dname);
-                    $("#updatepostname").val(good.pname);
+
+                    $("#updatedid").val(good.mid);
+                    $("#updatename").val(good.mname);
+                    $("#updatepower").val(good.power);
+
                     $("#updateMember").modal("show");
 
 
                 },
                 dateType: "json"
             });
-
         }
-
         //删除方法
         function del(did) {
-
             // if(!confirm("确认要删除？")){
             //     window.event.returnValue = false;
             // }
-
             $.ajax({
                 type: "POST",
                 url: "MemberServlet",
@@ -246,8 +248,6 @@
             });
 
         }
-
-
         function queryParams(param ) {
 
             var param={
@@ -259,12 +259,7 @@
     </script>
     <!--[if lt IE 9]>
     <script src="web/js/html5shiv.min.js"></script>
-
-
-
     <![endif]-->
-
-
     <script src="web/js/respond.min.js"></script>
 
     <link href="web/css/bootstrap.min.css" rel="stylesheet">
@@ -290,15 +285,12 @@
                 <!--<h2 align="center">岗位成员表</h2>-->
             <!--</div>-->
 
-
-
-
             <div class="col-xs-12">
                 <h3 align="center">岗位成员表</h3>
             </div>
 
             <div class="col-xs-2 ">
-                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addpost">添加岗位成员</button>
+                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addMember">添加岗位成员</button>
             </div>
 
             <form action="" id="serch">
@@ -361,8 +353,10 @@
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2 col-sm-offset-3 control-label">用户名：</label>
                                         <div class="col-xs-3 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
+                                            <input type="text" class="form-control input-sm duiqi" name="dname" id="addmembername"
                                                    placeholder="">
+                                            <label >用户系统登录，不可修改</label>
+
                                         </div>
                                     </div>
 
@@ -383,8 +377,9 @@
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2  col-sm-offset-3 control-label">所在岗位:</label>
                                         <div class="col-xs-3 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="dname" id="addname"
-                                                   placeholder="">
+                                            <select class="form-control" id="select2">
+
+                                            </select>
                                         </div>
                                     </div>
 

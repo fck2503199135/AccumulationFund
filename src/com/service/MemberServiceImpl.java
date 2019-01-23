@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Member  getMemberBymid(int mid) {
+     return  md.getMemberBymid(mid);
+    }
+
+    @Override
     public void addMember(Member member) {
         md.addMember(member);
     }

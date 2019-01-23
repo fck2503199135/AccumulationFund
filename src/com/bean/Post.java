@@ -10,6 +10,16 @@ public class Post {
 
     private  String dname;
 
+    private  String power;
+
+    public String getPower() {
+        return power;
+    }
+
+    public void setPower(String power) {
+        this.power = power;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -20,11 +30,12 @@ public class Post {
                 '}';
     }
 
-    public Post(int pid, String pname, int did, String dname) {
+    public Post(int pid, String pname, int did, String dname,String power) {
         this.pid = pid;
         this.pname = pname;
         this.did = did;
         this.dname = dname;
+        this.power=power;
     }
 
     public int getDid() {
