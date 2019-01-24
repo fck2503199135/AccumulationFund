@@ -48,30 +48,9 @@ public class UserDaoImpl implements UserDao {
             }
         }
 
-    @Override
-    public void updateStuSTime(User user) {
-            System.out.println(user.getLogintime());
-             Connection con=DB.getcon();
-             try{
-                 qr.execute(con,"update user set logintime=? where uid=?",user.getLogintime(),user.getUid());
-             }catch (Exception e){
-                 e.printStackTrace();
-             }finally {
-                 DB.close(con);
-             }
-    }
 
-    @Override
-    public void updateStuETime(User user) {
-        Connection con=DB.getcon();
-        try{
-            qr.execute(con,"update user set logouttime=? where uid=?",user.getLogouttime(),user.getUid());
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            DB.close(con);
-        }
-    }
+
+
 
     @Override
     public void updateStuPwd(User user){
