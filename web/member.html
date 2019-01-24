@@ -84,7 +84,7 @@
                 // alert(serialize)
 
                 var name=$("#updatename").val();
-                var power=$('input[name="power"]:checked').val()
+                var rid=$('input[name="rid"]:checked').val()
 
                 var pid=$("#select3").val();
                 var mid=$("#updatemid").val();
@@ -92,7 +92,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "MemberServlet?type=update&name="+name+"&power="+power+"&pid="+pid+"&mid="+mid,
+                    url: "MemberServlet?type=update&name="+name+"&rid="+rid+"&pid="+pid+"&mid="+mid,
                     // data: serialize,
                     data: form,
                     contentType: false,
@@ -121,14 +121,14 @@
 
                 var name=$("#addmembername").val();
                 var pid=$("#select2").val();
-                var power=$('input[name="power"]:checked').val()
+                var rid=$('input[name="rid"]:checked').val()
 
-                alert(power)
+                alert(rid)
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "MemberServlet?type=add&name="+name+"&pid="+pid+"&power="+power,
+                    url: "MemberServlet?type=add&name="+name+"&pid="+pid+"&rid="+rid,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -191,7 +191,7 @@
                     title: '所在岗位名称',
                     align: 'center',
                 },{
-                    field: 'power',
+                    field: 'rname',
                     title: '用户权限',
                     align: 'center',
                 },{
@@ -377,14 +377,14 @@
 
 
                                         <div class="col-sm-2">
-                                            <input type="radio" name="power" value="普通用户" title="" lay-skin="primary" checked="">普通用户
+                                            <input type="radio" name="rid" value="1" title="" lay-skin="primary" checked="">普通用户
                                         </div>
 
                                         <div class="col-sm-2">
-                                            <input type="radio" name="power" value="初级管理员" title="" lay-skin="primary" >初级管理员
+                                            <input type="radio" name="rid" value="2" title="" lay-skin="primary" >普通管理员
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="radio" name="power" value="管理员" title="" lay-skin="primary" >管理员
+                                            <input type="radio" name="rid" value="3" title="" lay-skin="primary" >超级管理员
                                         </div>
 
                                         <!--<div class="col-xs-3 ">-->
