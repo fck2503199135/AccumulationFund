@@ -76,7 +76,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     public static void main(String[] args) {
-      RoleDao rd=new RoleDaoImpl();
-      System.out.println(rd.getone("R001"));
+//      RoleDao rd=new RoleDaoImpl();
+//      System.out.println(rd.getone("R001"));
     }
 }

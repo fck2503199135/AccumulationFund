@@ -155,7 +155,7 @@ public class newLoginservlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         String uname=req.getParameter("uname");
         List<rizhi> rzs=us.getAllrizhis(uname);
-        System.out.println(rzs);
+System.out.println(rzs);
         PrintWriter out = resp.getWriter();
         Object rzsestr = JSON.toJSON(rzs);
         resp.getWriter().print(rzsestr);
