@@ -66,7 +66,13 @@
           var uname = btn.parentNode.parentNode.children[1].innerHTML;
           alert(uname);
           $("#myModal").modal("show");
-          $("#tab3").bootstrapTable("refresh");
+
+        $("#div3").html('');
+        var tab3 = document.createElement('table');
+        tab3.id = 'tab3';
+        tab3.className = 'table table-bordered';
+        $("#div3").append(tab3);
+        $("#tab3").bootstrapTable("refresh");
           $("#tab3").bootstrapTable({
           url: "newLoginservlet?type=seletesm&uname="+uname,    //请求后台的URL（*）
           method: 'post',                                      //请求方式（*）
@@ -131,10 +137,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">登陆详情</h4>
         </div>
-        <div class="modal-body">
-          <table class="table table-bordered" id='tab3' align="center">
+        <div class="modal-body" id="div3">
 
-          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" id="close1" data-dismiss="modal">关闭</button>
