@@ -42,8 +42,9 @@
                  <td><input type="password" class="form-control" name="pwd1"></td>
              </tr>
 
-             <tr><td></td><td></td>
-                 <td><br><button type="submit" class="btn btn-primary btn-sm">提交更改</button></td></tr>
+             <tr><td></td>
+                 <td><br><button type="submit" class="btn btn-primary btn-sm">提交更改</button></td>
+             </tr>
          </table>
 </body>
 </form>
