@@ -4,11 +4,24 @@ public class User {
     private int uid;
     private String uname;
     private String upwd;
-    private String logintime;
-    private String logouttime;
     private int unumber;
+    private  String  realname;
 
+    public User(int uid, String uname, String upwd,  int unumber, String realname) {
+        this.uid = uid;
+        this.uname = uname;
+        this.upwd = upwd;
+        this.unumber = unumber;
+        this.realname = realname;
+    }
 
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
     public User() {
     }
@@ -29,29 +42,9 @@ public class User {
         this.uid = uid;
         this.uname = uname;
         this.upwd = upwd;
-        this.logintime = logintime;
-        this.logouttime = logouttime;
+
         this.unumber = unumber;
     }
-
-
-
-    public String getLogintime() {
-        return logintime;
-    }
-
-    public void setLogintime(String logintime) {
-        this.logintime = logintime;
-    }
-
-    public String getLogouttime() {
-        return logouttime;
-    }
-
-    public void setLogouttime(String logouttime) {
-        this.logouttime = logouttime;
-    }
-
 
     public int getUid() {
         return uid;
@@ -91,8 +84,6 @@ public class User {
                 "uid=" + uid +
                 ", uname='" + uname + '\'' +
                 ", upwd='" + upwd + '\'' +
-                ", logintime='" + logintime + '\'' +
-                ", logouttime='" + logouttime + '\'' +
                 ", unumber=" + unumber +
                 '}';
     }

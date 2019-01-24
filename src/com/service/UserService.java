@@ -9,7 +9,5 @@ public interface UserService {
     List<User> getAllusers();
     void updateStuNumber(User user);
     void updateStuPwd(User user);
-    void updateStuSTime(User user);
-    void updateStuETime(User user);
 
 }

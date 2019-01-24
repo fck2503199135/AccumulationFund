@@ -28,4 +28,9 @@ public interface MemberDao {
      * 修改
      */
     public void updateMember(Member member);
+
+    /**
+     * 编辑根据mid查找
+     */
+    public  Member  getMemberBymid(int mid);
 }

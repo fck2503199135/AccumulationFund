@@ -74,7 +74,7 @@
             align: 'center',
             formatter: function (value, row, index) {
 
-              return '<button class="btn btn-primary btn-lg" type="button"  onclick="seleteone(' + value + ')">修改</button>'
+              return '<button class="btn btn-primary btn-lg" type="button"  onclick="seleteone(' + value + ')">查看详情</button>'
 
 
             }

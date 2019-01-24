@@ -1,9 +1,7 @@
 package com.myservlet;
 import com.alibaba.fastjson.JSON;
-import com.bean.MD5JM;
+import com.bean.*;
 
-import com.bean.User;
-import com.bean.role;
 import com.service.RoleService;
 import com.service.RoleServiceImpl;
 import com.service.UserService;
@@ -41,12 +39,20 @@ public class newLoginservlet extends HttpServlet {
         Calendar cal = Calendar.getInstance();
         int nowday = cal.get(Calendar.DAY_OF_WEEK);
 //
-        if( (nowday>1&&nowday<7)&&(r1>0&&r2<0)){
+        if((nowday>1&&nowday<7)&&(r1>0&&r2<0)){
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
-            } else if(type.equals("logout")){
+            }else if(type.equals("logout")){
                 logout(req,resp);
+            }else if(type.equals("updateone")){
+                updateone(req,resp);
+            }else if(type.equals("seleteone")){
+                seleteone(req,resp);
+            }else if(type.equals("search")){
+                search(req,resp);
+            }else if(type.equals("deletone")){
+                deletone(req,resp);
             }else if(type.equals("getAll"))
             {
                 UserService us=new UserServiceImpl();
@@ -59,25 +65,26 @@ public class newLoginservlet extends HttpServlet {
                 getAllroles(req,resp);
             }
             else if(type.equals("init")) {
-                String name = req.getParameter("uid");
+                String name = req.getParameter("uname");
                 String pwd = req.getParameter("pwd");
                 String  MD5pwd= MD5JM.getMD5String(pwd);
                 User u1 = us.getUser(name, MD5pwd);
-
+                System.out.println(name);
                 if (u1!= null && u1.getUnumber()!= 0) {
                     u1.setUnumber(u1.getUnumber()+1);
                     us.updateStuNumber(u1);
                     String n1 = NowTime.ATime();
 //                    String n1=NowTime.getNowTiem();
-                    u1.setLogintime(n1);
-                    us.updateStuSTime(u1);
+                    String ipadress= getIp.getIpAddr(req);
+                    rizhi rz1=new rizhi(u1.getUname(),n1,ipadress);
+                       us.updaterizhis(rz1);
+
+                    req.getSession().setAttribute("rz1",rz1);
                     req.getSession().setAttribute("u1",u1);
-
                     req.getSession().setAttribute("name",name);
-
                     resp.getWriter().print("success");
-                }else if (u1!= null && u1.getUnumber()== 0){
 
+                }else if (u1!= null && u1.getUnumber()== 0){
                     req.getSession().setAttribute("u1", u1);
                     resp.getWriter().print("ed");
 
@@ -111,19 +118,19 @@ public class newLoginservlet extends HttpServlet {
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          int uid=Integer.parseInt(req.getParameter("uid"));
         String t2 = NowTime.ATime();
+        System.out.println(t2);
 //        String t2=NowTime.getNowTiem();
-       User u2=new User();
-       u2.setUid(uid);
-        u2.setLogouttime(t2);
-        us.updateStuETime(u2);
+         rizhi rz2=new rizhi();
+         rz2.setUid(uid);
+         rz2.setEndtime(t2);
+         System.out.println(rz2);
+         us.updaterizhie(rz2);
         req.getSession().invalidate();
         resp.getWriter().print("logout");
-
     }
 
     protected void getAllroles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          System.out.println("---get---");
-
         RoleService rs= new RoleServiceImpl();
         PrintWriter out = resp.getWriter();
         List<role> roles=rs.getAllrole();
@@ -132,7 +139,51 @@ public class newLoginservlet extends HttpServlet {
         resp.getWriter().print(rolestr);
 
     }
-
+    protected void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---search---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        String rid=req.getParameter("rid");
+        RoleService rs= new RoleServiceImpl();
+        PrintWriter out = resp.getWriter();
+        List<role> roles=rs.getone(rid);
+        Object rolestr = JSON.toJSON(roles);
+        resp.getWriter().print(rolestr);
+    }
+    protected void seleteone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---sone---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        RoleService rs= new RoleServiceImpl();
+        PrintWriter out = resp.getWriter();
+        role role=rs.getone(id);
+        Object rolestr = JSON.toJSON(role);
+        resp.getWriter().print(rolestr);
+    }
+    protected void updateone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---sone---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        String rid=req.getParameter("rid");
+        String name=req.getParameter("name");
+        String jName=req.getParameter("jName");
+        String jS=req.getParameter("jS");
+        role r1=new role(id,rid,name,jName,jS);
+        RoleService rs= new RoleServiceImpl();
+        rs.update(r1);
+        resp.getWriter().print(1);
+    }
+    protected void deletone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("---done---");
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        int id=Integer.parseInt(req.getParameter("id"));
+        RoleService rs= new RoleServiceImpl();
+        rs.del(id);
+        resp.getWriter().print(1);
+    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       doPost(request,response);
     }

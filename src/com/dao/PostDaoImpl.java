@@ -34,7 +34,7 @@ public class PostDaoImpl implements PostDao {
 
         Connection con = DB.getcon();
         try {
-            return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did",new BeanListHandler<>(Post.class));
+            return   qr.query(con, "select pid,pname,dept.dname,power from post,dept where post.did=dept.did",new BeanListHandler<>(Post.class));
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -92,12 +92,12 @@ public class PostDaoImpl implements PostDao {
         try {
             if(did==0){
 
-                return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did and pname like ?", new BeanListHandler<>(Post.class),"%"+name+"%");
+                return   qr.query(con, "select pid,pname,dept.dname,power from post,dept where post.did=dept.did and pname like ?", new BeanListHandler<>(Post.class),"%"+name+"%");
 
 
             }else {
 
-                return   qr.query(con, "select pid,pname,dept.dname from post,dept where post.did=dept.did and dept.did=? and pname like ?", new BeanListHandler<>(Post.class),did,"%"+name+"%");
+                return   qr.query(con, "select pid,pname,dept.dname,power from post,dept where post.did=dept.did and dept.did=? and pname like ?", new BeanListHandler<>(Post.class),did,"%"+name+"%");
             }
         } catch (Exception e) {
             e.printStackTrace();

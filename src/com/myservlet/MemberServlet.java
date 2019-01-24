@@ -26,28 +26,55 @@ public class MemberServlet extends HttpServlet {
         String type = request.getParameter("type");
 
         if (type.equals("getAll")) {
-
             List<Member> allMember = ms.getAllMember();
             System.out.println(allMember);
             response.getWriter().write(JSON.toJSONString(allMember));
-        }
-        else if (type.equals("add")){
+        }else if (type.equals("add")){
             addMember(request,response);
-        }
-        else if (type.equals("edit")){
+        }else if (type.equals("edit")){
             edit(request,response);
+        }else if (type.equals("update")){
+            update(request,response);
+         } else if (type.equals("del")) {
+            del(request, response);
         }
-//        else if (type.equals("del")){
-//            del(request,response);
-//        }else if (type.equals("update")){
-//            update(request,response);
-//        }
 
+    }
+
+    private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("del方法里");
+        int mid = Integer.parseInt(request.getParameter("mid"));
+        ms.delMember(mid);
+        response.getWriter().write(JSON.toJSONString(1));
     }
 
     private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("edit方法里");
+        int mid = Integer.parseInt(request.getParameter("mid"));
+        Member memberBymid = ms.getMemberBymid(mid);
+        System.out.println(memberBymid);
+        response.getWriter().write(JSON.toJSONString(memberBymid));
 
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("update方法里+++++");
+
+        String name = request.getParameter("name");
+
+        String power = request.getParameter("power");
+
+        int pid = Integer.parseInt(request.getParameter("pid"));
+
+        int mid = Integer.parseInt(request.getParameter("mid"));
+
+        System.out.println("update方法里+++++mid"+mid);
+        String regtime= NowTime.ATime();
+        String rid="1";
+        Member member=new Member(mid,name,power,pid,regtime,rid);
+        ms.updateMember(member);
+        response.getWriter().write(JSON.toJSONString(1));
 
     }
 
@@ -56,16 +83,22 @@ public class MemberServlet extends HttpServlet {
 
         String name = request.getParameter("name");
 
+        System.out.println("name为"+name);
+
         String power = request.getParameter("power");
-        power=null;
 
-//        System.out.println(name);
-//            String regtime= NowTime.ATime();
-//        System.out.println(regtime);
 
-        int pid=1;
-//        Member member=new Member(0,name,power,1,regtime);
-//        ms.addMember(member);
+
+
+            String regtime= NowTime.ATime();
+        System.out.println(regtime);
+
+         String rid="1";  //默认1
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        System.out.println("pid"+pid);
+        Member member=new Member(0,name,power,pid,regtime,rid);
+        ms.addMember(member);
+        System.out.println("okkkkk");
         response.getWriter().write(JSON.toJSONString(1));
 
     }
