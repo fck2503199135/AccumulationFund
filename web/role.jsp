@@ -279,7 +279,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default closee" data-dismiss="modal">关闭</button>
-
                         <button type="button" class="btn btn-primary" onclick="updateone()">提交更改</button>
                     </div>
                 </form>
