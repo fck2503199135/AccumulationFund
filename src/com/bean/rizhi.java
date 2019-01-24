@@ -1,28 +1,36 @@
 package com.bean;
 
 public class rizhi {
-    private   int id;
+    private   int uid;
     private   String uname;
     private   String starttime;
     private   String endtime;
-    private   String ipadress;
+    private   String ipaddress;
+
 
     public rizhi() {
     }
 
-    public rizhi(int id, String uname, String starttime, String endtime, String ipadress) {
-        this.id = id;
+    public rizhi( String uname, String starttime, String ipaddress) {
         this.uname = uname;
         this.starttime = starttime;
-        this.endtime = endtime;
-        this.ipadress = ipadress;
-    }
-    public int getId() {
-        return id;
+        this.ipaddress = ipaddress;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getIpaddress() {
+        return ipaddress;
+    }
+
+    public void setIpaddress(String ipaddress) {
+        this.ipaddress = ipaddress;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getUname() {
@@ -49,22 +57,18 @@ public class rizhi {
         this.endtime = endtime;
     }
 
-    public String getIpadress() {
-        return ipadress;
-    }
-
-    public void setIpadress(String ipadress) {
-        this.ipadress = ipadress;
-    }
 
     @Override
     public String toString() {
         return "rizhi{" +
-                "id=" + id +
+                "uid=" + uid +
                 ", uname='" + uname + '\'' +
                 ", starttime='" + starttime + '\'' +
                 ", endtime='" + endtime + '\'' +
-                ", ipadress='" + ipadress + '\'' +
+                ", ipaddress='" + ipaddress + '\'' +
                 '}';
     }
+
+
+
 }
