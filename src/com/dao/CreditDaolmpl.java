@@ -154,7 +154,7 @@ public class CreditDaolmpl implements CreditDao {
 
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
+            return qr.query(con, "SELECT cdate,reason,style,COUNT(*) AS count FROM (SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre GROUP BY reason,style", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -168,7 +168,7 @@ public class CreditDaolmpl implements CreditDao {
 
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT uname,COUNT(*) AS count FROM user,(SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre where cre.unid = user.uid and rid = 'R001' GROUP BY uname", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
+            return qr.query(con, "SELECT cdate,uname,COUNT(*) AS count FROM user,(SELECT * FROM credit WHERE cdate > ?  AND  cdate < ? AND cname LIKE ? ) AS cre where cre.unid = user.uid and rid = 'R001' GROUP BY uname", new BeanListHandler<>(Credit.class),stime,etime,"%"+cname+"%");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -196,7 +196,7 @@ public class CreditDaolmpl implements CreditDao {
     public List<Credit> getAllcount(String reason, String style) {
         Connection con = DB.getcon();
         try {
-            return qr.query(con, "SELECT credit.*,uname FROM credit,user where credit.unid = user.uid and rid = 'R001' and reason = ? and style = ?", new BeanListHandler<>(Credit.class),reason,style);
+            return qr.query(con, "SELECT credit.*,uname FROM credit,user where credit.unid = user.uid and reason = ? and style = ?", new BeanListHandler<>(Credit.class),reason,style);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

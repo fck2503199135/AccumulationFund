@@ -42,12 +42,8 @@
                 // cardView: false,                    //是否显示详细视图
                 // detailView: false,                   //是否显示父子表
                 columns: [{
-                    field: $("#strtime").val(),
-                    title: '开始时间',
-                    align: 'center',
-                }, {
-                    field: $("#endtime").val(),
-                    title: '结束时间',
+                    field: 'cdate',
+                    title: '提交时间',
                     align: 'center',
                 }, {
                     field: 'reason',
@@ -74,6 +70,128 @@
             })
 
 
+<<<<<<< Updated upstream
+=======
+            $("#showtab1").bootstrapTable({
+                url: "CreditServlet?type=getAllcount",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 5,                       //每页的记录行数（*）
+                pageList: [10, 20, 30, 60],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                }, {
+                    field: 'index',
+                    title: '审核号',
+                    align: 'center',
+                }, {
+                    field: 'uname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '本人姓名',
+                    align: 'center',
+                }, {
+                    field: 'cnum',
+                    title: '本人身份证',
+                    align: 'center',
+                }, {
+                    field: 'wname',
+                    title: '配偶姓名',
+                    align: 'center',
+                }, {
+                    field: 'wnum',
+                    title: '配偶身份证',
+                    align: 'center',
+                }]
+            })
+
+
+            $("#showtab2").bootstrapTable({
+                url: "CreditServlet?type=getAllwork",         //请求后台的URL（*）
+                method: "get",                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                // striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                // sortable: false,                     //是否启用排序
+                // sortOrder: "asc",                   //排序方式
+                queryParams: queryParams,            //传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                // pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 5,                       //每页的记录行数（*）
+                pageList: [10, 20, 30, 60],        //可供选择的每页的行数（*）
+                // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                // strictSearch: true,
+                // showColumns: true,                  //是否显示所有的列
+                // showRefresh: true,                  //是否显示刷新按钮
+                // minimumCountColumns: 1,             //最少允许的列数
+                // clickToSelect: true,                //是否启用点击选中行
+                // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                // uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                // cardView: false,                    //是否显示详细视图
+                // detailView: false,                   //是否显示父子表
+                columns: [{
+                    field: 'cdate',
+                    title: '提交时间',
+                    align: 'center',
+                },{
+                    field: 'uname',
+                    title: '经办人',
+                    align: 'center',
+                }, {
+                    field: 'reason',
+                    title: '查询原因',
+                    align: 'center',
+                }, {
+                    field: 'style',
+                    title: '查询类型',
+                    align: 'center',
+                }, {
+                    field: 'cname',
+                    title: '本人姓名',
+                    align: 'center',
+                },{
+                    field: 'wname',
+                    title: '配偶姓名',
+                    align: 'center',
+                }]
+            })
+
+
+
+>>>>>>> Stashed changes
             $("#table1").bootstrapTable({
                 url: "CreditServlet?type=getWork",         //请求后台的URL（*）
                 method: "get",                      //请求方式（*）
@@ -99,13 +217,10 @@
                 // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
                 // cardView: false,                    //是否显示详细视图
                 // detailView: false,                   //是否显示父子表
-                columns: [{
-                    field: $("#strtime").val(),
-                    title: '开始时间',
-                    align: 'center',
-                }, {
-                    field: $("#endtime").val(),
-                    title: '结束时间',
+                columns: [
+                 {
+                    field: 'cdate',
+                    title: '提交时间',
                     align: 'center',
                 }, {
                     field: 'uname',
@@ -126,10 +241,33 @@
                 }]
             })
 
+
         })
 
-
         function getAllwork(btn) {
+<<<<<<< Updated upstream
+=======
+            name = btn.parentNode.parentNode.children[1].innerHTML
+            $("#showtab2").bootstrapTable("refresh")
+            $("#show2").modal("show")
+        }
+
+            // $.ajax({
+            //     type: "post",
+            //     url: "CreditServlet",
+            //     data: "type=getAllwork&uname=" + name,
+            //     dateType: "json",
+            //     success: function (works) {
+            //         var data = JSON.parse(works);
+            //
+            //         for (var i = 0; i < data.length; i++) {
+            //             $("#showtab2  tr:not(:first)").html("");
+            //             $("#showtab2").append("<tr><td>" + data[i].uname + "</td><td>" + data[i].cdate + "</td><td>" + data[i].reason + "</td><td>" + data[i].style + "</td><td>" + data[i].cname + "</td><td>" + data[i].wname + "</td></tr>")
+            //         }
+            //
+            //     }
+            // })
+>>>>>>> Stashed changes
 
             var name = btn.parentNode.parentNode.children[2].innerHTML
             $.ajax({
@@ -166,6 +304,11 @@
         // }
 
         function getAllcount(btn) {
+<<<<<<< Updated upstream
+=======
+            rea = btn.parentNode.parentNode.children[1].innerHTML
+            sty = btn.parentNode.parentNode.children[2].innerHTML
+>>>>>>> Stashed changes
 
             var rea = btn.parentNode.parentNode.children[2].innerHTML
             var sty = btn.parentNode.parentNode.children[3].innerHTML
@@ -281,6 +424,31 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="show3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog"  style="width: 800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="imgModalLabel3">查看详细信息</h4>
+                </div>
+                <div class="modal-body">
+
+                    <table border="1" id="showtab3" class="table table-striped table-bordered table-hover" style="width: auto">
+
+
+
+                    </table>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <div class="col-sm-4 form-group">
@@ -328,6 +496,7 @@
 
         </ul>
         <div id="myTabContent" class="tab-content">
+
             <div class="tab-pane active" id="zero">
                 <div class="form-group">
 
@@ -337,6 +506,8 @@
 
                 </div>
             </div>
+
+
             <div class="tab-pane fade" id="first">
                 <div class="form-group">
 
