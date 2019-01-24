@@ -2,9 +2,12 @@ package com.myservlet;
 
 import com.alibaba.fastjson.JSON;
 import com.bean.Credit;
+import com.bean.Diary;
 import com.jspsmart.upload.SmartUpload;
 import com.service.CreditService;
 import com.service.CreditServicelmpl;
+import com.service.DiaryService;
+import com.service.DiaryServicelmpl;
 import com.utils.NowTime;
 import sun.security.provider.certpath.CertId;
 
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +32,7 @@ public class CreditServlet extends HttpServlet {
     }
 
     CreditService cs = new CreditServicelmpl();
-
+    DiaryService ds = new DiaryServicelmpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
@@ -91,11 +95,8 @@ public class CreditServlet extends HttpServlet {
         String endtime = request.getParameter("endtime");
         cname = request.getParameter("cname");
 
-<<<<<<< Updated upstream
-        System.out.println(cname + "===================");
 
-=======
->>>>>>> Stashed changes
+
         if (cname == null) {
             cname = "";
         }
@@ -106,12 +107,12 @@ public class CreditServlet extends HttpServlet {
             etime = "2500-1-1";
         }
 
-<<<<<<< Updated upstream
+
 
         List<Credit> works = cs.getWork(stime, etime, cname);
-=======
-        List<Credit> works = cs.getWork(strtime, endtime, cname);
->>>>>>> Stashed changes
+
+
+
         response.getWriter().write(JSON.toJSONString(works));
 
     }
@@ -135,16 +136,9 @@ public class CreditServlet extends HttpServlet {
     String cname;
 
     protected void getDateName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< Updated upstream
         String strtime = request.getParameter("strtime");
         String endtime = request.getParameter("endtime");
         cname = request.getParameter("cname");
-=======
-         strtime = request.getParameter("strtime");
-         endtime = request.getParameter("endtime");
-         cname = request.getParameter("cname");
-
->>>>>>> Stashed changes
 
         if (cname == null) {
             cname = "";
@@ -187,11 +181,6 @@ public class CreditServlet extends HttpServlet {
 
     protected void getbyId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-<<<<<<< Updated upstream
-        int cid = Integer.parseInt(request.getParameter("cid"));
-        Credit credit = cs.getbyId(cid);
-        response.getWriter().write(JSON.toJSONString(credit));
-=======
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String ddate = simpleDateFormat.format(date);
@@ -216,7 +205,7 @@ public class CreditServlet extends HttpServlet {
 
 
 
->>>>>>> Stashed changes
+
     }
 
 
