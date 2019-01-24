@@ -34,7 +34,7 @@ public class MemberDaoImpl implements MemberDao {
     public List<Member> getAllMember() {
         Connection con = DB.getcon();
         try {
-            return   qr.query(con, "select mid,mname,member.pid,regtime,post.pname,member.rid,root.rname from member,root,post where member.rid = root.rid and member.pid=post.pid", new BeanListHandler<>(Member.class));
+            return   qr.query(con, "select mid,mname,post.pname,member.power,regtime from member,post where member.pid=post.pid", new BeanListHandler<>(Member.class));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class MemberDaoImpl implements MemberDao {
     public List<Member> getMemberByPid(int pid) {
         Connection con = DB.getcon();
         try {
-            return   qr.query(con, "select mid,mname,member.pid,regtime,post.pname,member.rid,root.rname from member,root,post where member.rid = root.rid and member.pid=post.pid and pid=?", new BeanListHandler<>(Member.class),pid);
+            return   qr.query(con, "select * from member where pid=?", new BeanListHandler<>(Member.class),pid);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class MemberDaoImpl implements MemberDao {
         Connection con = DB.getcon();
 
         try {
-            qr.execute(con,"update Member set Mname=?,pid=?,rid=? where Mid=?",member.getMname(),member.getPid(),member.getRid(),member.getMid());
+            qr.execute(con,"update Member set Mname=?,power=?,pid=? where Mid=?",member.getMname(),member.getPower(),member.getPid(),member.getMid());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -81,7 +81,7 @@ public class MemberDaoImpl implements MemberDao {
     public void addMember(Member member) {
         Connection con = DB.getcon();
         try {
-            qr.execute(con,"insert into Member values(null,?,?,?,?)",member.getMname(),member.getPid(),member.getRegtime(),member.getRid());
+            qr.execute(con,"insert into Member values(0,?,?,?,?,?)",member.getMname(),member.getPower(),member.getPid(),member.getRegtime(),member.getRid());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

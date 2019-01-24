@@ -8,6 +8,7 @@ public interface DiaryDao {
 
     void addDiary (Diary diary);
     List<Diary> getAllDiary();
+    int cot(String now);
 
 
 }

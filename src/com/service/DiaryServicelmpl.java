@@ -18,4 +18,9 @@ public class DiaryServicelmpl implements DiaryService {
     public List<Diary> getAllDiary() {
         return dd.getAllDiary();
     }
+
+    @Override
+    public int cot(String now) {
+        return dd.cot(now);
+    }
 }

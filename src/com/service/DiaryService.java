@@ -8,4 +8,5 @@ public interface DiaryService {
 
     void addDiary (Diary diary);
     List<Diary> getAllDiary();
+    int cot(String now);
 }

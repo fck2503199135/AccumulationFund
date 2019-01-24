@@ -4,7 +4,9 @@ package com.dao;
 import com.bean.Diary;
 import com.utils.DB;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,5 +38,18 @@ public class DiaryDaolmpl implements DiaryDao {
             DB.close(con);
         }
         return null;
+    }
+
+    @Override
+    public int cot(String now) {
+        Connection con = DB.getcon();
+        try {
+           return ((Long) qr.query(con,"SELECT COUNT(*) FROM diary where ddate like ? ",new ScalarHandler<>(),"%"+now+"%")).intValue();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DB.close(con);
+        }
+        return 0;
     }
 }
