@@ -32,15 +32,14 @@
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
     <script type="text/javascript">
         function login() {
-            alert(1)
-            var uid=$("#form-username").val();
-            alert(uid)
+
+            var uname=$("#form-username").val();
             var pwd=$("#form-password").val();
 
             $.ajax({
                 type: "POST",//方法类型
                 url: "newLoginservlet?type=init",//url
-                data: {uid:uid,pwd:pwd},
+                data: {uname:uname,pwd:pwd},
                 success:function (msg) {
                     if (msg == "success") {
 

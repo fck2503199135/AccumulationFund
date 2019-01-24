@@ -1,13 +1,18 @@
 package com.service;
 
 import com.bean.User;
+import com.bean.rizhi;
 
 import java.util.List;
 
 public interface UserService {
     User getUser(String name, String pwd);
     List<User> getAllusers();
-    void updateStuNumber(User user);
     void updateStuPwd(User user);
+    void updateStuNumber(User user);
+    rizhi getRizhi();
+    void updaterizhis(rizhi rz);
+    void updaterizhie(rizhi rz);
+    List<rizhi> getAllrizhis(String uname);
 
 }

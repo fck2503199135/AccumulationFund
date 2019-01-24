@@ -2,9 +2,12 @@ package com.myservlet;
 
 import com.alibaba.fastjson.JSON;
 import com.bean.Credit;
+import com.bean.Diary;
 import com.jspsmart.upload.SmartUpload;
 import com.service.CreditService;
 import com.service.CreditServicelmpl;
+import com.service.DiaryService;
+import com.service.DiaryServicelmpl;
 import com.utils.NowTime;
 import sun.security.provider.certpath.CertId;
 
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +32,7 @@ public class CreditServlet extends HttpServlet {
     }
 
     CreditService cs = new CreditServicelmpl();
-
+    DiaryService ds = new DiaryServicelmpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
@@ -36,6 +40,7 @@ public class CreditServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         String type = request.getParameter("type");
+        System.out.println(type);
 
         if (type == null) {
             getAll(request, response);
@@ -90,7 +95,7 @@ public class CreditServlet extends HttpServlet {
         String endtime = request.getParameter("endtime");
         cname = request.getParameter("cname");
 
-        System.out.println(cname + "===================");
+
 
         if (cname == null) {
             cname = "";
@@ -103,7 +108,11 @@ public class CreditServlet extends HttpServlet {
         }
 
 
+
         List<Credit> works = cs.getWork(stime, etime, cname);
+
+
+
         response.getWriter().write(JSON.toJSONString(works));
 
     }
@@ -115,7 +124,9 @@ public class CreditServlet extends HttpServlet {
 
         String style = request.getParameter("style");
 
+
         List<Credit> counts = cs.getAllcount(reason, style);
+
         response.getWriter().write(JSON.toJSONString(counts));
 
 
@@ -170,9 +181,31 @@ public class CreditServlet extends HttpServlet {
 
     protected void getbyId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int cid = Integer.parseInt(request.getParameter("cid"));
-        Credit credit = cs.getbyId(cid);
-        response.getWriter().write(JSON.toJSONString(credit));
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String ddate = simpleDateFormat.format(date);
+        SimpleDateFormat st = new SimpleDateFormat("yyyy-MM-dd");
+        String now = st.format(date);
+        InetAddress addr = InetAddress.getLocalHost();
+        String s = addr.getHostAddress();
+        String s1 = addr.getHostName();
+
+        int cot = ds.cot(now);
+
+        if (cot < 10){
+            int cid = Integer.parseInt(request.getParameter("cid"));
+            Credit credit = cs.getbyId(cid);
+            response.getWriter().write(JSON.toJSONString(credit));
+            ds.addDiary(new Diary("admin",ddate,s+":-"+s1,credit.getIndex(),"业务对象："+credit.getCname()+"***"+"业务申请："+credit.getReason()+","+credit.getStyle()));
+        }else {
+            response.getWriter().write(JSON.toJSONString(1));
+        }
+
+
+
+
+
+
     }
 
 

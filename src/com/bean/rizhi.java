@@ -4,6 +4,9 @@ public class rizhi {
     private   int uid;
     private   String uname;
     private   String starttime;
+
+
+
     private   String endtime;
     private   String ipaddress;
 
@@ -17,6 +20,8 @@ public class rizhi {
         this.ipaddress = ipaddress;
     }
 
+
+
     public String getIpaddress() {
         return ipaddress;
     }
@@ -24,7 +29,6 @@ public class rizhi {
     public void setIpaddress(String ipaddress) {
         this.ipaddress = ipaddress;
     }
-
     public int getUid() {
         return uid;
     }

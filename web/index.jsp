@@ -28,7 +28,7 @@
 
                 $("#logout").slideToggle(600);
 
-            })
+            });
 
 
             $("#management").click(function () {
@@ -44,7 +44,7 @@
 
                 $(".rc").slideToggle(500);
 
-            })
+            });
 
 
 
@@ -78,9 +78,23 @@
                 $("#leftMeun").toggleClass("show");
                 $("#rightContent").toggleClass("pd0px");
             })
-        })
+        });
 
 
+
+            function logout() {
+
+                var uid=$("#uid").val();
+                alert(uid);
+                $.ajax({
+                    type: "POST",//方法类型
+                    url: "newLoginservlet?type=logout",//url
+                    data:{uid:uid},
+                    success:function (msg){
+                        window.location.href="Login.jsp";
+                    }
+                });
+            }
 
 
 
@@ -191,7 +205,8 @@
                 </p>
 
                 <p id="logout" style="display: none">
-                    <a href="Login.jsp">退出登录</a> <br>
+                    <input type="hidden" id="uid" value="${rz0.uid}" name="uid">
+                    <a href="#"onclick="logout()">退出登录</a> <br>
                     <a href="#">注销</a> <br>
                 </p>
             </div>
