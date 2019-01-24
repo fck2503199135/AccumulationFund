@@ -2,12 +2,9 @@ package com.myservlet;
 
 import com.alibaba.fastjson.JSON;
 import com.bean.Credit;
-import com.bean.Diary;
 import com.jspsmart.upload.SmartUpload;
 import com.service.CreditService;
 import com.service.CreditServicelmpl;
-import com.service.DiaryService;
-import com.service.DiaryServicelmpl;
 import com.utils.NowTime;
 import sun.security.provider.certpath.CertId;
 
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +28,6 @@ public class CreditServlet extends HttpServlet {
     }
 
     CreditService cs = new CreditServicelmpl();
-    DiaryService ds = new DiaryServicelmpl();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -71,10 +66,6 @@ public class CreditServlet extends HttpServlet {
                 getWork(request, response);
             } else if (type.equals("getAllwork")) {
                 getAllwork(request, response);
-            } else if (type.equals("getAllCredit")) {
-                getAllwork(request, response);
-            } else if (type.equals("getAllDiary")) {
-                getAllDiary(request, response);
             }
 
         }
@@ -82,15 +73,6 @@ public class CreditServlet extends HttpServlet {
 
     }
 
-
-
-    protected void getAllDiary(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
-        List<Diary> diaries = ds.getAllDiary();
-        response.getWriter().write(JSON.toJSONString(diaries));
-
-
-    }
 
     protected void getAllwork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -104,24 +86,24 @@ public class CreditServlet extends HttpServlet {
 
     protected void getWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        strtime = request.getParameter("strtime");
-        endtime = request.getParameter("endtime");
+        String strtime = request.getParameter("strtime");
+        String endtime = request.getParameter("endtime");
         cname = request.getParameter("cname");
 
+        System.out.println(cname + "===================");
 
         if (cname == null) {
             cname = "";
         }
-        if (strtime.equals("")) {
-            strtime = "1500-1-1";
+        if (strtime == null) {
+            stime = "1500-1-1";
         }
-        if (endtime.equals("")) {
-            endtime = "2500-1-1";
+        if (endtime == null) {
+            etime = "2500-1-1";
         }
 
-        System.out.println(strtime+"***"+endtime+"***"+cname);
 
-        List<Credit> works = cs.getWork(strtime, endtime, cname);
+        List<Credit> works = cs.getWork(stime, etime, cname);
         response.getWriter().write(JSON.toJSONString(works));
 
     }
@@ -141,27 +123,23 @@ public class CreditServlet extends HttpServlet {
 
 
     String cname;
-    String strtime;
-    String endtime;
 
     protected void getDateName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         strtime = request.getParameter("strtime");
-         endtime = request.getParameter("endtime");
-         cname = request.getParameter("cname");
-         System.out.println(cname+"====");
+        String strtime = request.getParameter("strtime");
+        String endtime = request.getParameter("endtime");
+        cname = request.getParameter("cname");
 
         if (cname == null) {
             cname = "";
         }
-        if (strtime.equals("")) {
-            strtime = "1500-1-1";
+        if (strtime == null) {
+            stime = "1500-1-1";
         }
-        if (endtime.equals("")) {
-            endtime = "2500-1-1";
+        if (endtime == null) {
+            etime = "2500-1-1";
         }
 
-
-        List<Credit> dateName = cs.getDateName(strtime, endtime, cname);
+        List<Credit> dateName = cs.getDateName(stime, etime, cname);
         response.getWriter().write(JSON.toJSONString(dateName));
 
     }
@@ -195,17 +173,6 @@ public class CreditServlet extends HttpServlet {
         int cid = Integer.parseInt(request.getParameter("cid"));
         Credit credit = cs.getbyId(cid);
         response.getWriter().write(JSON.toJSONString(credit));
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String ddate = simpleDateFormat.format(date);
-        InetAddress addr = InetAddress.getLocalHost();
-        String s = addr.getHostAddress();
-        String s1 = addr.getHostName();
-
-        ds.addDiary(new Diary("admin",ddate,s+":-"+s1,credit.getIndex(),"业务对象："+credit.getCname()+"***"+"业务申请："+credit.getReason()+","+credit.getStyle()));
-
-
-
     }
 
 
@@ -293,10 +260,10 @@ public class CreditServlet extends HttpServlet {
         response.setContentType("text/html;charset=GBK");
 
         try {
+            Date date = new Date();
             sud.upload();
             sud.save(realPath);
             String fileName = sud.getFiles().getFile(0).getFileName();
-            Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String cdate = simpleDateFormat.format(date);
             long index = date.getTime();
@@ -309,6 +276,7 @@ public class CreditServlet extends HttpServlet {
             String thmit1 = sud.getRequest().getParameter("thmit");
 
             String wname = request.getParameter("wname");
+
 
             String wnum = sud.getRequest().getParameter("wnum");
             String option = sud.getRequest().getParameter("option1");
@@ -327,7 +295,8 @@ public class CreditServlet extends HttpServlet {
                 style = "身份信息核查";
             }
 
-            if (mymit1 != null || thmit1 != null) {
+
+            if (mymit1 != null || thmit != null) {
 
                     mymit = "本人";
                     thmit = "配偶";

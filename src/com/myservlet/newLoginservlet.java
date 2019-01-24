@@ -53,8 +53,6 @@ public class newLoginservlet extends HttpServlet {
                 search(req,resp);
             }else if(type.equals("deletone")){
                 deletone(req,resp);
-            }else if(type.equals("seletesm")){
-                seletesm(req,resp);
             }else if(type.equals("getAll"))
             {
                 UserService us=new UserServiceImpl();
@@ -77,12 +75,11 @@ public class newLoginservlet extends HttpServlet {
                     us.updateStuNumber(u1);
                     String n1 = NowTime.ATime();
 //                    String n1=NowTime.getNowTiem();
-                    String ipaddress= getIp.getIpAddr(req);
-                    System.out.println(ipaddress);
-                    rizhi rz1=new rizhi(u1.getUname(),n1,ipaddress);
+                    String ipadress= getIp.getIpAddr(req);
+                    rizhi rz1=new rizhi(u1.getUname(),n1,ipadress);
                        us.updaterizhis(rz1);
-                     rizhi rz0=us.getRizhi();
-                    req.getSession().setAttribute("rz0",rz0);
+
+                    req.getSession().setAttribute("rz1",rz1);
                     req.getSession().setAttribute("u1",u1);
                     req.getSession().setAttribute("name",name);
                     resp.getWriter().print("success");
@@ -114,15 +111,19 @@ public class newLoginservlet extends HttpServlet {
         us.updateStuNumber(u1);
         resp.sendRedirect("Login.jsp");
 
+
+
+
     }
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          int uid=Integer.parseInt(req.getParameter("uid"));
         String t2 = NowTime.ATime();
-
+        System.out.println(t2);
 //        String t2=NowTime.getNowTiem();
          rizhi rz2=new rizhi();
          rz2.setUid(uid);
          rz2.setEndtime(t2);
+         System.out.println(rz2);
          us.updaterizhie(rz2);
         req.getSession().invalidate();
         resp.getWriter().print("logout");
@@ -148,17 +149,6 @@ public class newLoginservlet extends HttpServlet {
         List<role> roles=rs.getone(rid);
         Object rolestr = JSON.toJSON(roles);
         resp.getWriter().print(rolestr);
-    }
-    protected void seletesm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("---sem---");
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
-        String uname=req.getParameter("uname");
-        List<rizhi> rzs=us.getAllrizhis(uname);
-System.out.println(rzs);
-        PrintWriter out = resp.getWriter();
-        Object rzsestr = JSON.toJSON(rzs);
-        resp.getWriter().print(rzsestr);
     }
     protected void seleteone(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("---sone---");

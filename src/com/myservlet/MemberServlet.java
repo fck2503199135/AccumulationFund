@@ -72,7 +72,7 @@ public class MemberServlet extends HttpServlet {
         System.out.println("update方法里+++++mid"+mid);
         String regtime= NowTime.ATime();
         String rid="1";
-        Member member=new Member(mid,name,pid,regtime,rid);
+        Member member=new Member(mid,name,power,pid,regtime,rid);
         ms.updateMember(member);
         response.getWriter().write(JSON.toJSONString(1));
 
@@ -85,18 +85,18 @@ public class MemberServlet extends HttpServlet {
 
         System.out.println("name为"+name);
 
+        String power = request.getParameter("power");
+
+
 
 
             String regtime= NowTime.ATime();
         System.out.println(regtime);
 
-        String rid = request.getParameter("rid");
-
-        System.out.println(rid+"=============");
-
+         String rid="1";  //默认1
         int pid = Integer.parseInt(request.getParameter("pid"));
         System.out.println("pid"+pid);
-        Member member=new Member(0,name,pid,regtime,rid);
+        Member member=new Member(0,name,power,pid,regtime,rid);
         ms.addMember(member);
         System.out.println("okkkkk");
         response.getWriter().write(JSON.toJSONString(1));
