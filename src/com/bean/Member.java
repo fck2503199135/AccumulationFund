@@ -8,7 +8,6 @@ public class Member {
 
     private  int mid;       //成员id
     private  String mname; //成员名称
-    private  String power;//权限
 
     private  int pid;//所属岗位id
 
@@ -19,6 +18,8 @@ public class Member {
 
 
     private  String rid;
+
+    private String rname;
 
 
 
@@ -44,20 +45,26 @@ public class Member {
         return "Member{" +
                 "mid=" + mid +
                 ", mname='" + mname + '\'' +
-                ", power='" + power + '\'' +
                 ", pid=" + pid +
                 ", pname='" + pname + '\'' +
                 ", regtime='" + regtime + '\'' +
                 '}';
     }
 
-    public Member(int mid, String mname, String power, int pid, String regtime,String rid) {
+    public Member(int mid, String mname,int pid, String regtime,String rid) {
         this.mid = mid;
         this.mname = mname;
-        this.power = power;
         this.pid = pid;
         this.regtime = regtime;
         this.rid=rid;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
     }
 
     public int getChecked() {
@@ -78,13 +85,6 @@ public class Member {
     public void setRegtime(String regtime) {
         this.regtime = regtime;
     }
-
-
-
-
-
-
-
 
 
 
@@ -112,13 +112,6 @@ public class Member {
         this.mname = mname;
     }
 
-    public String getPower() {
-        return power;
-    }
-
-    public void setPower(String power) {
-        this.power = power;
-    }
 
     public int getPid() {
         return pid;
