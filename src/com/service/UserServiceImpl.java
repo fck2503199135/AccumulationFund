@@ -1,6 +1,7 @@
 package com.service;
 
 import com.bean.User;
+import com.bean.rizhi;
 import com.dao.UserDao;
 import com.dao.UserDaoImpl;
 import com.utils.DB;
@@ -24,7 +25,25 @@ public class UserServiceImpl implements UserService{
            ud.updateStuPwd(user);
     }
 
+    @Override
+    public void updaterizhis(rizhi rz) {
+        ud.updaterizhis(rz);
+    }
 
+    @Override
+    public void updaterizhie(rizhi rz) {
+       ud.updaterizhie(rz);
+    }
+
+    @Override
+    public rizhi getRizhi() {
+        return ud.getRizhi();
+    }
+
+    @Override
+    public List<rizhi> getAllrizhis(String uname) {
+        return ud.getAllrizhis(uname);
+    }
 
 
     @Override
