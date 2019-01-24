@@ -7,7 +7,7 @@ public class NowTime {
     public static String ATime(){
 
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cdate = simpleDateFormat.format(date);
 
         return cdate;
