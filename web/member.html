@@ -77,18 +77,22 @@
 
             //点击模态框提交按钮   修改提交
             $("#updateBtn").click(function () {
+
                 //获取表单数据
                 // var serialize = $("#form1").serialize();
                 var form = new FormData($("#updateform")[0]);
                 // alert(serialize)
-                var name=$("#updatename").val();
-                var did=$("#updatedid").val();
 
-                alert("修改提交did为"+did)
+                var name=$("#updatename").val();
+                var power=$('input[name="power"]:checked').val()
+
+                var pid=$("#select3").val();
+                var mid=$("#updatemid").val();
+                alert("修改提交pid为"+pid)
 
                 $.ajax({
                     type: "POST",
-                    url: "MemberServlet?type=update&name="+name+"&did="+did,
+                    url: "MemberServlet?type=update&name="+name+"&power="+power+"&pid="+pid+"&mid="+mid,
                     // data: serialize,
                     data: form,
                     contentType: false,
@@ -117,13 +121,14 @@
 
                 var name=$("#addmembername").val();
                 var pid=$("#select2").val();
-                alert(name)
+                var power=$('input[name="power"]:checked').val()
 
+                alert(power)
                 var form = new FormData($("#addform")[0]);
                 // var did=$("#select2").val();
                 $.ajax({
                     type: "POST",
-                    url: "MemberServlet?type=add&name="+name+"pid"+pid,
+                    url: "MemberServlet?type=add&name="+name+"&pid="+pid+"&power="+power,
                     // data:serialize,
                     data: form,
                     contentType: false,
@@ -218,7 +223,7 @@
                     // alert(good.did);
                     alert(111)
 
-                    $("#updatedid").val(good.mid);
+                    $("#updatemid").val(good.mid);
                     $("#updatename").val(good.mname);
                     $("#updatepower").val(good.power);
 
@@ -237,7 +242,7 @@
             $.ajax({
                 type: "POST",
                 url: "MemberServlet",
-                data: "type=del&did=" + did,
+                data: "type=del&mid=" + did,
                 dataType: "json",//声明返回数据格式是json
                 success: function (data) {
 
@@ -369,10 +374,23 @@
                                     </div>
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2  col-sm-offset-3 control-label">权限:</label>
-                                        <div class="col-xs-3 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="power" id="power"
-                                                   placeholder="">
+
+
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="普通用户" title="" lay-skin="primary" checked="">普通用户
                                         </div>
+
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="初级管理员" title="" lay-skin="primary" >初级管理员
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="管理员" title="" lay-skin="primary" >管理员
+                                        </div>
+
+                                        <!--<div class="col-xs-3 ">-->
+                                            <!--<input type="text" class="form-control input-sm duiqi" name="power" id="power"-->
+                                                   <!--placeholder="">-->
+                                        <!--</div>-->
                                     </div>
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2  col-sm-offset-3 control-label">所在岗位:</label>
@@ -463,22 +481,16 @@
                     </div>
 
                     <form id="updateform">
-
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <form class="form-horizontal">
-                                    <!--<div class="form-group ">-->
-                                    <!--<label for="" class="col-xs-4 control-label">用户名：</label>-->
-                                    <!--<div class="col-xs-8 ">-->
-                                    <!--<input type="text" class="form-control input-sm duiqi" name="dname" id="addname"-->
-                                    <!--placeholder="">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
+
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2 col-sm-offset-3 control-label">用户名：</label>
                                         <div class="col-xs-3 ">
+                                            <input type="hidden" name="mid" id="updatemid" value="">
                                             <input type="text" class="form-control input-sm duiqi" name="dname" id="updatename"
-                                                   placeholder="">
+                                                   placeholder=""  readonly>
                                         </div>
                                     </div>
 
@@ -491,16 +503,27 @@
                                     </div>
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2  col-sm-offset-3 control-label">权限:</label>
-                                        <div class="col-xs-3 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="power" id="updatepower"
-                                                   placeholder="">
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="普通用户" title="" lay-skin="primary" checked="">普通用户
                                         </div>
+
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="初级管理员" title="" lay-skin="primary" >初级管理员
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="power" value="管理员" title="" lay-skin="primary" >管理员
+                                        </div>
+                                        <!--<div class="col-xs-3 ">-->
+                                            <!--<input type="text" class="form-control input-sm duiqi" name="power" id="updatepower"-->
+                                                   <!--placeholder="">-->
+                                        <!--</div>-->
                                     </div>
                                     <div class="form-group col-xs-12 ">
                                         <label class="col-xs-2  col-sm-offset-3 control-label">所在岗位:</label>
                                         <div class="col-xs-3 ">
-                                            <input type="text" class="form-control input-sm duiqi" name="postname" id="updatepostname"
-                                                   placeholder="">
+                                            <select class="form-control" id="select3">
+
+                                            </select>
                                         </div>
                                     </div>
 
@@ -563,7 +586,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                            <button type="button" id="updatebtn" class="btn btn-xs btn-green">保 存</button>
+                            <button type="button" id="updateBtn" class="btn btn-xs btn-green">保 存</button>
                         </div>
                     </form>
                 </div>
@@ -583,34 +606,7 @@
                         <!--<h4 class="modal-title">修改成员</h4>-->
                     <!--</div>-->
 
-                    <!--<form action="" id="updateform">-->
-                        <!--<div class="modal-body">-->
-                            <!--<div class="container-fluid">-->
-                                <!--<form class="form-horizontal">-->
-                                    <!--<div class="form-group ">-->
-                                        <!--<label for="updatename" class="col-xs-4 control-label">成员名称：</label>-->
-                                        <!--<div class="col-xs-8 ">-->
-                                            <!--<input type="hidden" id="updatedid" value="">-->
-                                            <!--<input type="text" class="form-control input-sm duiqi" id="updatename"-->
-                                                   <!--placeholder="">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
 
-                                <!--</form>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="modal-footer">-->
-                            <!--<button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>-->
-                            <!--<button type="button" id="updateBtn" class="btn btn-xs btn-green">保 存</button>-->
-                        <!--</div>-->
-                    <!--</form>-->
-
-                <!--</div>-->
-                <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
-            <!--</div>-->
-            <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-        <!--</div>-->
-        <!-- /.modal -->
 
         <!--弹出删除用户警告窗口-->
         <div class="modal fade" id="deleteMember" role="dialog" aria-labelledby="gridSystemModalLabel">
