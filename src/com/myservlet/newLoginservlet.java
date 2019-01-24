@@ -1,9 +1,7 @@
 package com.myservlet;
 import com.alibaba.fastjson.JSON;
-import com.bean.MD5JM;
+import com.bean.*;
 
-import com.bean.User;
-import com.bean.role;
 import com.service.RoleService;
 import com.service.RoleServiceImpl;
 import com.service.UserService;
@@ -41,7 +39,7 @@ public class newLoginservlet extends HttpServlet {
         Calendar cal = Calendar.getInstance();
         int nowday = cal.get(Calendar.DAY_OF_WEEK);
 //
-        if( (nowday>1&&nowday<7)&&(r1>0&&r2<0)){
+        if((nowday>1&&nowday<7)&&(r1>0&&r2<0)){
         if(type!=null) {
             if (type.equals("epwd")) {
                 epwd(req, resp);
@@ -54,7 +52,6 @@ public class newLoginservlet extends HttpServlet {
             }else if(type.equals("search")){
                 search(req,resp);
             }else if(type.equals("deletone")){
-                System.out.println("---done---");
                 deletone(req,resp);
             }else if(type.equals("getAll"))
             {
@@ -68,23 +65,26 @@ public class newLoginservlet extends HttpServlet {
                 getAllroles(req,resp);
             }
             else if(type.equals("init")) {
-                String name = req.getParameter("uid");
+                String name = req.getParameter("uname");
                 String pwd = req.getParameter("pwd");
                 String  MD5pwd= MD5JM.getMD5String(pwd);
                 User u1 = us.getUser(name, MD5pwd);
-
+                System.out.println(name);
                 if (u1!= null && u1.getUnumber()!= 0) {
                     u1.setUnumber(u1.getUnumber()+1);
                     us.updateStuNumber(u1);
                     String n1 = NowTime.ATime();
 //                    String n1=NowTime.getNowTiem();
+                    String ipadress= getIp.getIpAddr(req);
+                    rizhi rz1=new rizhi(u1.getUname(),n1,ipadress);
+                       us.updaterizhis(rz1);
 
+                    req.getSession().setAttribute("rz1",rz1);
                     req.getSession().setAttribute("u1",u1);
                     req.getSession().setAttribute("name",name);
-
                     resp.getWriter().print("success");
-                }else if (u1!= null && u1.getUnumber()== 0){
 
+                }else if (u1!= null && u1.getUnumber()== 0){
                     req.getSession().setAttribute("u1", u1);
                     resp.getWriter().print("ed");
 
@@ -118,11 +118,15 @@ public class newLoginservlet extends HttpServlet {
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          int uid=Integer.parseInt(req.getParameter("uid"));
         String t2 = NowTime.ATime();
+        System.out.println(t2);
 //        String t2=NowTime.getNowTiem();
-
+         rizhi rz2=new rizhi();
+         rz2.setUid(uid);
+         rz2.setEndtime(t2);
+         System.out.println(rz2);
+         us.updaterizhie(rz2);
         req.getSession().invalidate();
         resp.getWriter().print("logout");
-
     }
 
     protected void getAllroles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
